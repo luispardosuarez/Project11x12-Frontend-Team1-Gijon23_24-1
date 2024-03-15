@@ -4,27 +4,26 @@ import LoginComponet from '@/components/login/LoginComponet.vue';
 </script>
 
 <template>
-<main>
-    <LoginComponet/>
-</main>
+
+    <div class="login">
+        <LoginComponet />
+    </div>
 
 </template>
 
 <style>
 
-main{
-    background-image: url(../../src/assets/imageLogin/04.jpg);
+.login{
+    background-image: url(../../src/assets/imageLogin/torre.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    height: 100vh;
-    width: 100%;
-    background-position: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
     
-
 }
 
 </style>
