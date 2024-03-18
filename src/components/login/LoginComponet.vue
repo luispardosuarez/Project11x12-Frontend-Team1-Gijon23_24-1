@@ -75,6 +75,11 @@ a{
     
     text-decoration: none; 
     color: white;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #383e7d;
 }
 
 button{
@@ -93,8 +98,8 @@ button:hover {
 
 .mi-clase{
     color:black;
-    
 }
+
 
 @media (max-width: 768px) {
     img{
