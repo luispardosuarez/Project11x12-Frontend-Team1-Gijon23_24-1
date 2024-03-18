@@ -17,7 +17,7 @@ const handleAceptoCondicionesChange = () => {
  }
 };
 
-// Asegúrate de tener una referencia para aceptoCondiciones si no la tienes
+
 const aceptoCondiciones = ref(false);
 
 
