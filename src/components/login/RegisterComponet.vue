@@ -9,116 +9,74 @@ const password = ref('');
 const confirmPassword = ref('');
 
 
-const handleLogin = async () => {
-    if (!isAdult.value) {
-        alert('Debes ser mayor de edad para registrarte.');
-        return;
-    }
-    if (password.value !== confirmPassword.value) {
-        alert('Las contraseñas no coinciden.');
-        return;
-    }
-
-    //AQUI VA LA LLAMADA A AXIOS
-};
-
-const enviar = () => {
-    handleLogin();
-};
 
 
 </script>
 
 <template>
-<div class="container">
+    <div class="container">
         <div class="image"><img src="../../assets/imageLogin/11x12.png" alt=""></div>
 
         <h2>REGISTRO</h2>
 
-        <form @submit.prevent="handleLogin">
+        <form @submit.prevent="checkin">
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Usuario" v-model="username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Contraseña" v-model="password" required>
+            </div>
             <div class="inputs">
-        <input type="text" id="username" placeholder="Usuario" v-model="username" required>
-    </div>
-    <div class="inputs">
-        <input type="password" id="password" placeholder="Contraseña" v-model="password" required>
-    </div>
-
-    <div class="inputs">
-            <input type="password" id="confirmPassword" placeholder="Confirmar Contraseña" v-model="confirmPassword" required>
-        </div>
-
-            <div class="inputs">
-            <input type="checkbox" id="isAdult"  v-model="isAdult" >
-            <label for="isAdult" class="checkbox-label">Acepto ser mayor de edad</label>
-            
-        </div>
-            
+                <input type="password" id="confirmPassword" placeholder="Confirmar Contraseña" v-model="confirmPassword"
+                    required>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="mayorDeEdad" v-model="mayorDeEdad" @change="handleMayorDeEdadChange">
+                    <label for="mayorDeEdad">Soy mayor de edad</label>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="aceptoCondiciones" v-model="aceptoCondiciones"
+                            @change="handleAceptoCondicionesChange">
+                        <label for="aceptoCondiciones">Acepto las condiciones legales</label>
+                    </div>
+                </div>
+            </div>
         </form>
-
-
-        <button type="submit"><a href="#" class="mi-clase" @click="enviar" >REGISTRARSE</a></button>
+        <button type="submit"><a href="#" class="mi-clase" @click="enviar">REGISTRARSE</a></button>
     </div>
+
+
+
 
 </template>
 
-
 <style scoped>
 
-.checkbox-label {
-    display: inline-block;
-}
 
-input[type="checkbox"] {
-    transform: scale(0.50);
-    margin-right: 10%;
-}
 
 img{
     width: 30%;
     height: 40%;
     justify-content: center;
     margin-left: 35%;
-
 }
-
-h2{
-        color: white;
-        margin-left: 41%;
-        margin-bottom: 3%;
-    }
-
-.inputs{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-    
-    
-}
-
-input{
-    width: 30%;
-    height: 6vh;
-    margin-bottom: 5px;
-}
-
 p{
     color: white;
     margin-left: 35%;
 }
-
+h2{
+  color: white;
+  margin-left: 41%;
+  margin-bottom: 3%;
+}
 a{
-    
-    text-decoration: none; 
+    text-decoration: none;
     color: white;
     transition: color 0.3s ease;
 }
-
 a:hover {
-    color: #383e7d;
+    color: #383E7D;
 }
-
 button{
-    margin-left: 41%;
+    margin-left: 40%;
     width: 20%;
     height: 6vh;
     margin-top: 10px;
@@ -126,14 +84,36 @@ button{
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 button:hover {
-    background-color: #009eb393;
+    background-color: pink;
 }
-
 .mi-clase{
     color:black;
 }
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+input[type="text"], input[type="password"] {
+    width: 500px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    
+}
 
+#confirmPassword {
+    width: 64vh;
+    height: 45px;
+}
 
+label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
+        margin-left: 10px;
+        color: #fff; 
+    }
 </style>
