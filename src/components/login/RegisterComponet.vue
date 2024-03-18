@@ -9,7 +9,7 @@ const password = ref('');
 const confirmPassword = ref('');
 
 
-const handleLogin = async () => {
+const checkin  = async () => {
     if (!isAdult.value) {
         alert('Debes ser mayor de edad para registrarte.');
         return;
@@ -19,11 +19,11 @@ const handleLogin = async () => {
         return;
     }
 
-    //AQUI VA LA LLAMADA A AXIOS
+    // me falta la llamada a Axios 
 };
 
 const enviar = () => {
-    handleLogin();
+    checkin ();
 };
 
 
@@ -35,7 +35,7 @@ const enviar = () => {
 
         <h2>REGISTRO</h2>
 
-        <form @submit.prevent="handleLogin">
+        <form @submit.prevent="checkin">
             <div class="inputs">
         <input type="text" id="username" placeholder="Usuario" v-model="username" required>
     </div>
@@ -47,11 +47,16 @@ const enviar = () => {
             <input type="password" id="confirmPassword" placeholder="Confirmar Contraseña" v-model="confirmPassword" required>
         </div>
 
-            <div class="inputs">
+            <div class="check">
+            <input type="checkbox" id="isAdult"  v-model="isAdult" >
+            <label for="isAdult" class="checkbox-label">Acepto ser mayor de edad</label>
+
             <input type="checkbox" id="isAdult"  v-model="isAdult" >
             <label for="isAdult" class="checkbox-label">Acepto ser mayor de edad</label>
             
         </div>
+
+        
             
         </form>
 
