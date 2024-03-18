@@ -4,7 +4,8 @@
 
 <template>
 
-    <div class="footerContainer">
+    <div id="footerContainer">
+
         <img class="gijonLogo" src="../../assets/icons/gijon.png">
 
         <div class="footerIcons">
@@ -23,7 +24,7 @@
 
 <style lang="scss">
 
-    .footerContainer {
+    #footerContainer {
 
         background-color: $black;
         padding: 10px;
@@ -51,7 +52,7 @@
 
 @media only screen and (min-width: 768px) {
 
-    .footerContainer {
+    #footerContainer {
 
         
 
