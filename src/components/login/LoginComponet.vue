@@ -1,4 +1,14 @@
 <script setup>
+import { ref } from "vue"
+import { useRoute, useRouter } from "vue-router";
+
+const route = useRoute()
+const router = useRouter()
+
+function redirectToRegister() {
+  const redirectPath = route.query.redirect || '/register'
+  router.push(redirectPath)
+}
 
 
 </script>
@@ -22,7 +32,7 @@
             
         </form>
 
-        <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="goToRegister">Regístrate</a></p>
+        <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()">Regístrate</a></p>
 
         <button type="submit"><a href="#" class="mi-clase" @click="enviar" >Entrar</a></button>
     </div>
