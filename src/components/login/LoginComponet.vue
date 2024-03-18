@@ -1,6 +1,15 @@
 <script setup>
 
 
+
+
+const goToRegister = () => {
+  console.log('clicked');
+  router.push('/')
+}
+
+
+
 </script>
 
 
