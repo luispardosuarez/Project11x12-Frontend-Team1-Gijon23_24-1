@@ -5,20 +5,17 @@ import Header from './components/general/Header.vue';
 </script>
 
 <template>
-<<<<<<< HEAD
   <header>
 
 
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
+       <!--  <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
+        <RouterLink to="/login">Login</RouterLink> -->
       </nav>
     </div>
   </header>
-=======
->>>>>>> dev
 
   <Header />
   <RouterView />
