@@ -54,14 +54,37 @@ const aceptoCondiciones = ref(false);
         <div v-if="showPrivacyPolicy" class="privacy-policy-popup">
             <div class="privacy-policy-content">
                 <h3>Condiciones legales</h3>
-                <p class="lorem">Hay muchas variaciones de los pasajes de Lorem Ipsum disponibles, pero la mayoría sufrió alteraciones
-                    en alguna manera, ya sea porque se le agregó humor, o palabras aleatorias que no parecen ni un poco
-                    creíbles.
+                <p class="lorem"> <ol>
+                    <li> Intelectual: Todos los derechos de propiedad intelectual
+                    relacionados con el nombre "11x12 Gijón", incluyendo pero no limitado a marcas registradas, derechos
+                    de autor, y cualquier propiedad intelectual relacionada, son propiedad exclusiva de la entidad
+                    responsable de su creación. Cualquier uso no autorizado de estos derechos está prohibido y puede
+                    estar sujeto a acciones legales.</li><br>
 
-                    Si vas a utilizar un pasaje de Lorem Ipsum, necesitás estar seguro de que no hay nada avergonzante
-                    escondido en el medio del texto. Todos los generadores de Lorem Ipsum que se encuentran en Internet
-                    tienden a repetir trozos predefinidos cuando sea necesario, haciendo a este el único generador
-                    verdadero (válido) en la Internet.
+                    <li>Responsabilidad del Contenido: La entidad "11x12 Gijón" no se hace responsable por el
+                    contenido de terceros enlazado desde su sitio web o cualquier otra plataforma de comunicación. Los
+                    usuarios asumen toda la responsabilidad por el contenido que compartan en relación con la marca
+                    "11x12 Gijón".</li><br>
+
+                    <li>Privacidad: La entidad "11x12 Gijón" se compromete a proteger la privacidad de los
+                    usuarios de acuerdo con las leyes de protección de datos aplicables. Cualquier información personal
+                    recopilada será utilizada únicamente con el propósito declarado y no será compartida con terceros
+                    sin el consentimiento expreso del usuario, excepto cuando sea requerido por ley.</li><br>
+
+                    <li>Jurisdicción: Cualquier disputa legal relacionada con "11x12 Gijón" estará sujeta a la
+                    jurisdicción de los tribunales competentes en la ubicación de su sede principal o de acuerdo con los
+                    términos especificados en los contratos pertinentes.</li><br>
+
+                    <li>Modificaciones: Cualquier disputa legal relacionada con "11x12 Gijón" estará sujeta a la
+                    jurisdicción de los tribunales competentes en la ubicación de su sede principal o de acuerdo con los
+                    términos especificados en los contratos pertinentes.</li><br>
+
+            
+
+
+
+
+                </ol>
 
                 </p>
                 <button class="accept-button" @click="closePrivacyPolicy">Aceptar</button>
@@ -152,35 +175,42 @@ label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.181);
+    /* background-color: rgba(0, 0, 0, 0.181); */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    overflow: auto; 
 }
 
 .privacy-policy-content {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
-    width: 80%;
-    max-width: 500px;
+    width: 100%;
+    height: 100vh;
+    max-width: 500%;
+    box-sizing: border-box;
     
 }
 
 
 .accept-button{
     background-color: rgba(255, 0, 0, 0.873);
+    margin-left: 40%;
 }
 
 h3{
-    margin-left: 20%;
+    margin-left: 39%;
     color: rgba(255, 0, 0, 0.79);
 }
 
 .lorem{
     color: black;
     margin-left: 5%;
+    font-size:large;
+    font-weight: normal;
 }
+
 
 </style>
