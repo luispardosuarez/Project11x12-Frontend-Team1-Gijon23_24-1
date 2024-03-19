@@ -9,11 +9,8 @@
   <main>
 
     <div>
-
-      <h1>Campamentos</h1>
-
+      <h3>Campamentos</h3>
       <FetchCampamentos />
-
     </div>
 
   </main> 
