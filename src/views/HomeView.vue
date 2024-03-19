@@ -17,9 +17,6 @@
 
 </template>
 
-<style>
-
-</style>
 
 
 

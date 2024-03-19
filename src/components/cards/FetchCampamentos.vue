@@ -1,12 +1,13 @@
 <script setup>
 
+  import { ref } from 'vue';
   import CardsCampamentos from "./CardsCampamentos.vue";
-
-  const campamentos = [];
+  
+  const campamentos = ref([]);
 
   const fetchCampamentos = async () => {
     try {
-      const response = await fetch("campamentos.json");
+      const response = await fetch("/campamentos.json");
       const data = await response.json();
       console.log(data.campamentos);
       campamentos.value = data.campamentos;
@@ -23,28 +24,23 @@
 <template>
 
   <div class="contenedorCards">
-
     <div v-if="campamentos.length === 0">Cargando...</div>
-    <div v-else>
-      <div v-for="(item, index) in campamentos" :key="index" class="cardsCampamentos">
-        <CardsCampamentos :campamento="item" />
-      </div>
+    <div v-else class="cardsContainer">
+      <CardsCampamentos v-for="(campamento, index) in campamentos" :key="index" :campamento="campamento" />
     </div>
-
   </div>
 
 </template>
 
 <style scoped lang="scss">
 
-  .contenedorCards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.contenedorCards {
+  display: flex;
+  justify-content: center;
 
-    .cardsCampamentos {
-      margin-bottom: 20px;
-    }
+  .cardsContainer {
+    max-width: 400px;     
   }
+}
 
 </style>

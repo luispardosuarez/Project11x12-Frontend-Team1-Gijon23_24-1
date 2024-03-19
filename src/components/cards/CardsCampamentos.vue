@@ -1,8 +1,10 @@
 <script setup>
 
-props: {
+import { defineProps } from 'vue';
+
+const props = defineProps({
   campamento: Object
-}
+});
 
 </script>
 
@@ -25,11 +27,6 @@ props: {
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
-
-    .card img {
-      max-width: 100%;
-      height: auto;
-    }
   }
 
 </style>
