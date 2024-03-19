@@ -1,8 +1,29 @@
 <script setup>
+
+  import FetchCampamentos from '../components/cards/FetchCampamentos.vue';
+
 </script>
 
-<template>
+<template> 
+
   <main>
-    <TheWelcome />
-  </main>
+
+    <div>
+
+      <h1>Campamentos</h1>
+
+      <FetchCampamentos />
+
+    </div>
+
+  </main> 
+
 </template>
+
+<style>
+
+</style>
+
+
+
+
