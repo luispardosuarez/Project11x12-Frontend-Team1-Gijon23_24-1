@@ -9,9 +9,9 @@
     try {
       const response = await fetch("/campamentos.json");
       const data = await response.json();
-      console.log(data.campamentos);
+      // console.log(data.campamentos);
       campamentos.value = data.campamentos;
-      console.log(campamentos.value);
+      // console.log(campamentos.value);
     } catch (error) {
       console.error('Error al cargar el archivo JSON de campamentos:', error);
     }
