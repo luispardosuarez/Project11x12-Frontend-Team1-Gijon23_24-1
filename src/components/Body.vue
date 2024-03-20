@@ -21,13 +21,13 @@ const closePopup = () => {
 <img src="../../src/assets/img/kaleidoscope banner.jpg"  alt="" />
 </div>
 <div class="container">
-<div class ="descrption">
+<div class ="description">
     <h1>Descripción</h1>
 <p>El proyecto 11x12 tiene como objetivo facilitar la conciliación laboral, familiar y personal de la ciudadanía de Gijón/Xixón.
     Para ello, 15 centros educativos de la ciudad permanecen abiertos, 11 horas al día, 12 meses al año, proporcionando a niños y niñas de los niveles de infantil y primaria un programa que combina entretenimiento, actividades culturales, organización del tiempo para la realización de las tareas escolares y merienda.
     Atención continuada desde que finaliza el horario del comedor escolar hasta las 6 y media de la tarde.
     Se ofrece el servicio de catering de merienda para aquellas familias que así lo demanden.
-    En coordinación con el Patronato Deportivo Municipal se ofertan acti=vidades deportivas en primaria, de manera que los niños y niñas que están inscritos e inscritas con carácter mensual al 11x12, pueden apuntarse de manera gratuita a una de estas actividades
+    En coordinación con el Patronato Deportivo Municipal se ofertan actividades deportivas en primaria, de manera que los niños y niñas que están inscritos e inscritas con carácter mensual al 11x12, pueden apuntarse de manera gratuita a una de estas actividades
     </p>
 
 </div>
@@ -39,14 +39,34 @@ const closePopup = () => {
 <div>
     <button class="more-information" @click="showPopup">+ Información</button>
     <div v-if="popupVisible" class="popup">
-    <p>Proyecto 11X12. Campamentos Urbanos de Semana Santa 2024. 
-Abierto plazo de inscripción: Del 11 de marzo de 2024 al 22 de marzo de 2024
+    <h2>Proyecto 11X12. Campamentos Urbanos de Semana Santa 2024.</h2>
+<p>Abierto plazo de inscripción: Del 11 de marzo de 2024 al 22 de marzo de 2024
 El modo de inscripción podrás hacerlo vía online.Si quieres hacerlo presencial pulsa aqui . Sigue los pasos para inscribirte en el botón Inscribirme .
-Precios
+Precios:
 El precio de cada día de campamento es de 6,10 euros por cada niño o niña.Se contemplan los habituales descuentos para las familias con varios hermanos y hermanas.
-Horarios
+<p>
+  <strong>Horarios:</strong>
 El horario de las actividades de los campamentos será de 9:00 am a las 2:00 pm ofreciéndose además la posibilidad de atención temprana con desayuno desde las 7:30 am, comida y el servicio de catering de merienda para aquellas familias que así lo demanden, siendo el precio de 2,50 euros/día el desayuno, 4,50 euros/día el comedor y 1,50 euros/día la merienda.
-Becas comedor
+</p>
+<table>
+  <tr>
+    <td>Servicio</td>
+    <td>Precio</td>
+  </tr>
+  <tr>
+    <td>Desayuno</td>
+    <td>2,50 euros/día</td>
+  </tr>
+  <tr>
+    <td>Comedor</td>
+    <td>4,50 euros/día</td>
+  </tr>
+  <tr>
+    <td>Merienda</td>
+    <td>1,50 euros/día</td>
+  </tr>
+</table>
+Becas comedor:
 Las familias que tienen concedida la beca de comedor al 100 por 100 del Ayuntamiento de Gijón/Xixón siguen manteniendo una ayuda equivalente a dicho porcentaje en esta actividad. 
 </p>
 <button @click="closePopup">Cerrar</button>
@@ -63,6 +83,10 @@ h1 {
 color: red;
 text-align: center;
 margin-top: 25px;
+font-size: 28px;
+}
+.description p {
+  text-align: justify;
 }
 .banner img {
    
@@ -82,17 +106,27 @@ margin-top: 25px;
   flex: 1; 
 }
 .logoproject img {
-  width: 150px; 
+  width: 180px; 
   margin-top: 25px; 
   margin-right: 15px; 
   margin-left: 55px ;
   height: 210px;
 }
+.information h2 {
+  font-size: 25px;
+}
+/* .information h3 {
+font-size: 15px;
+} */
+.information p {
+  text-align: justify;
+}
 .information .more-information {
   margin-left: 550px;
   background-color: red;
   color: white;
-  border: none;
+  border-radius: 10%;
+  border: 2px solid white;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -106,7 +140,7 @@ margin-top: 25px;
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 20px;
-  border: 2px solid black;
+  border: 2px solid white;
 }
 
 
