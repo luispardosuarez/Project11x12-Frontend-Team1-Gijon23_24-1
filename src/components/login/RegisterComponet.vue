@@ -45,7 +45,7 @@ const aceptoCondiciones = ref(false);
                     <div class="checkbox-container">
                         <input type="checkbox" id="aceptoCondiciones" v-model="aceptoCondiciones"
                             @change="handleAceptoCondicionesChange">
-                        <label for="aceptoCondiciones">Acepto las condiciones legales</label>
+                        <label for="aceptoCondiciones">Acepto las condiciones legales (ver)</label> <!-- añadir funcionalidad a ver -->
                     </div>
                 </div>
             </div>
@@ -78,10 +78,6 @@ const aceptoCondiciones = ref(false);
                     <li>Modificaciones: Cualquier disputa legal relacionada con "11x12 Gijón" estará sujeta a la
                     jurisdicción de los tribunales competentes en la ubicación de su sede principal o de acuerdo con los
                     términos especificados en los contratos pertinentes.</li><br>
-
-            
-
-
 
 
                 </ol>
