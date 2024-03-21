@@ -2,29 +2,37 @@
 import { ref } from 'vue';
 
 const isAdult = ref(false);
+
+
 const username = ref('');
 const password = ref('');
 const confirmPassword = ref('');
-const showPrivacyPolicy = ref(false);
 
-const closePrivacyPolicy = () => {
- showPrivacyPolicy.value = false;
+
+const handleLogin = async () => {
+    if (!isAdult.value) {
+        alert('Debes ser mayor de edad para registrarte.');
+        return;
+    }
+    if (password.value !== confirmPassword.value) {
+        alert('Las contraseñas no coinciden.');
+        return;
+    }
+
+    //AQUI VA LA LLAMADA A AXIOS
 };
 
-const handleAceptoCondicionesChange = () => {
- if (!aceptoCondiciones.value) {
-    showPrivacyPolicy.value = true;
- }
+const enviar = () => {
+    handleLogin();
 };
 
 
-const aceptoCondiciones = ref(false);
 
 
 </script>
 
 <template>
-    <div class="container">
+<div class="container">
         <div class="image"><img src="../../assets/imageLogin/11x12.png" alt=""></div>
 
         <h2>REGISTRO</h2>
@@ -104,26 +112,47 @@ img{
     height: 40%;
     justify-content: center;
     margin-left: 35%;
+
 }
+
+h2{
+        color: white;
+        margin-left: 41%;
+        margin-bottom: 3%;
+    }
+
+.inputs{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    
+    
+}
+
+input{
+    width: 30%;
+    height: 6vh;
+    margin-bottom: 5px;
+}
+
 p{
     color: white;
     margin-left: 35%;
 }
-h2{
-  color: white;
-  margin-left: 41%;
-  margin-bottom: 3%;
-}
+
 a{
-    text-decoration: none;
+    
+    text-decoration: none; 
     color: white;
     transition: color 0.3s ease;
 }
+
 a:hover {
-    color: #383E7D;
+    color: #383e7d;
 }
+
 button{
-    margin-left: 40%;
+    margin-left: 41%;
     width: 20%;
     height: 6vh;
     margin-top: 10px;
