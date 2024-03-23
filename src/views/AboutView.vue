@@ -1,5 +1,6 @@
 <script setup>
 import BecadosForm from "@/components/Becados/BecadosForm.vue";
+
 </script>
 <template>
   <div class="BecadosFormContainer">

@@ -1,7 +1,43 @@
-<script setup></script>
+<script setup>
+import {ref} from 'vue';
+import axios from 'axios';
+
+const scholarshipForm = ref(null);
+
+const resetForm = () => {
+  if (scholarshipForm.value){
+    scholarshipForm.value.reset();
+  }
+};
+
+let dni = ref('');
+const isSubmitting = ref(false);
+
+const submitForm = async() => {
+  if(isSubmitting.value) return;
+  isSubmitting.value= true;
+
+  axios.post(import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP, {
+    dni: dni.value
+  }) 
+  .then(() => {
+    resetForm();
+    isSubmitting.value = false;
+    
+    
+ })
+ .catch((error) => {
+    isSubmitting.value = false;
+    
+    console.error(error);
+  });
+}
+
+
+</script>
 <template>
   <div class="scholarshipContainer">
-    <form class="scholarshipForm">
+    <form class="scholarshipForm" @submit.prevent="submitForm" ref="scholarshipForm">
       <h4 class="titleForm">Añadir Becado</h4>
       <div class="formGroupDni">
         <div class="labelInputContainer">
@@ -10,9 +46,11 @@
             type="text"
             class="dni-input"
             placeholder="Introduzca DNI sin espacios"
+            id="formGroupScholarship"
+            v-model="dni"
           />
         </div>
-        <button type="submit" class="btnAddDni">Añadir Becado</button>
+        <button type="submit" class="btnAddDni" @click.prevent="submitForm">Añadir Becado</button>
       </div>
     </form>
   </div>
