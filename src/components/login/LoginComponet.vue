@@ -1,13 +1,42 @@
 <script setup>
 import { ref } from "vue"
 import { useRoute, useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+
+
+let uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
 
 const route = useRoute()
 const router = useRouter()
+const store = useAuthStore()
+
+let username = ref("")
+let password = ref("")
+
+
+async function login() {
+
+    const dataConnection = {
+        username: username.value,
+        password: password.value
+    }
+
+let isAuthenticated = await store.login(dataConnection)
+
+    if (isAuthenticated && store.user.roles == "ROLE_ADMIN") {
+        const redirectPath = route.query.redirect || '/dashboard'
+        router.push(redirectPath)
+    }
+
+    if (isAuthenticated && store.user.roles == "ROLE_USER") {
+        const redirectPath = route.query.redirect || '/'
+        router.push(redirectPath)
+    }
+}
 
 function redirectToRegister() {
-  const redirectPath = route.query.redirect || '/register'
-  router.push(redirectPath)
+    const redirectPath = route.query.redirect || '/register'
+    router.push(redirectPath)
 }
 
 
@@ -23,19 +52,20 @@ function redirectToRegister() {
         <form @submit.prevent="handleLogin">
             <div class="inputs">
         
-                <input type="text" id="username" placeholder="Usuario" >
+                <input type="text" id="username" placeholder="Usuario" v-model="username" >
             </div>
             <div class="inputs">
             
-                <input type="password" id="password" placeholder="Contraseña" required>
+                <input type="password" id="password" placeholder="Contraseña" required v-model="password">
             </div>
             
         </form>
 
         <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()">Regístrate</a></p>
 
-        <button type="submit"><a href="#" class="mi-clase" @click="enviar" >Entrar</a></button>
+        <button type="submit"><a href="#" class="mi-clase" @click="enviar">Entrar</a></button>
     </div>
+    
 </template>
 
 <style scoped>
