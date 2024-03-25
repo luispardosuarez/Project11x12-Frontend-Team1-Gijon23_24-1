@@ -39,14 +39,17 @@ const closePopup = () => {
 <div>
     <button class="more-information" @click="showPopup">+ Información</button>
     <div v-if="popupVisible" class="popup">
-    <h2>Proyecto 11X12. Campamentos Urbanos de Semana Santa 2024.</h2>
-<p>Abierto plazo de inscripción: Del 11 de marzo de 2024 al 22 de marzo de 2024
+    <h2>Proyecto 11X12. Campamentos Urbanos 2024.</h2>
+<p>
+  <strong>Plazo de inscripción:</strong>
+  <p>Del 11 de marzo de 2024 al 22 de marzo de 2024
 El modo de inscripción podrás hacerlo vía online.Si quieres hacerlo presencial pulsa aqui . Sigue los pasos para inscribirte en el botón Inscribirme .
-Precios:
+</p>
+<strong>Precios:</strong>
 El precio de cada día de campamento es de 6,10 euros por cada niño o niña.Se contemplan los habituales descuentos para las familias con varios hermanos y hermanas.
 <p>
   <strong>Horarios:</strong>
-El horario de las actividades de los campamentos será de 9:00 am a las 2:00 pm ofreciéndose además la posibilidad de atención temprana con desayuno desde las 7:30 am, comida y el servicio de catering de merienda para aquellas familias que así lo demanden, siendo el precio de 2,50 euros/día el desayuno, 4,50 euros/día el comedor y 1,50 euros/día la merienda.
+El horario de las actividades de los campamentos será de 9:00 am a las 2:00 pm ofreciéndose además la posibilidad de atención temprana con desayuno desde las 7:30 am, comida y el servicio de catering de merienda para aquellas familias que así lo demanden. 
 </p>
 <table>
   <tr>
@@ -66,7 +69,7 @@ El horario de las actividades de los campamentos será de 9:00 am a las 2:00 pm 
     <td>1,50 euros/día</td>
   </tr>
 </table>
-Becas comedor:
+<strong>Becas comedor:</strong> 
 Las familias que tienen concedida la beca de comedor al 100 por 100 del Ayuntamiento de Gijón/Xixón siguen manteniendo una ayuda equivalente a dicho porcentaje en esta actividad. 
 </p>
 <button @click="closePopup">Cerrar</button>
@@ -80,7 +83,7 @@ Las familias que tienen concedida la beca de comedor al 100 por 100 del Ayuntami
 <style scoped>
 
 h1 {
-color: red;
+color: #D0003E;
 text-align: center;
 margin-top: 25px;
 font-size: 28px;
@@ -115,21 +118,20 @@ font-size: 28px;
 .information h2 {
   font-size: 25px;
 }
-/* .information h3 {
-font-size: 15px;
-} */
+
 .information p {
   text-align: justify;
 }
 .information .more-information {
   margin-left: 550px;
-  background-color: red;
+  background-color: #D0003E;
   color: white;
   border-radius: 10%;
   border: 2px solid white;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  text-align: justify;
   
 }
 
@@ -143,6 +145,8 @@ font-size: 15px;
   border: 2px solid white;
 }
 
-
+.information td {
+padding: 15px;
+}
 
 </style>
