@@ -2,37 +2,29 @@
 import { ref } from 'vue';
 
 const isAdult = ref(false);
-
-
 const username = ref('');
 const password = ref('');
 const confirmPassword = ref('');
+const showPrivacyPolicy = ref(false);
 
-
-const handleLogin = async () => {
-    if (!isAdult.value) {
-        alert('Debes ser mayor de edad para registrarte.');
-        return;
-    }
-    if (password.value !== confirmPassword.value) {
-        alert('Las contraseñas no coinciden.');
-        return;
-    }
-
-    //AQUI VA LA LLAMADA A AXIOS
+const closePrivacyPolicy = () => {
+ showPrivacyPolicy.value = false;
 };
 
-const enviar = () => {
-    handleLogin();
+const handleAceptoCondicionesChange = () => {
+ if (!aceptoCondiciones.value) {
+    showPrivacyPolicy.value = true;
+ }
 };
 
 
+const aceptoCondiciones = ref(false);
 
 
 </script>
 
 <template>
-<div class="container">
+    <div class="container">
         <div class="image"><img src="../../assets/imageLogin/11x12.png" alt=""></div>
 
         <h2>REGISTRO</h2>
@@ -53,7 +45,7 @@ const enviar = () => {
                     <div class="checkbox-container">
                         <input type="checkbox" id="aceptoCondiciones" v-model="aceptoCondiciones"
                             @change="handleAceptoCondicionesChange">
-                        <label for="aceptoCondiciones">Acepto las condiciones legales (ver)</label> <!-- añadir funcionalidad a ver -->
+                        <label for="aceptoCondiciones">Acepto las condiciones legales </label>
                     </div>
                 </div>
             </div>
@@ -87,11 +79,11 @@ const enviar = () => {
                     jurisdicción de los tribunales competentes en la ubicación de su sede principal o de acuerdo con los
                     términos especificados en los contratos pertinentes.</li><br>
 
-
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti omnis, error vero illum laboriosam fuga consequuntur cum, ducimus voluptas magnam quasi inventore. Blanditiis unde aut numquam voluptates esse exercitationem sunt ipsum quidem, ut ex veniam, quos necessitatibus, voluptate architecto error quas aspernatur nam eius? Velit vel alias earum deserunt veniam vero. Recusandae molestiae obcaecati eius, facere necessitatibus accusamus laborum ipsam nostrum totam incidunt illo, minima quaerat accusantium ducimus enim, quod sequi aspernatur vitae porro rem? Eos quod minus vitae quia nesciunt corrupti, quas quos soluta nulla deleniti quis enim, expedita asperiores at? Eos minima, cumque quasi culpa dolor inventore magni?
                 </ol>
 
                 </p>
-                <button class="accept-button" @click="closePrivacyPolicy">Aceptar</button>
+                <button class="accept-button" @click="closePrivacyPolicy">Cerrar</button>
             </div>
         </div>
 
@@ -112,60 +104,47 @@ img{
     height: 40%;
     justify-content: center;
     margin-left: 35%;
-
 }
-
-h2{
-        color: white;
-        margin-left: 41%;
-        margin-bottom: 3%;
-    }
-
-.inputs{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-    
-    
-}
-
-input{
-    width: 30%;
-    height: 6vh;
-    margin-bottom: 5px;
-}
-
 p{
     color: white;
     margin-left: 35%;
 }
+h2{
+  color: white;
+  margin-left: 41%;
+  margin-bottom: 3%;
+}
 
 a{
-    
-    text-decoration: none; 
+    text-decoration: none;
     color: white;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #383e7d;
+    color: #383E7D;
 }
 
 button{
-    margin-left: 41%;
+    margin-left: 40%;
     width: 20%;
     height: 6vh;
     margin-top: 10px;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 button:hover {
     background-color: pink;
 }
+
 .mi-clase{
-    color:black;
+    padding: 10px 20px; 
+    text-decoration: none; 
+    color: #000000;
 }
+
 form {
     display: flex;
     flex-direction: column;
@@ -175,6 +154,7 @@ form {
     max-width: 400px;
     margin: 0 auto;
 }
+
 input[type="text"], input[type="password"] {
     width: 500px;
     padding: 10px;
@@ -184,9 +164,8 @@ input[type="text"], input[type="password"] {
 }
 
 #confirmPassword {
-    width: 64vh;
-    height: 45px;
-}
+            width: 400px;
+        }
 
 label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
         margin-left: 10px;
@@ -208,7 +187,7 @@ label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
     overflow: auto; 
 }
 
-.privacy-policy-content {
+/* .privacy-policy-content {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
@@ -217,16 +196,33 @@ label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
     max-width: 500%;
     box-sizing: border-box;
     
+} */
+
+.privacy-policy-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 600px;
+    max-height: 400px; 
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
 
-.accept-button{
+.accept-button {
     background-color: rgba(255, 0, 0, 0.873);
-    margin-left: 40%;
+    margin-left: 30%;
+    border-radius: 5px;
+    color: #fff;
+    width: 35%;
+    height: 45px;
+    font-size: x-large;
+    font-weight: 600;
 }
+
 
 h3{
-    margin-left: 39%;
+    margin-left: 25%;
     color: rgba(255, 0, 0, 0.79);
 }
 
