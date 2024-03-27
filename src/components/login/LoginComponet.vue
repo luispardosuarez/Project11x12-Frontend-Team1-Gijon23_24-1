@@ -75,12 +75,13 @@ img{
     height: 40%;
     justify-content: center;
     margin-left: 35%;
+    margin-top: 8%;
 
 }
 
 h2{
         color: white;
-        margin-left: 41%;
+        margin-left: 39%;
         margin-bottom: 3%;
     }
 
@@ -88,13 +89,15 @@ h2{
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
-    
-    
 }
 
 input{
     width: 30%;
     height: 6vh;
+    padding: 5px;
+    border-radius: 3px;
+    border: none;
+
 }
 
 p{
@@ -114,21 +117,66 @@ a:hover {
 }
 
 button{
-    margin-left: 41%;
+    margin-left: 40%;
     width: 20%;
     height: 6vh;
-    margin-top: 10px;
-    border-radius: 2px;
+    margin-top: 20px;
+    border-radius: 3px;
+    border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #009eb393;
-}
 
 .mi-clase{
     color:black;
+}
+
+
+
+@media (min-width: 769px) {
+    img{
+        width: 30%;
+        height: 40%;
+        margin-left: 35%;
+        margin-top: 8%;
+    }
+
+    h2{
+        color: white;
+        margin-left: 39%;
+        margin-bottom: 3%;
+    }
+
+    .inputs{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    input{
+        width: 30%;
+        height: 6vh;
+        padding: 5px;
+        border-radius: 3px;
+        border: none;
+    }
+
+    p{
+        color: white;
+        margin-left: 35%;
+    }
+
+    button{
+        margin-left: 40%;
+        width: 20%;
+        height: 6vh;
+        margin-top: 20px;
+        border-radius: 3px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 }
 
 

@@ -86,23 +86,28 @@ img{
     justify-content: center;
     margin-left: 35%;
 }
+
 p{
     color: white;
     margin-left: 35%;
 }
+
 h2{
   color: white;
   margin-left: 41%;
   margin-bottom: 3%;
 }
+
 a{
     text-decoration: none;
     color: white;
     transition: color 0.3s ease;
 }
+
 a:hover {
     color: #383E7D;
 }
+
 button{
     margin-left: 40%;
     width: 20%;
