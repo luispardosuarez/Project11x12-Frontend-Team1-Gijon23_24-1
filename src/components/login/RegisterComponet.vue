@@ -123,9 +123,9 @@ a{
     transition: color 0.3s ease;
 }
 
-a:hover {
+/* a:hover {
     color: #383E7D;
-}
+} */
 
 button{
     margin-left: 40%;
