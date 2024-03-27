@@ -1,13 +1,42 @@
 <script setup>
 import { ref } from "vue"
 import { useRoute, useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+
+
+let uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
 
 const route = useRoute()
 const router = useRouter()
+const store = useAuthStore()
+
+let username = ref("")
+let password = ref("")
+
+
+async function login() {
+
+    const dataConnection = {
+        username: username.value,
+        password: password.value
+    }
+
+let isAuthenticated = await store.login(dataConnection)
+
+    if (isAuthenticated && store.user.roles == "ROLE_ADMIN") {
+        const redirectPath = route.query.redirect || '/dashboard'
+        router.push(redirectPath)
+    }
+
+    if (isAuthenticated && store.user.roles == "ROLE_USER") {
+        const redirectPath = route.query.redirect || '/'
+        router.push(redirectPath)
+    }
+}
 
 function redirectToRegister() {
-  const redirectPath = route.query.redirect || '/register'
-  router.push(redirectPath)
+    const redirectPath = route.query.redirect || '/register'
+    router.push(redirectPath)
 }
 
 
@@ -23,19 +52,20 @@ function redirectToRegister() {
         <form @submit.prevent="handleLogin">
             <div class="inputs">
         
-                <input type="text" id="username" placeholder="Usuario" >
+                <input type="text" id="username" placeholder="Usuario" v-model="username" >
             </div>
             <div class="inputs">
             
-                <input type="password" id="password" placeholder="Contraseña" required>
+                <input type="password" id="password" placeholder="Contraseña" required v-model="password">
             </div>
             
         </form>
 
         <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()">Regístrate</a></p>
 
-        <button type="submit"><a href="#" class="mi-clase" @click="enviar" >Entrar</a></button>
+        <button type="submit"><a href="#" class="mi-clase" @click="enviar">Entrar</a></button>
     </div>
+    
 </template>
 
 <style scoped>
@@ -45,12 +75,13 @@ img{
     height: 40%;
     justify-content: center;
     margin-left: 35%;
+    margin-top: 8%;
 
 }
 
 h2{
         color: white;
-        margin-left: 41%;
+        margin-left: 39%;
         margin-bottom: 3%;
     }
 
@@ -58,13 +89,15 @@ h2{
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
-    
-    
 }
 
 input{
     width: 30%;
     height: 6vh;
+    padding: 5px;
+    border-radius: 3px;
+    border: none;
+
 }
 
 p{
@@ -84,21 +117,66 @@ a:hover {
 }
 
 button{
-    margin-left: 41%;
+    margin-left: 40%;
     width: 20%;
     height: 6vh;
-    margin-top: 10px;
-    border-radius: 2px;
+    margin-top: 20px;
+    border-radius: 3px;
+    border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #009eb393;
-}
 
 .mi-clase{
     color:black;
+}
+
+
+
+@media (min-width: 769px) {
+    img{
+        width: 30%;
+        height: 40%;
+        margin-left: 35%;
+        margin-top: 8%;
+    }
+
+    h2{
+        color: white;
+        margin-left: 39%;
+        margin-bottom: 3%;
+    }
+
+    .inputs{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    input{
+        width: 30%;
+        height: 6vh;
+        padding: 5px;
+        border-radius: 3px;
+        border: none;
+    }
+
+    p{
+        color: white;
+        margin-left: 35%;
+    }
+
+    button{
+        margin-left: 40%;
+        width: 20%;
+        height: 6vh;
+        margin-top: 20px;
+        border-radius: 3px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 }
 
 
