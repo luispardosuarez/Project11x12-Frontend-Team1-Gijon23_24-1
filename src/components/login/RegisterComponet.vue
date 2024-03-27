@@ -8,13 +8,14 @@ const confirmPassword = ref('');
 const showPrivacyPolicy = ref(false);
 
 const closePrivacyPolicy = () => {
- showPrivacyPolicy.value = false;
+    showPrivacyPolicy.value = false;
 };
 
 const handleAceptoCondicionesChange = () => {
- if (!aceptoCondiciones.value) {
-    showPrivacyPolicy.value = true;
- }
+    if (!aceptoCondiciones.value) {
+        showPrivacyPolicy.value = true;
+    }
+
 };
 
 
@@ -109,10 +110,11 @@ p{
     color: white;
     margin-left: 35%;
 }
-h2{
-  color: white;
-  margin-left: 41%;
-  margin-bottom: 3%;
+
+h2 {
+    color: white;
+    margin-left: 41%;
+    margin-bottom: 3%;
 }
 
 a{
