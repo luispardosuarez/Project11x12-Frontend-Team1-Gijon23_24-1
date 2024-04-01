@@ -39,6 +39,12 @@ function redirectToRegister() {
     router.push(redirectPath)
 }
 
+/*  function enviar() {
+    const redirectPath = route.query.redirect || '/prueba'
+    router.push(redirectPath)
+}
+ */
+
 
 </script>
 
@@ -49,7 +55,7 @@ function redirectToRegister() {
 
         <h2>INICIAR SESIÓN</h2>
 
-        <form @submit.prevent="handleLogin">
+        <form @submit.prevent="login()">
             <div class="inputs">
         
                 <input type="text" id="username" placeholder="Usuario" v-model="username" >
@@ -63,10 +69,11 @@ function redirectToRegister() {
 
         <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()">Regístrate</a></p>
 
-        <button type="submit"><a href="#" class="mi-clase" @click="enviar">Entrar</a></button>
+        <button type="submit"><a href="#" class="mi-clase" @click.prevent="enviar()">Entrar</a></button>
     </div>
     
 </template>
+
 
 <style scoped>
 
