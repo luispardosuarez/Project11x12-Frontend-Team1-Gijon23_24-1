@@ -4,5 +4,6 @@
 <template>
   <main>
     <TheWelcome />
+    <Becados />
   </main>
 </template>
