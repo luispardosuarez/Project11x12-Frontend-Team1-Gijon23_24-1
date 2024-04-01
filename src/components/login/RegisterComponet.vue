@@ -32,17 +32,19 @@ const aceptoCondiciones = ref(false);
 
         <form @submit.prevent="checkin">
             <div class="input-group">
-                <input type="text" id="username" placeholder="Usuario" v-model="username" required>
-            </div>
+                <input type="text" id="username" placeholder="Usuario" v-model="username" required></div>
+
             <div class="input-group">
-                <input type="password" id="password" placeholder="Contraseña" v-model="password" required>
-            </div>
+                <input type="password" id="password" placeholder="Contraseña" v-model="password" required></div>
+
+
             <div class="inputs">
-                <input type="password" id="confirmPassword" placeholder="Confirmar Contraseña" v-model="confirmPassword"
-                    required>
+                <input type="password" id="confirmPassword" placeholder="Confirmar Contraseña" v-model="confirmPassword" required>
+
                 <div class="checkbox-container">
                     <input type="checkbox" id="mayorDeEdad" v-model="mayorDeEdad" @change="handleMayorDeEdadChange">
                     <label for="mayorDeEdad">Soy mayor de edad</label>
+
                     <div class="checkbox-container">
                         <input type="checkbox" id="aceptoCondiciones" v-model="aceptoCondiciones"
                             @change="handleAceptoCondicionesChange">
@@ -51,6 +53,7 @@ const aceptoCondiciones = ref(false);
                 </div>
             </div>
         </form>
+
 
         <div v-if="showPrivacyPolicy" class="privacy-policy-popup">
             <div class="privacy-policy-content">
@@ -105,6 +108,7 @@ img{
     height: 40%;
     justify-content: center;
     margin-left: 35%;
+    margin-top: 5%;
 }
 p{
     color: white;
@@ -123,26 +127,22 @@ a{
     transition: color 0.3s ease;
 }
 
-/* a:hover {
-    color: #383E7D;
-} */
-
 button{
     margin-left: 40%;
     width: 20%;
     height: 6vh;
-    margin-top: 10px;
+    margin-top: 60px;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    border: none;
+    
 }
-button:hover {
-    background-color: pink;
-}
+
 
 .mi-clase{
     padding: 10px 20px; 
     text-decoration: none; 
+    border: none;
     color: #000000;
 }
 
@@ -161,6 +161,8 @@ input[type="text"], input[type="password"] {
     padding: 10px;
     margin-bottom: 10px;
     font-size: 16px;
+    border-radius: 4px;
+    border: none;
     
 }
 
@@ -180,24 +182,12 @@ label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
     left: 0;
     width: 100%;
     height: 100%;
-    /* background-color: rgba(0, 0, 0, 0.181); */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
     overflow: auto; 
 }
-
-/* .privacy-policy-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 100%;
-    height: 100vh;
-    max-width: 500%;
-    box-sizing: border-box;
-    
-} */
 
 .privacy-policy-content {
     background-color: white;
@@ -215,10 +205,10 @@ label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
     margin-left: 30%;
     border-radius: 5px;
     color: #fff;
-    width: 35%;
-    height: 45px;
-    font-size: x-large;
-    font-weight: 600;
+    width: 30%;
+    height: 40px;
+    font-size: large;
+    font-weight: 500;
 }
 
 
@@ -227,12 +217,60 @@ h3{
     color: rgba(255, 0, 0, 0.79);
 }
 
-.lorem{
-    color: black;
-    margin-left: 5%;
-    font-size:large;
-    font-weight: normal;
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+
+    img {
+        width: 40%;
+        height: auto;
+        margin-left: 30%;
+        margin-top: 5%;
+    }
+
+    h2 {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 100%;
+    }
+
+    .privacy-policy-content {
+        width: 90%;
+    }
+
+    .accept-button {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    button{
+    margin-left: 30%;
+    width: 40%;
+    height: 5vh;
+    margin-top: 60px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    
 }
+
+#confirmPassword {
+    max-width: 100%;
+    
+}
+
+
+
+}
+
 
 
 </style>

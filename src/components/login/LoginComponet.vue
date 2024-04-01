@@ -133,7 +133,6 @@ button{
 }
 
 
-
 @media (min-width: 769px) {
     img{
         width: 30%;
