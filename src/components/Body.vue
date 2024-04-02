@@ -37,7 +37,7 @@ const closePopup = () => {
 </div>
 <div class="information">
 <div>
-    <button class="more-information" @click="showPopup">+ Información</button>
+    <button class="more-information" @click="showPopup">Más información</button>
     <div v-if="popupVisible" class="popup">
     <h2>Proyecto 11X12. Campamentos Urbanos 2024.</h2>
 <p>
