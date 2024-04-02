@@ -25,12 +25,12 @@ async function login() {
 let isAuthenticated = await store.login(dataConnection)
 
     if (isAuthenticated && store.user.roles == "ROLE_ADMIN") {
-        const redirectPath = route.query.redirect || '/prueba'
+        const redirectPath = route.query.redirect || '/admin'
         router.push(redirectPath)
     }
 
     if (isAuthenticated && store.user.roles == "ROLE_USER") {
-        const redirectPath = route.query.redirect || '/'
+        const redirectPath = route.query.redirect || '/user'
         router.push(redirectPath)
     }
 }
