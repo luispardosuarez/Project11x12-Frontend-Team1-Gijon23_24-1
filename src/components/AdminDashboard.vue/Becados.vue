@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import Header from '@/components/Header.vue';
-import Pagination from '@/components/Pagination.vue';
+// import Header from '@/components/Header.vue';
+// import Pagination from '@/components/Pagination.vue';
 
 const showListaBecados = ref(false);
 const listaBecados = ref(['12345678', '87654321', '98765432']);
@@ -30,8 +30,8 @@ function añadirBecado() {
 <template>
 
 <div class="dashboard">
-    <!-- Header -->
-    <Header />
+    
+    <!-- <Header /> -->
 
     <!-- Body -->
     <div class="body">
@@ -39,7 +39,7 @@ function añadirBecado() {
         <button @click="showBecados">Becados</button>
         <button @click="showCampamentos">Campamentos</button>
         <button @click="showInscritos">Inscritos</button>
-        <img src="logo.png" alt="Logo">
+        <img src="../assets/img/11x12.jpg" alt="">
       </div>
       <div class="right-panel">
         <ul v-if="showListaBecados">
@@ -70,9 +70,10 @@ function añadirBecado() {
 <style scoped>
 
 /* Estilos para la vista */
-.dashboard {
+/* .dashboard {
+
   /* Estilos del dashboard */
-}
+/* } */ */
 
 .body {
   display: flex;
