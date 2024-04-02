@@ -4,7 +4,8 @@ import { useRoute, useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 
 
-let uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
+
+let uri = import.meta.env.VITE_APP_API_ENDPOINT_LOGIN
 
 const route = useRoute()
 const router = useRouter()
@@ -24,7 +25,7 @@ async function login() {
 let isAuthenticated = await store.login(dataConnection)
 
     if (isAuthenticated && store.user.roles == "ROLE_ADMIN") {
-        const redirectPath = route.query.redirect || '/dashboard'
+        const redirectPath = route.query.redirect || '/prueba'
         router.push(redirectPath)
     }
 
@@ -39,12 +40,6 @@ function redirectToRegister() {
     router.push(redirectPath)
 }
 
-/*  function enviar() {
-    const redirectPath = route.query.redirect || '/prueba'
-    router.push(redirectPath)
-}
- */
-
 
 </script>
 
@@ -55,22 +50,20 @@ function redirectToRegister() {
 
         <h2>INICIAR SESIÓN</h2>
 
-        <form @submit.prevent="login()">
+        <form @submit.prevent="login">
             <div class="inputs">
         
-                <input type="text" id="username" placeholder="Usuario" v-model="username" >
-            </div>
+                <input type="text" id="username" placeholder="Usuario" v-model="username"></div>
+                
             <div class="inputs">
             
-                <input type="password" id="password" placeholder="Contraseña" required v-model="password">
-            </div>
+                <input type="password" id="password" placeholder="Contraseña" required v-model="password"></div>
             
         </form>
 
         <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()">Regístrate</a></p>
 
-        <button type="submit"><a href="#" class="mi-clase" @click.prevent="enviar()">Entrar</a></button>
-    </div>
+        <button type="submit" @click="login">Entrar</button></div>
     
 </template>
 

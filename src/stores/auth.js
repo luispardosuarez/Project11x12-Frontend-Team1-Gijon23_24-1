@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
                 withCredentials: true
             }
 
-            const response = await axios.get('/login', options)
+            const response = await axios.get(`${uri}/login`, options)
             const data = await response.data
             user.isAuthenticated = true
             user.username = data.username
