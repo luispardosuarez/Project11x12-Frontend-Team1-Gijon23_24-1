@@ -20,7 +20,7 @@ const isLoggedIn = ref(false);
     </div>
 
     <div class="headerLink" v-else>
-        <RouterLink class="routerLink" to="/about">Iniciar sesión</RouterLink>
+        <RouterLink class="routerLink" to="/login">Iniciar sesión</RouterLink>
     </div>
 
 </div>
