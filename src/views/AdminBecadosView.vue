@@ -1,5 +1,5 @@
 <script setup>
-import Becados from './components/Becados.vue';
+import Becados from '../components/AdminDashboard/Becados.vue';
 
 
 </script>
