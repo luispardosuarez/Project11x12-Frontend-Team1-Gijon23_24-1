@@ -36,10 +36,12 @@
 
 .contenedorCards {
   display: flex;
-  justify-content: center;
-
+  
   .cardsContainer {
-    max-width: 400px;     
+    padding: 3%;
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
   }
 }
 
