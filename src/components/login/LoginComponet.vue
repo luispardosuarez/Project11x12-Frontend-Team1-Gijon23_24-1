@@ -5,7 +5,7 @@ import { useAuthStore } from "@/stores/auth";
 
 
 
-let uri = import.meta.env.VITE_APP_API_ENDPOINT_LOGIN
+let uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
 
 const route = useRoute()
 const router = useRouter()

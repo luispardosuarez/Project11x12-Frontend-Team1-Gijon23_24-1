@@ -14,7 +14,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     const login = async (dataConnection) => {
 
-        const uri = import.meta.env.VITE_APP_API_ENDPOINT
+        const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
 
         try {
             isLoading.value = true
