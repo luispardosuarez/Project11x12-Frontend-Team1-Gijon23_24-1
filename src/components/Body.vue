@@ -148,5 +148,14 @@ font-size: 28px;
 .information td {
 padding: 15px;
 }
-
+@media screen and (max-width: 768px) {
+    .container {
+      flex-direction: column; 
+    }
+    .information .more-information {
+      margin-left: 0; 
+      margin-top: 15px; 
+      text-align: center; 
+    }
+  }
 </style>
