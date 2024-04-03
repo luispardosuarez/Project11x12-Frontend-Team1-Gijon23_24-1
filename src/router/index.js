@@ -34,6 +34,13 @@ const router = createRouter({
       
     },
 
+    {
+      path: '/user',
+      name: 'UserDashboard',
+      component: () => import('../views/UserDashboardView.vue')
+      
+    },
+
 
 
   ]
