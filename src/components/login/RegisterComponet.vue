@@ -1,7 +1,50 @@
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios'
+import { useRoute, useRouter } from "vue-router";
+
+const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
+console.log(uri);
+
+const route = useRoute()
+const router = useRouter()
+
+
+async function register() {
+    try {
+        let passwordEncrypted = btoa(`${password.value}`)
+        
+
+        const data = {
+            username: username.value,
+            password: passwordEncrypted
+        }
+
+        const response = await axios.post(`${uri}/register`, data, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true,
+            
+        })
+        console.log(response);
+        const status = response.status
+
+        console.log(status);
+        redirectToDashboard()
+    } catch (error) {
+        throw new Error('Error occured during API fetch POST request while login : ' + error)
+    }
+}
+
+
+function redirectToDashboard() {
+    const redirectPath = '/user'
+    router.push(redirectPath)
+}
 
 const isAdult = ref(false);
+const canRegister = ref(false);
 const username = ref('');
 const password = ref('');
 const confirmPassword = ref('');
@@ -12,25 +55,23 @@ const closePrivacyPolicy = () => {
 };
 
 const handleAceptoCondicionesChange = () => {
-    if (!aceptoCondiciones.value) {
+    if (aceptoCondiciones.value) {
         showPrivacyPolicy.value = true;
     }
-
+    canRegister.value = isAdult.value && aceptoCondiciones.value;
 };
-
-
-const aceptoCondiciones = ref(false);
 
 
 </script>
 
 <template>
+
     <div class="container">
         <div class="image"><img src="../../assets/imageLogin/11x12.png" alt=""></div>
 
         <h2>REGISTRO</h2>
 
-        <form @submit.prevent="checkin">
+        <form @submit.prevent="register">
             <div class="input-group">
                 <input type="text" id="username" placeholder="Usuario" v-model="username" required></div>
 
@@ -42,7 +83,7 @@ const aceptoCondiciones = ref(false);
                 <input type="password" id="confirmPassword" placeholder="Confirmar Contraseña" v-model="confirmPassword" required>
 
                 <div class="checkbox-container">
-                    <input type="checkbox" id="mayorDeEdad" v-model="mayorDeEdad" @change="handleMayorDeEdadChange">
+                    <input type="checkbox" id="mayorDeEdad" v-model="isAdult" @change="handleMayorDeEdadChange">
                     <label for="mayorDeEdad">Soy mayor de edad</label>
 
                     <div class="checkbox-container">
@@ -91,7 +132,7 @@ const aceptoCondiciones = ref(false);
             </div>
         </div>
 
-        <button type="submit"><a href="#" class="mi-clase" @click="enviar">REGISTRARSE</a></button>
+        <button type="submit" :disabled="!canRegister"><a href="#" class="mi-clase" @click="register">REGISTRARSE</a></button>
     </div>
 
 
