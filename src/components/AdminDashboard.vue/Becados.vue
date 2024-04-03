@@ -8,15 +8,15 @@ const listaBecados = ref(['12345678', '87654321', '98765432']);
 const totalPages = ref(10);
 const nuevoDni = ref('');
 
-function showBecados() {
+function Becados() {
   showListaBecados.value = true;
 }
 
-function showCampamentos() {
+function Campamentos() {
   // Lógica para mostrar los campamentos
 }
 
-function showInscritos() {
+function Inscritos() {
   // Lógica para mostrar los inscritos
 }
 
@@ -36,13 +36,13 @@ function añadirBecado() {
     <!-- Body -->
     <div class="body">
       <div class="left-panel">
-        <button @click="showBecados">Becados</button>
-        <button @click="showCampamentos">Campamentos</button>
-        <button @click="showInscritos">Inscritos</button>
+        <button @click="Becados">Becados</button>
+        <button @click="Campamentos">Campamentos</button>
+        <button @click="Inscritos">Inscritos</button>
         <img src="../assets/img/11x12.jpg" alt="">
       </div>
       <div class="right-panel">
-        <ul v-if="showListaBecados">
+        <ul v-if="ListaBecados">
           <li v-for="dni in listaBecados" :key="dni">
             {{ dni }}
             <button class="editar">Editar</button>
