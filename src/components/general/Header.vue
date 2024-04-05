@@ -51,8 +51,8 @@ const isLoggedIn = ref(false);
 }
 
 .logo {
-    width: 30%;
-    padding: 19px;
+    width: 40%;
+    padding: 20px;
     margin-right: 150px;
 }
 

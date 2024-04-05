@@ -58,12 +58,12 @@
 
         .gijonLogo {
             width: 5%;
-            margin-right: 85rem;
         }
 
         .footerIcons {
             width: 15%;
             padding: 5px;
+            margin-left: 80rem;
         }
     }
 }
