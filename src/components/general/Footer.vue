@@ -54,8 +54,6 @@
 
     #footerContainer {
 
-        
-
         .gijonLogo {
             width: 5%;
             margin-right: 85rem;
@@ -67,5 +65,4 @@
         }
     }
 }
-
 </style>

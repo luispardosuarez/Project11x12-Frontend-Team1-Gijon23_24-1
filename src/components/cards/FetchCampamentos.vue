@@ -26,7 +26,7 @@
   <div class="contenedorCards">
     <div v-if="campamentos.length === 0">Cargando...</div>
     <div v-else class="cardsContainer">
-      <CardsCampamentos v-for="(campamento, index) in campamentos" :key="index" :campamento="campamento" />
+      <CardsCampamentos v-for="(campamento, index) in campamentos" :key="index" :campamento="campamento"  :style="{ backgroundColor: `hsl(${x}, 80%, 50%)` }"/>
     </div>
   </div>
 
@@ -35,14 +35,12 @@
 <style scoped lang="scss">
 
 .contenedorCards {
-  display: flex;
-  
-  .cardsContainer {
-    padding: 3%;
-    display: flex;
-    flex-direction: row;
-    gap: 1%;
-  }
-}
 
+  .cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    gap:5%;
+    padding: 3%;
+}
+}
 </style>
