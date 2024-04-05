@@ -35,7 +35,7 @@
     <div class="inputGroup">
 
     <label input="Teléfonos">Teléfonos de contacto</label>
-    <input type="Teléfonos" placeholder="Teléfono 1"> <input type="Teléfonos" placeholder="Teléfono 2">
+    <input class="telephone1" type="Teléfonos" placeholder="Teléfono 1"> <input type="Teléfonos" placeholder="Teléfono 2">
     <img src="../../assets/icons/edit.svg">
 
     </div>
@@ -100,6 +100,8 @@
 
 <style lang="scss">
 
+// Mobile 
+
 .userWelcome {
     display: flex;
     justify-content: space-between;
@@ -119,6 +121,24 @@
 }
 
 .userDashboard {
+    
+    .inputGroup {
+    margin-bottom: 10px; 
+    
+    label {
+        margin-bottom: 5px; 
+    }
+
+    input {
+        padding: 5px; 
+        width: calc(100% - 30px); 
+        margin-right: 10px; 
+    }
+
+    .telephone1 {
+        margin-bottom: 10px;
+    }
+}
     img {
         width: 5%;
     }
@@ -214,9 +234,31 @@
 
 #bottomContainer {
     background-color: $gray-form;
-    margin-bottom: 70px;
-    margin-top: 67px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     padding: 20px;
+}
+
+
+// Tablet 
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .userWelcome {
+        h3 {
+            font-size: 50px;
+        }
+        img {
+            width: 100%;
+        }
+    }
+
+    .userDashboard {
+        .inputGroup {
+            input {
+                width: calc(50% - 20px);
+            }
+        }
+    }
 }
 
 </style>
