@@ -73,9 +73,9 @@ function redirectToRegister() {
             
         </form>
 
-        <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()">Regístrate</a></p>
+        <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()">Regístrate aquí</a></p>
 
-        <button type="submit" @click="login">Entrar</button></div>
+        <button type="submit" @click="login">ENTRAR</button></div>
     
 </template>
 
@@ -83,44 +83,53 @@ function redirectToRegister() {
 <style scoped>
 
 
+.container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 .image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    margin-top: 5%;
 }
 
 .image img {
-    width: 35%;
+    width: 100%;
+    max-width: 400px;
     height: auto;
 }
 
 h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
     color: white;
-    margin-left: 40%;
-    margin-bottom: 3%;
-    font-size: xx-large;
-    justify-content: center;
+    
 }
 
 .inputs {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin-bottom: 15px;
+    justify-content: center;
+    
 }
 
 input {
-    width: 50%;
-    height: 6vh;
+    width: 80%;
+    height: 45px;
     padding: 5px;
     border-radius: 3px;
     border: none;
+    margin-left: 10%;
+
 }
 
 p {
+    text-align: center;
     color: white;
-    margin-left: 25%;
-    font-weight: 400;
+    margin-right: 40%;
+
 }
 
 a {
@@ -129,17 +138,54 @@ a {
 }
 
 button {
-    width: 30%;
-    justify-content: center;
-    margin-left: 35%;
-    height: 6vh;
-    margin-top: 20px;
+    width: 40%;
+    height: 40px;
     border-radius: 3px;
     border: none;
+    background-color: white;
+    color: black;
     cursor: pointer;
+    margin-left: 30%;
+    margin-top: 20px;
+    font-size: large;
 }
 
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
 
+    .image img {
+    margin-top: 15%;
+}
+
+    input {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    p {
+    text-align: center;
+    color: white;
+    margin-right: 25%;
+
+}
+
+    button {
+        width: 50%;
+        margin-left: 20p;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .container {
+        max-width: 700px;
+        padding: 0 50px;
+        
+    }
+
+
+}
 
 
 

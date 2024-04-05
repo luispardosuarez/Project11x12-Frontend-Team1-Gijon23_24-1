@@ -22,7 +22,9 @@ import LoginComponet from '@/components/login/LoginComponet.vue';
     display: flex;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: 800;
+    /* font-weight: 800; */
+    object-fit: cover;
+
     
 }
 
