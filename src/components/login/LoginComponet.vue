@@ -82,6 +82,7 @@ function redirectToRegister() {
 
 <style scoped>
 
+
 .image {
     display: flex;
     justify-content: center;
@@ -95,19 +96,21 @@ function redirectToRegister() {
 
 h2 {
     color: white;
-    margin-left: 25%;
+    margin-left: 40%;
     margin-bottom: 3%;
+    font-size: xx-large;
+    justify-content: center;
 }
 
 .inputs {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 input {
-    width: 80%;
+    width: 50%;
     height: 6vh;
     padding: 5px;
     border-radius: 3px;
@@ -117,128 +120,27 @@ input {
 p {
     color: white;
     margin-left: 25%;
+    font-weight: 400;
 }
 
 a {
-        color: white;
-        text-decoration: none;
-    }
+    color: white;
+    text-decoration: none;
+}
 
 button {
-    width: 60%;
-    margin-left: 20%;
+    width: 30%;
+    justify-content: center;
+    margin-left: 35%;
     height: 6vh;
     margin-top: 20px;
     border-radius: 3px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
- @media (min-width: 769px) {
-    img {
-        width: 30%;
-        height: auto;
-        margin-left: 35%;
-        margin-top: 8%;
-    }
-
-    h2 {
-        color: white;
-        margin-left: 39%;
-        margin-bottom: 3%;
-    }
-
-    .inputs {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-
-    input {
-        width: 30%;
-        height: 6vh;
-        padding: 5px;
-        border-radius: 3px;
-        border: none;
-    }
-
-    p {
-        color: white;
-        margin-left: 30%;
-    }
-
-    a {
-        color: white;
-        text-decoration: none;
-    }
-
-    button {
-        width: 20%;
-        margin-left: 40%;
-        height: 6vh;
-        margin-top: 20px;
-        border-radius: 3px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
 }
 
 
-@media (min-width: 1024px) {
-    img {
-        width: 20%;
-        height: auto;
-        margin-left: 0%;
-        margin-top: 5%;
-    }
 
-    h2 {
-        color: white;
-        margin-bottom: 3%;
-    }
-
-    .inputs {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin-bottom: 15px;
-    }
-
-    input {
-        width: 40%;
-        height: 6vh;
-        padding: 5px;
-        border-radius: 3px;
-        border: none;
-    }
-
-    p {
-        color: white;
-        margin-left: 30%;
-    }
-    
-    a {
-        color: white;
-        text-decoration: none;
-    }
-    
-
-    
-
-    button {
-        width: 20%;
-        margin-left: 40%;
-        height: 6vh;
-        margin-top: 20px;
-        border-radius: 3px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-}
 
 
 </style>
