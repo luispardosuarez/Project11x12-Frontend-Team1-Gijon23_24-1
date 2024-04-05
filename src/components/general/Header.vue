@@ -11,8 +11,10 @@ const isLoggedIn = ref(false);
 
 <div id="headerContainer">
 
-    <img class="logo" src="../../assets/icons/gijon.png" alt="">
-
+    <RouterLink to="/">
+        <img class="logo" src="../../assets/icons/gijon.png" alt="Logo">
+    </RouterLink>
+    
     <div class="headerLinkLogged" v-if="isLoggedIn">
         <RouterLink class="routerLink" to="/"> <img src="../../assets/icons/home.svg"> </RouterLink>
         <RouterLink class="routerLink" to="/"> <img src="../../assets/icons/user.svg"> </RouterLink>
@@ -20,7 +22,7 @@ const isLoggedIn = ref(false);
     </div>
 
     <div class="headerLink" v-else>
-        <RouterLink class="routerLink" to="/about">Iniciar sesión</RouterLink>
+        <RouterLink class="routerLink" to="/login">Iniciar sesión</RouterLink>
     </div>
 
 </div>
@@ -82,9 +84,9 @@ img {
 
 @media only screen and (min-width: 768px){
     .logo {
-        width: 7%;
-        margin-left: 30px;
-        padding: 10px;
+        width: 40%;
+        margin-left: 20px;
+        padding: 20px;
     }
 
     .headerLink {
