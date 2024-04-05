@@ -1,12 +1,17 @@
 <script setup>
-import Becados from "../components/AdminDashboard.vue/Becados.vue";
+// import AdminBecados from "@/components/AdminDashboard/AdminBecados.vue";
 
+import PruebaAdminBeca from "@/components/AdminDashboard.vue/PruebaAdminBeca.vue";
 
 </script>
 
 <template>
+    
+    <div>
+ 
+<PruebaAdminBeca />
+</div>
 
-<Becados />
 
 </template>
 
