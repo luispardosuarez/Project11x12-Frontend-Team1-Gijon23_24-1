@@ -40,7 +40,6 @@ function redirectToRegister() {
     router.push(redirectPath)
 }
 
-
 </script>
 
 

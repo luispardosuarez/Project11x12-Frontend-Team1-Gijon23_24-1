@@ -3,12 +3,11 @@ import BecadosForm from "@/components/Becados/BecadosForm.vue";
 
 </script>
 <template>
- <!--  <div class="BecadosFormContainer">
+ <div class="BecadosFormContainer">
     <BecadosForm />
 
-  </div> -->
+  </div>
 
-  <h1>Hola</h1>
 </template>
 
 <style scoped lang="scss">
