@@ -13,9 +13,21 @@ const store = useAuthStore()
 
 let username = ref("")
 let password = ref("")
+let errorMessage = ref("")
+
+
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
 
 
 async function login() {
+
+    if (!validateEmail(username.value)) {
+        errorMessage.value = 'Por favor, ingresa una dirección de correo electrónico válida.';
+        return; 
+    }
 
     const dataConnection = {
         username: username.value,
@@ -52,11 +64,12 @@ function redirectToRegister() {
         <form @submit.prevent="login">
             <div class="inputs">
         
-                <input type="text" id="username" placeholder="Usuario" v-model="username"></div>
+                <input type="text" id="username" placeholder="Usuario" v-model="username" ></div>
+                <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
                 
             <div class="inputs">
             
-                <input type="password" id="password" placeholder="Contraseña" required v-model="password"></div>
+            <input type="password" id="password" placeholder="Contraseña" required v-model="password"></div>
             
         </form>
 
@@ -69,55 +82,51 @@ function redirectToRegister() {
 
 <style scoped>
 
-img{
-    width: 30%;
-    height: 40%;
-    justify-content: center;
-    margin-left: 35%;
-    margin-top: 8%;
-
-}
-
-h2{
-        color: white;
-        margin-left: 39%;
-        margin-bottom: 3%;
-    }
-
-.inputs{
+.image {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.image img {
+    width: 35%;
+    height: auto;
+}
+
+h2 {
+    color: white;
+    margin-left: 25%;
+    margin-bottom: 3%;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 10px;
 }
 
-input{
-    width: 30%;
+input {
+    width: 80%;
     height: 6vh;
     padding: 5px;
     border-radius: 3px;
     border: none;
-
 }
 
-p{
+p {
     color: white;
-    margin-left: 35%;
+    margin-left: 25%;
 }
 
-a{
-    
-    text-decoration: none; 
-    color: white;
-    transition: color 0.3s ease;
-}
+a {
+        color: white;
+        text-decoration: none;
+    }
 
-a:hover {
-    color: #383e7d;
-}
-
-button{
-    margin-left: 40%;
-    width: 20%;
+button {
+    width: 60%;
+    margin-left: 20%;
     height: 6vh;
     margin-top: 20px;
     border-radius: 3px;
@@ -126,33 +135,28 @@ button{
     transition: background-color 0.3s ease;
 }
 
-
-.mi-clase{
-    color:black;
-}
-
-
-@media (min-width: 769px) {
-    img{
+ @media (min-width: 769px) {
+    img {
         width: 30%;
-        height: 40%;
+        height: auto;
         margin-left: 35%;
         margin-top: 8%;
     }
 
-    h2{
+    h2 {
         color: white;
         margin-left: 39%;
         margin-bottom: 3%;
     }
 
-    .inputs{
+    .inputs {
         display: flex;
+        flex-direction: row;
         justify-content: center;
         margin-bottom: 10px;
     }
 
-    input{
+    input {
         width: 30%;
         height: 6vh;
         padding: 5px;
@@ -160,14 +164,19 @@ button{
         border: none;
     }
 
-    p{
+    p {
         color: white;
-        margin-left: 35%;
+        margin-left: 30%;
     }
 
-    button{
-        margin-left: 40%;
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    button {
         width: 20%;
+        margin-left: 40%;
         height: 6vh;
         margin-top: 20px;
         border-radius: 3px;
@@ -178,33 +187,56 @@ button{
 }
 
 
-@media (max-width: 768px) {
-    img{
-        width: 50%;
+@media (min-width: 1024px) {
+    img {
+        width: 20%;
         height: auto;
-        margin-left: 25%;
+        margin-left: 0%;
+        margin-top: 5%;
     }
 
-    h2{
-        margin-left: 25%;
+    h2 {
+        color: white;
+        margin-bottom: 3%;
     }
 
-    .inputs{
-        flex-direction: column;
-        align-items: center;
+    .inputs {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 15px;
     }
 
-    input{
-        width: 80%;
+    input {
+        width: 40%;
+        height: 6vh;
+        padding: 5px;
+        border-radius: 3px;
+        border: none;
     }
 
-    p{
-        margin-left: 25%;
+    p {
+        color: white;
+        margin-left: 30%;
     }
+    
+    a {
+        color: white;
+        text-decoration: none;
+    }
+    
 
-    button{
-        width: 60%;
-        margin-left: 20%;
+    
+
+    button {
+        width: 20%;
+        margin-left: 40%;
+        height: 6vh;
+        margin-top: 20px;
+        border-radius: 3px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
 }
 
