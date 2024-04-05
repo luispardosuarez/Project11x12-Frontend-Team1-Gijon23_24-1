@@ -20,11 +20,11 @@ const deleteDni = (index) => {
 };
 
 const showCampamentos = () => {
-  // Lógica para mostrar campamentos
+  
 };
 
 const showInscritos = () => {
-  // Lógica para mostrar inscritos
+  
 };
 </script>
 
@@ -32,13 +32,16 @@ const showInscritos = () => {
 
 <template>
     <div class="app">
-      <h1>Mis Becados</h1>
-      <div class="buttons">
-        <button @click="showBecados">Becados</button>
-        <button @click="showCampamentos">Campamentos</button>
-        <button @click="showInscritos">Inscritos</button>
+      <h1>¡Hola Admin!</h1>
+      <div class= button-container>
+      
+        <button class="small-button" @click="showBecados">Becados</button>
+        <button class="small-button" @click="showCampamentos">Campamentos</button>
+        <button class="small-button" @click="showInscritos">Inscritos</button>
       </div>
-      <ul v-if="showList">
+      <img src="@/assets/img/11x12.jpg" alt="" class= "my-image" />
+      <div class="dni-list-container">
+      <ul v-if="showList" >
         <li v-for="(dni, index) in dniList" :key="index">
           {{ dni }}
           <button @click="editDni(index)">Editar</button>
@@ -46,34 +49,50 @@ const showInscritos = () => {
         </li>
       </ul>
     </div>
+    </div>
   </template>
   
   
     
   <style scoped>
   .app {
-    font-family: Arial, sans-serif;
+   font-family: Arial, sans-serif;
     text-align: center;
     margin: 20px;
   }
+  .button-container {
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-start;
+  margin-bottom: 10px;
   
-  .buttons {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    margin: 5px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
+}
+
+  .small-button {
+    margin: 8px;
+    padding: 10px 25px;
+    background-color: #D0003E;
+    font-size: 14px;
+    color: #fff;    
     border: none;
     cursor: pointer;
+    width: 120px;
   }
+  .my-image {
+  max-width: 9%; 
+  display: block;
+  margin-left: 0;
   
+}
+.dni-list-container {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  margin-top: 0; 
+}
+
   ul {
-    list-style: none;
+   list-style: none;
     padding: 0;
   }
   
