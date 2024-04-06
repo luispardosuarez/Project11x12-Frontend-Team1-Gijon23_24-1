@@ -11,13 +11,14 @@ import Body from "@/components/Body.vue";
   <main>
     <Body />
     <div>
-      <h3>Campamentos</h3>
+      
       <FetchCampamentos />
     </div>
 
   </main> 
 
 </template>
+
 
 
     
