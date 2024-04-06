@@ -26,7 +26,7 @@
   <div class="contenedorCards">
     <div v-if="campamentos.length === 0">Cargando...</div>
     <div v-else class="cardsContainer">
-      <CardsCampamentos v-for="(campamento, index) in campamentos" :key="index" :campamento="campamento"  :style="{ backgroundColor: `hsl(${x}, 80%, 50%)` }"/>
+      <CardsCampamentos v-for="(campamento, index) in campamentos" :key="index" :campamento="campamento" />
     </div>
   </div>
 
