@@ -4,12 +4,12 @@
 </script>
 <template>
     <div class="btnPasos">
-        <button>Seleccionar semana</button>
-        <button>Seleccionar colegio</button>
-        <button>Seleccionar participante</button>
-        <button>Confirmar compra</button>
-        <button>Pago</button>
-        <button>Finalizar</button>
+        <button id="paso1">Seleccionar semana</button>
+        <button id="paso2">Seleccionar colegio</button>
+        <button id="paso3">Seleccionar participante</button>
+        <button id="paso4">Confirmar compra</button>
+        <button id="paso5">Pago</button>
+        <button id="paso6">Finalizar</button>
     </div>
   
 </template>
@@ -22,8 +22,15 @@
     font-family: Arial;
     
     button {
-        background-color: $red;
+        background-color: $gray;
         color: white;
+        margin: 1%;
+        border: none;
+
     }
+
+    #paso1 {
+            background-color: $red;
+        }
 }
 </style>
