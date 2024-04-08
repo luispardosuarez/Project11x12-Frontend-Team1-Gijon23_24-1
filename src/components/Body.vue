@@ -82,6 +82,8 @@ Las familias que tienen concedida la beca de comedor al 100 por 100 del Ayuntami
 </template>
 <style scoped>
 
+@import "../../assets/scss/variables.scss";
+
 h1 {
 color: #D0003E;
 text-align: center;
