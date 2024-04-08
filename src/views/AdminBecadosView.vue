@@ -1,5 +1,6 @@
 <script setup>
 import AdminBecados from "@/components/AdminDashboard.vue/AdminBecados.vue";
+import BecadosForm from "@/components/Becados/BecadosForm.vue";
 
 // import PruebaAdminBeca from "@/components/AdminDashboard.vue/PruebaAdminBeca.vue";
 
@@ -11,6 +12,7 @@ import AdminBecados from "@/components/AdminDashboard.vue/AdminBecados.vue";
  
 <!-- <PruebaAdminBeca /> -->
 <AdminBecados />
+<BecadosForm />
 </div>
 
 

@@ -21,7 +21,7 @@ const fetchBecados = async () => {
 
 const editarBecado = async (index) => {
   try {
-    const response = await axios.put(`VITE_API_ENDPOINT_EDITAR_BECADO/${index}`, becados.value[index]);
+    const response = await axios.put(`VITE_API_ENDPOINT_SCHOLARSHIP/${index}`, becados.value[index]);
     console.log('Becado editado:', response.data);
   } catch (error) {
     console.error('Error editando becado:', error);
@@ -30,7 +30,7 @@ const editarBecado = async (index) => {
 
 const borrarBecado = async (index) => {
   try {
-    await axios.delete(`VITE_API_ENDPOINT_BORRAR_BECADO/${index}`);
+    await axios.delete(`VITE_API_ENDPOINT_SCHOLARSHIP/${index}`);
     becados.value.splice(index, 1);
     console.log('Becado borrado exitosamente');
   } catch (error) {
@@ -79,14 +79,7 @@ const añadirBecado = () => {
       </v-list-item>
     </v-list>
     <v-pagination v-model="paginaActual" :length="totalPaginas" @click="cambiarPagina" />
-    <div class="añadir-container">
-      <p>Añadir Becado:</p>
-      <div>
-        <p>DNI Becado:</p>
-        <v-text-field v-model="nuevoDni" outlined></v-text-field>
-        <v-btn class="añadir-btn" @click="añadirBecado">Añadir Becado</v-btn>
-      </div>
-    </div>
+    
   </div>
 
 </template>
