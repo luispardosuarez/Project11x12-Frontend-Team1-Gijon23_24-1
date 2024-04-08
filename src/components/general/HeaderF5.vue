@@ -44,6 +44,7 @@ const isLoggedIn = ref(false);
 
         p {
             margin: 20px;
+            font-size: 18px;
         }    
 }
 
@@ -55,6 +56,7 @@ const isLoggedIn = ref(false);
 
             p {
                 margin: 20px;
+                font-size: 20px;
             } 
             .logof5 {
                 margin-right: 20px;
