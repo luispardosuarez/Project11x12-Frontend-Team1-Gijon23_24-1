@@ -183,8 +183,4 @@ padding: 15px;
 }
 
 
-
-
-
-
 </style>
