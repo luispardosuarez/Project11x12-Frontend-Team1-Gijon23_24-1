@@ -20,13 +20,14 @@
     display: flex;
     flex-direction: column;
     font-family: Arial;
+    margin-top: 0px;
     
     button {
         background-color: $gray;
         color: white;
-        margin: 1%;
+        margin: 2%;
         border: none;
-        padding: 1%;
+        padding: 2%;
 
     }
 

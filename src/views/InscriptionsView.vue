@@ -19,17 +19,27 @@ import BarraLateral from "@/components/inscriptions/BarraLateral.vue";
 </template>
 
 <style scoped lang="scss">
-main {
-  height: 100%;
+
+h2 {
+  padding-left: 2%;
+  padding-top: 2%;
 }
+
+.bajoSaludo {
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+}
+
 aside {
   width: 20%;
   align-items: center;
+  margin: 1%;
 }
 
 .logo11x12 {
   width: 100%;
-  margin: 1%;
+  margin-top: 2%;
 }
 
 @media only screen and (max-width: 768px){
