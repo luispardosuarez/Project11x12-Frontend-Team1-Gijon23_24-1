@@ -1,10 +1,12 @@
 <script setup>
+import BarraLateral from '@/components/inscriptions/BarraLateral.vue';
+
 
 
 </script>
 <template>
   <div>
-    vista de inscripciones
+    <BarraLateral/>
   </div>
 </template>
 
