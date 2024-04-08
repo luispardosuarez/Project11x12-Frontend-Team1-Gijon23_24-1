@@ -149,4 +149,38 @@ font-size: 28px;
 padding: 15px;
 }
 
+@media screen and (max-width: 768px) {
+    .container {
+      flex-direction: column; 
+    }
+    .information .more-information {
+      margin-left: 0; 
+      margin-top: 15px; 
+      text-align: center; 
+    }
+  }
+  .logoproject img {
+  width: 180px; 
+  margin-top: 25px; 
+  margin-right: 15px; 
+  margin-left: 55px ;
+  height: 210px;
+}
+@media screen and (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .logoproject img {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .information .more-information {
+    margin-left: 0;
+    margin-top: 15px;
+    text-align: center;
+  }
+}
+
+
 </style>
