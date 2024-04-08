@@ -1,49 +1,112 @@
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios'
+import { useRoute, useRouter } from "vue-router";
+
+const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
+
+const route = useRoute()
+const router = useRouter()
+
+const errorMessage = ref('');
+
+function isValidEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+
+async function register() {
+
+    if (!email.value) {
+        errorMessage.value = 'Por favor, introduce tu correo electrónico.';
+        return;
+    }
+
+    if (!isValidEmail(email.value)) {
+        errorMessage.value = 'Por favor, introduce un correo electrónico válido.';
+        return;
+    }
+    try {
+        let passwordEncrypted = btoa(`${password.value}`)
+        
+
+        const data = {
+            username: email.value,
+            password: passwordEncrypted
+        }
+
+        const response = await axios.post(`${uri}/register`, data, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true,
+            
+        })
+        console.log(response);
+        const status = response.status
+
+        console.log(status);
+        redirectToDashboard()
+    } catch (error) {
+        throw new Error('Error occured during API fetch POST request while login : ' + error)
+    }
+}
+
+
+function redirectToDashboard() {
+    const redirectPath = '/user'
+    router.push(redirectPath)
+}
 
 const isAdult = ref(false);
-const username = ref('');
+const canRegister = ref(false);
+const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 const showPrivacyPolicy = ref(false);
+const aceptoCondiciones = ref(false);
+
 
 const closePrivacyPolicy = () => {
     showPrivacyPolicy.value = false;
 };
 
 const handleAceptoCondicionesChange = () => {
-    if (!aceptoCondiciones.value) {
+    if (aceptoCondiciones.value) {
         showPrivacyPolicy.value = true;
     }
-
+    canRegister.value = isAdult.value && aceptoCondiciones.value;
 };
-
-
-const aceptoCondiciones = ref(false);
 
 
 </script>
 
 <template>
+
     <div class="container">
-        <div class="image"><img src="../../assets/imageLogin/11x12.png" alt=""></div>
+    <img src="../../assets/imageLogin/11x12 recortada.png" alt="">
 
         <h2>REGISTRO</h2>
 
-        <form @submit.prevent="checkin">
+        <form @submit.prevent="register">
             <div class="input-group">
-                <input type="text" id="username" placeholder="Usuario" v-model="username" required></div>
+
+                <input type="email" id="email" placeholder="Usuario" v-model="email" required>
+            </div>
 
             <div class="input-group">
-                <input type="password" id="password" placeholder="Contraseña" v-model="password" required></div>
+                <input type="password" id="password" placeholder="Contraseña" v-model="password" required>
+            </div>
 
 
-            <div class="inputs">
-                <input type="password" id="confirmPassword" placeholder="Confirmar Contraseña" v-model="confirmPassword" required>
+            <div class="input-group">
+                <input type="password" id="confirmPassword" placeholder="Confirmar Contraseña" v-model="confirmPassword"
+                    required> </div>
 
                 <div class="checkbox-container">
-                    <input type="checkbox" id="mayorDeEdad" v-model="mayorDeEdad" @change="handleMayorDeEdadChange">
-                    <label for="mayorDeEdad">Soy mayor de edad</label>
+                    <input type="checkbox" id="mayorDeEdad" v-model="isAdult" @change="handleMayorDeEdadChange">
+                    <label for="mayorDeEdad">Soy mayor de edad</label> 
 
                     <div class="checkbox-container">
                         <input type="checkbox" id="aceptoCondiciones" v-model="aceptoCondiciones"
@@ -51,47 +114,118 @@ const aceptoCondiciones = ref(false);
                         <label for="aceptoCondiciones">Acepto las condiciones legales </label>
                     </div>
                 </div>
-            </div>
+            
         </form>
+
+        <div v-if="errorMessage" class="error-popup">
+    <div class="error-content">
+        <p>{{ errorMessage }}</p>
+        <button @click="errorMessage = ''">Cerrar</button>
+    </div>
+</div>
 
 
         <div v-if="showPrivacyPolicy" class="privacy-policy-popup">
             <div class="privacy-policy-content">
                 <h3>Condiciones legales</h3>
-                <p class="lorem"> <ol>
-                    <li> Intelectual: Todos los derechos de propiedad intelectual
-                    relacionados con el nombre "11x12 Gijón", incluyendo pero no limitado a marcas registradas, derechos
-                    de autor, y cualquier propiedad intelectual relacionada, son propiedad exclusiva de la entidad
-                    responsable de su creación. Cualquier uso no autorizado de estos derechos está prohibido y puede
-                    estar sujeto a acciones legales.</li><br>
+                <p >
+                    Los datos recogidos en los diferentes apartados de la Web municipal son tratados por el Ayuntamiento
+                    de Gijón/Xixón (dirección postal: Plaza Mayor, 1. 33201 Gijón - Asturias; teléfono: 985 181 105),
+                    como responsable del tratamiento, con las finalidades descritas en cada procedimiento, formulario o
+                    en los modelos de la sede electrónica.<br><br>
 
-                    <li>Responsabilidad del Contenido: La entidad "11x12 Gijón" no se hace responsable por el
-                    contenido de terceros enlazado desde su sitio web o cualquier otra plataforma de comunicación. Los
-                    usuarios asumen toda la responsabilidad por el contenido que compartan en relación con la marca
-                    "11x12 Gijón".</li><br>
+                    En la Página web municipal no se recogen datos personales sin que previamente se informe y detalle
+                    el tratamiento realizado, de acuerdo con el contenido del artículo 13 del Reglamento (UE) General de
+                    Protección de Datos.<br><br>
 
-                    <li>Privacidad: La entidad "11x12 Gijón" se compromete a proteger la privacidad de los
-                    usuarios de acuerdo con las leyes de protección de datos aplicables. Cualquier información personal
-                    recopilada será utilizada únicamente con el propósito declarado y no será compartida con terceros
-                    sin el consentimiento expreso del usuario, excepto cuando sea requerido por ley.</li><br>
+                    Los datos aportados se utilizarán, con carácter único y exclusivo, para los fines previstos en el
+                    procedimiento o actuación para los que sean tratados.<br><br>
 
-                    <li>Jurisdicción: Cualquier disputa legal relacionada con "11x12 Gijón" estará sujeta a la
-                    jurisdicción de los tribunales competentes en la ubicación de su sede principal o de acuerdo con los
-                    términos especificados en los contratos pertinentes.</li><br>
+                    El Ayuntamiento no trata (recoge, gestiona, conserva, comunica, etc.) sus datos personales sin haber
+                    analizado previamente la base de licitud y respetando los principios de lealtad, limitación de la
+                    finalidad, minimización, conservación y confidencialidad. Puede consultar los tratamientos de datos
+                    que realiza el Ayuntamiento de Gijón/Xixón junto con su base de licitud en el Inventario Municipal
+                    del Tratamiento de Datos Personales.<br><br>
 
-                    <li>Modificaciones: Cualquier disputa legal relacionada con "11x12 Gijón" estará sujeta a la
-                    jurisdicción de los tribunales competentes en la ubicación de su sede principal o de acuerdo con los
-                    términos especificados en los contratos pertinentes.</li><br>
+                    En el caso de que las personas usuarias de la Página Web, Sede electrónica o aplicaciones
+                    municipales (app) aportaran datos personales de terceros, reconocen y garantizan al Ayuntamiento que
+                    dispone de la correspondiente autorización y consentimiento de dicho tercero.<br><br>
 
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti omnis, error vero illum laboriosam fuga consequuntur cum, ducimus voluptas magnam quasi inventore. Blanditiis unde aut numquam voluptates esse exercitationem sunt ipsum quidem, ut ex veniam, quos necessitatibus, voluptate architecto error quas aspernatur nam eius? Velit vel alias earum deserunt veniam vero. Recusandae molestiae obcaecati eius, facere necessitatibus accusamus laborum ipsam nostrum totam incidunt illo, minima quaerat accusantium ducimus enim, quod sequi aspernatur vitae porro rem? Eos quod minus vitae quia nesciunt corrupti, quas quos soluta nulla deleniti quis enim, expedita asperiores at? Eos minima, cumque quasi culpa dolor inventore magni?
-                </ol>
+                    En cumplimiento con la normativa vigente, el Ayuntamiento de Gijón/Xixón ha adoptado las medidas
+                    técnicas y organizativas necesarias para mantener el nivel de seguridad requerido en atención al
+                    riesgo en los datos personales tratados, en el marco del Esquema Nacional de Seguridad. Asimismo,
+                    está dotado de los mecanismos precisos a su alcance para evitar en la medida de lo posible los
+                    accesos no autorizados, sustracciones y modificaciones ilícitas, así como la pérdida de datos.<br><br>
+
+                    Para más información puede consultar la Política de Seguridad de la Información y Política de Datos
+                    Personales del Ayuntamiento de Gijón/Xixón modificado puntualmente al objeto de actualizar la
+                    denominación y composición del Comité de Seguridad de la Información<br><br>
+
+                    Esta declaración de privacidad se aplica a las páginas de la Web y la Sede electrónica municipales;
+                    no se garantiza en los accesos a través de enlaces con estos sitios ni a los enlaces desde estos
+                    sitios con otras páginas web.<br><br>
+
+
+                    <b>  • DELEGADO/A DE PROTECCIÓN DE DATOS PERSONALES</b><br><br>
+
+                    El Ayuntamiento de Gijón/Xixón le recuerda que los datos personales publicados en la Página Web
+                    tienen como finalidad la transparencia e información pública de conformidad con la legislación
+                    específica aplicable en la materia respectiva (leyes de transparencia, empleo público,
+                    contratación…). El Ayuntamiento no autoriza el tratamiento de datos personales con finalidades
+                    distintas ni la copia o difusión de dichos datos en páginas ajenas a la municipal.<br><br>
+
+                    El Ayuntamiento le informa expresamente que si utiliza los datos con finalidades propias será
+                    considerado como responsable del tratamiento, quedando obligado a garantizar el pleno respeto de los
+                    principios que consagran la protección de datos personales, en los términos establecidos en el
+                    Reglamento General de Protección de Datos (RGPD) UE 2016/679 y la Ley Orgánica 3/2018, de 5 de
+                    diciembre, de Protección de Datos Personales y garantía de los derechos digitales, debiendo
+                    responder directamente de las posibles infracciones y sanciones que puedan derivarse de los
+                    incumplimientos de la normativa de protección de datos personales.<br><br>
+
+                  <b>  • DELEGADO/A DE PROTECCIÓN DE DATOS PERSONALES</b><br><br>
+
+                    El Ayuntamiento de Gijón/Xixón ha designado una persona como Delegada de Protección de Datos
+                    Personales que incluye en su ámbito de actuación al propio Ayuntamiento de Gijón, sus Organismos
+                    Autónomos y las empresas municipales de desarrollo y promoción económica, así como la coordinación
+                    de los trabajos de adecuación al RGPD en el resto de empresas municipales, tal y como se constata en
+                    el número 225 del Boletín Oficial del Principado de Asturias (BOPA) del 27 de septiembre de 2018.<br><br>
+
+                    Las funciones principales de la persona Delegada de Protección de Datos son las de asesoramiento y
+                    supervisión de las medidas adoptadas para garantizar un adecuado cumplimiento de la normativa
+                    reguladora del derecho a la protección de los datos personales. Además, la Delegada puede responder
+                    a consultas o reclamaciones que le presenten las personas afectadas por tratamientos de datos del
+                    Ayuntamiento. También es la persona encargada de coordinarse con la Autoridad de Control (Agencia
+                    Española de Protección de Datos). Si lo desea puede ponerse en contacto con la Delegada de
+                    Protección de Datos a través de la dirección de correo electrónico: dpd@gijon.es<br><br>
+
+                   <b>  • DELEGADO/A DE PROTECCIÓN DE DATOS PERSONALES</b><br><br>
+
+                    Si desea ejercitar los derechos reconocidos en la normativa de protección de datos, el Ayuntamiento
+                    de Gijón/Xixón dispone de diferentes medios, bien de forma presencial en nuestras oficinas de
+                    asistencia en materia de registros, por correo postal o en la oficina virtual de la Sede electrónica
+                    municipal. Le recordamos que el ejercicio de derechos en materia de protección de datos es personal
+                    al ser un derecho fundamental, por lo que deberá identificarse para que sea posible atender
+                    correctamente su solicitud. En caso de que la solicitud sea presentada por un representante legal o
+                    voluntario, se deberá acreditar dicha representación por cualquier medio válido en derecho para el
+                    trámite concreto.<br><br>
+
+                    El plazo de resolución es de un mes desde su presentación, pudiendo incrementarse mediante
+                    resolución motivada que le será comunicada, ante solicitudes complejas.<br><br>
+
+                    Si desea presentar su solicitud por el modelo normalizado de la Agencia Española de Protección de
+                    Datos, puede acudir a su página web. En cualquier caso, será atendido el ejercicio de su derecho en
+                    el plazo de un mes, como se recoge en la normativa de protección de datos, sin perjuicio de la
+                    posibilidad de alargar dicho plazo con carácter excepcional y previa información al solicitante o su
+                    representante hasta un máximo de dos meses.
 
                 </p>
                 <button class="accept-button" @click="closePrivacyPolicy">Cerrar</button>
             </div>
         </div>
 
-        <button type="submit"><a href="#" class="mi-clase" @click="enviar">REGISTRARSE</a></button>
+        <button type="submit" :disabled="!canRegister"  @click="register" class="register-button">REGISTRARSE</button> 
+    
+
     </div>
 
 
@@ -101,50 +235,50 @@ const aceptoCondiciones = ref(false);
 
 <style scoped>
 
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 
-img{
+img {
     width: 30%;
-    height: 40%;
+    height: 20%;
     justify-content: center;
-    margin-left: 35%;
-    margin-top: 5%;
+    margin-top: 8%;
 }
+
 p{
-    color: white;
-    margin-left: 35%;
+    color: black;
+    margin-left: 3%;
+    text-align: center;
 }
+
 
 h2 {
     color: white;
-    margin-left: 41%;
+    text-align: center;
+    margin-top: 2%;
     margin-bottom: 3%;
 }
 
-a{
-    text-decoration: none;
-    color: white;
-    transition: color 0.3s ease;
-}
 
 button{
-    margin-left: 40%;
-    width: 20%;
-    height: 6vh;
-    margin-top: 60px;
+    width: auto;
+    margin-top: 3%;
+    margin-bottom: 2%;
     border-radius: 4px;
+    border: none;
+    background-color: white;
+    padding:1%; 
+    color: #858585;
+}
+
+.register-button {
     cursor: pointer;
-    border: none;
-    
 }
 
-
-.mi-clase{
-    padding: 10px 20px; 
-    text-decoration: none; 
-    border: none;
-    color: #000000;
-}
 
 form {
     display: flex;
@@ -156,23 +290,22 @@ form {
     margin: 0 auto;
 }
 
-input[type="text"], input[type="password"] {
+
+input[type="email"], input[type="password"] {
     width: 500px;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 16px;
     border-radius: 4px;
     border: none;
-    
+    background-color: rgba(255, 255, 255, 0.773);
 }
-
-#confirmPassword {
-            width: 400px;
-        }
 
 label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
         margin-left: 10px;
         color: #fff; 
+        font-weight: 100;
+        border: white;
     }
 
 
@@ -187,22 +320,24 @@ label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
     align-items: center;
     z-index: 1000;
     overflow: auto; 
+    text-align: center;
 }
+
 
 .privacy-policy-content {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
-    width: 600px;
+    max-width: 400px;
     max-height: 400px; 
     overflow-y: auto;
     box-sizing: border-box;
+    font-weight: normal;
+    
 }
-
 
 .accept-button {
     background-color: rgba(255, 0, 0, 0.873);
-    margin-left: 30%;
     border-radius: 5px;
     color: #fff;
     width: 30%;
@@ -213,64 +348,117 @@ label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
 
 
 h3{
-    margin-left: 25%;
+    margin-left: 13%;
     color: rgba(255, 0, 0, 0.79);
 }
 
-@media (max-width: 768px) {
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+
+.error-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.error-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.error-content p {
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width : 768px) {
     .container {
-        max-width: 100%;
+
+        max-width: 800px;
+        margin: 0 auto;
     }
 
     img {
-        width: 40%;
+        width: 50%;
+        max-width: 100%;
         height: auto;
-        margin-left: 30%;
-        margin-top: 5%;
+        margin-top: 15%;
+        
     }
 
-    h2 {
-        margin-left: 0;
-        text-align: center;
-    }
 
-    form {
+    input[type="email"], input[type="password"] {
+
         width: 100%;
-    }
-
-    input[type="text"], input[type="password"] {
-        width: 100%;
-    }
-
-    .privacy-policy-content {
-        width: 90%;
-    }
-
-    .accept-button {
-        width: 100%;
-        margin-left: 0;
+        max-width: 400px;
     }
 
     button{
-    margin-left: 30%;
-    width: 40%;
-    height: 5vh;
-    margin-top: 60px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: none;
-    
+        margin-top: 9%;
+    }
+
+    .privacy-policy-content, .error-content {
+        max-width: 600px;
+    }
+
+    .accept-button {
+        width: auto;
+        padding: 10px 20px;
+    }
+
+    h3 {
+        text-align: center;
+        font-size: 1.5em;
+    }
 }
 
-#confirmPassword {
-    max-width: 100%;
-    
+
+@media only screen and (max-width : 992px) {
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    img {
+        width: 50%;
+        height: auto;
+        margin-top: 40%
+
+        
+    }
+
+    input[type="email"], input[type="password"] {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .privacy-policy-content, .error-content {
+        max-width: 800px;
+    }
+
+    .accept-button {
+        width: auto;
+        padding: 15px 30px;
+    }
+
+    h3 {
+        font-size: 2em;
+    }
 }
-
-
-
-}
-
 
 
 </style>
