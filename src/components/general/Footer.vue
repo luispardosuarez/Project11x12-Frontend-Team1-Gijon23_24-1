@@ -24,6 +24,8 @@
 
 <style lang="scss">
 
+// Mobile
+
     #footerContainer {
 
         background-color: $black;
@@ -50,6 +52,9 @@
         }
     }
 
+
+// Tablet
+
 @media only screen and (min-width: 768px) {
 
     #footerContainer {
@@ -57,15 +62,35 @@
         
 
         .gijonLogo {
-            width: 5%;
-            margin-right: 85rem;
+            width: 10%;
         }
 
         .footerIcons {
-            width: 15%;
+            width: 25%;
             padding: 5px;
+            margin-left: 80px;
         }
     }
 }
+
+// Desktop
+
+@media only screen and (min-width : 992px) {
+
+    #footerContainer {
+
+    
+    .gijonLogo {
+        width: 5%;
+    }
+
+    .footerIcons {
+        width: 15%;
+        padding: 5px;
+        margin-left: 900px;
+    }
+    }
+    }
+
 
 </style>

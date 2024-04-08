@@ -51,8 +51,8 @@ const isLoggedIn = ref(false);
 }
 
 .logo {
-    width: 30%;
-    padding: 19px;
+    width: 40%;
+    padding: 20px;
     margin-right: 150px;
 }
 
@@ -61,6 +61,7 @@ const isLoggedIn = ref(false);
     align-items: center;
     gap: 1rem;
     margin-right: 15px;
+    font-size: 15px;
 }
 
 .headerLinkLogged {
@@ -69,7 +70,7 @@ const isLoggedIn = ref(false);
     justify-content: space-between;
 
     img {
-        width: 70%;
+        width: 40%;
     }
 }
 
@@ -84,20 +85,33 @@ img {
 
 @media only screen and (min-width: 768px){
     .logo {
-        width: 40%;
+        width: 45%;
         margin-left: 20px;
-        padding: 20px;
+        padding: 25px;
     }
 
     .headerLink {
         margin-right: 3%;
+        font-size: 20px;
     }
 
     .headerLinkLogged {
         
         img {
-            width: 40%;
+            width: 35%;
         }
+    }
+}
+
+@media only screen and (min-width : 992px) {
+
+    .logo {
+        width: 45%;
+        padding: 20px;
+    }
+
+    .headerLink {
+        font-size: 17px;
     }
 }
 </style>
