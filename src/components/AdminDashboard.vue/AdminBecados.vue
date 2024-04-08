@@ -1,115 +1,160 @@
 <script setup>
-import { ref } from 'vue';
-// import Header from '@/components/Header.vue';
-// import Pagination from '@/components/Pagination.vue';
+import { ref, computed } from 'vue';
 
-const showListaBecados = ref(false);
-const listaBecados = ref(['12345678', '87654321', '98765432']);
-const totalPages = ref(10);
+import axios from 'axios';
+
+const becados = ref([]);
+const mostrarLista = ref(false);
+const paginaActual = ref(1);
+const elementosPorPagina = 10;
 const nuevoDni = ref('');
 
-function Becados() {
-  showListaBecados.value = true;
-}
+const fetchBecados = async () => {
+  try {
+    const response = await axios.get('VITE_API_ENDPOINT_SCHOLARSHIP');
+    becados.value = response.data;
+    mostrarLista.value = true;
+  } catch (error) {
+    console.error('Error fetching becados:', error);
+  }
+};
 
-function Campamentos() {
-  // Lógica para mostrar los campamentos
-}
+const editarBecado = async (index) => {
+  try {
+    const response = await axios.put(`VITE_API_ENDPOINT_EDITAR_BECADO/${index}`, becados.value[index]);
+    console.log('Becado editado:', response.data);
+  } catch (error) {
+    console.error('Error editando becado:', error);
+  }
+};
 
-function Inscritos() {
-  // Lógica para mostrar los inscritos
-}
+const borrarBecado = async (index) => {
+  try {
+    await axios.delete(`VITE_API_ENDPOINT_BORRAR_BECADO/${index}`);
+    becados.value.splice(index, 1);
+    console.log('Becado borrado exitosamente');
+  } catch (error) {
+    console.error('Error borrando becado:', error);
+  }
+};
+const totalPaginas = computed(() => Math.ceil(becados.value.length / elementosPorPagina));
+const paginatedBecados = computed(() => {
+  const inicio = (paginaActual.value - 1) * elementosPorPagina;
+  const fin = paginaActual.value * elementosPorPagina;
+  return becados.value.slice(inicio, fin);
+});
 
-function añadirBecado() {
-  listaBecados.value.push(nuevoDni.value);
-  nuevoDni.value = '';
-}
-
+const cambiarPagina = (pagina) => {
+  paginaActual.value = pagina;
+};
+const añadirBecado = () => {
+  if (nuevoDni.value) {
+    becados.value.push({ dni: nuevoDni.value });
+    nuevoDni.value = ''; 
+  }
+};
 </script>
 
 <template>
 
-<div class="dashboard">
-    
-    <!-- <Header /> -->
+  <div>
+    <h1 class="titulo">¡Hola Admin!</h1>
 
-    <!-- Body -->
-    <div class="body">
-      <div class="left-panel">
-        <button @click="Becados">Becados</button>
-        <button @click="Campamentos">Campamentos</button>
-        <button @click="Inscritos">Inscritos</button>
-        <img src="../assets/img/11x12.jpg" alt="">
-      </div>
-      <div class="right-panel">
-        <ul v-if="ListaBecados">
-          <li v-for="dni in listaBecados" :key="dni">
-            {{ dni }}
-            <button class="editar">Editar</button>
-            <button class="borrar">Borrar</button>
-          </li>
-        </ul>
-        <Pagination :totalPages="totalPages" />
+    <div class="botones-container">
+    <v-btn class="boton becados-btn" color="#D0003E" @click="mostrarLista = !mostrarLista">Becados</v-btn>
+    <v-btn class="boton" color="#D0003E" @click="mostrarCampamentos">Campamentos</v-btn>
+    <v-btn class="boton" color="#D0003E" @click="mostrarInscritos">Inscritos</v-btn>
+    </div>
+    <img src="@/assets/img/11x12.jpg" alt="" class= "my-image" />
 
-        <div class="añadir-becados">
-          Añadir becados
-          <div class="input-dni">
-            <label for="dni">DNI Becado:</label>
-            <input type="text" id="dni" v-model="nuevoDni">
-            <button @click="añadirBecado">Añadir Becado</button>
-          </div>
-        </div>
+    <v-list v-if="mostrarLista" class="lista-dnis-container">
+      <v-list-item v-for="(dni, index) in becados" :key="index">
+        <v-list-item-content>
+          <v-text-field v-model="dni.dni" outlined></v-text-field>
+        </v-list-item-content>
+        <v-list-item-action>
+          <v-icon @click="editarBecado(index)">mdi-pencil</v-icon>
+          <v-icon @click="borrarBecado(index)">mdi-delete</v-icon>
+        </v-list-item-action>
+      </v-list-item>
+    </v-list>
+    <v-pagination v-model="paginaActual" :length="totalPaginas" @click="cambiarPagina" />
+    <div class="añadir-container">
+      <p>Añadir Becado:</p>
+      <div>
+        <p>DNI Becado:</p>
+        <v-text-field v-model="nuevoDni" outlined></v-text-field>
+        <v-btn class="añadir-btn" @click="añadirBecado">Añadir Becado</v-btn>
       </div>
     </div>
-  </div> 
-
+  </div>
 
 </template>
 
-
 <style scoped>
 
-/* Estilos para la vista */
-/* .dashboard {
+.titulo {
+  text-align:left;
+  margin-top: 25px;
+  font-size: 30px;
+}
 
-  /* Estilos del dashboard */
-/* } */ */
-
-.body {
+.botones-container {
   display: flex;
-  /* Estilos del cuerpo del dashboard */
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 70px;
+  
+}
+.boton {
+  margin: 8px;
+  padding: 10px 25px;
+  background-color: #D0003E;
+  font-size: 14px;
+  color: #fff;    
+  border: none;
+  cursor: pointer;
+  width: 120px;
+}
+.my-image {
+  max-width: 9%; 
+  display: block;
+  margin-left: 8px;
+  margin-top: 20px;
 }
 
-.left-panel {
-  /* Estilos del panel izquierdo */
+.becados-btn {
+  position: absolute;
+  top: 155px;
+  left: 2px;
 }
 
-.right-panel {
-  /* Estilos del panel derecho */
+.v-icon {
+  cursor: pointer;
+  margin-left: 10px;
+}
+.v-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.añadir-container {
+  text-align: center;
+  margin-top: 20px;
 }
 
-.input-dni {
-  /* Estilos para el input de DNI y el botón de añadir */
+.añadir-btn {
+  margin-top: 10px;
+  padding: 10px 25px;
+  background-color: #D0003E;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
-
-/* Otros estilos necesarios */
-
-button {
-  background-color: red; /* Color de fondo rojo */
-  color: white; /* Color del texto blanco */
-  border: none; /* Quitamos el borde */
-  border-radius: 5px; /* Bordes redondeados */
-  padding: 10px 20px; /* Espaciado interno */
-  margin-bottom: 10px; /* Espaciado inferior */
-  cursor: pointer; /* Cursor de tipo mano */
-}
-
-/* Estilos para los botones de editar y borrar */
-button.editar,
-button.borrar {
-  background-color: transparent; /* Fondo transparente */
-  color: red; /* Color del texto rojo */
-  border: 1px solid red; /* Borde sólido rojo */
+.lista-dnis-container {
+  margin-top: 20px;
+  text-align: center;
 }
 
 
