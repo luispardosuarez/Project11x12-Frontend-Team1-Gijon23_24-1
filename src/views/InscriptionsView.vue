@@ -19,6 +19,9 @@ import BarraLateral from "@/components/inscriptions/BarraLateral.vue";
 </template>
 
 <style scoped lang="scss">
+main {
+  height: 100%;
+}
 aside {
   width: 20%;
   align-items: center;

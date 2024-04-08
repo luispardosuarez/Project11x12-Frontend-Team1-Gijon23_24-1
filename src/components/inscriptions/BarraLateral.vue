@@ -26,6 +26,7 @@
         color: white;
         margin: 1%;
         border: none;
+        padding: 1%;
 
     }
 
