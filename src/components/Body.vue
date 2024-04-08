@@ -176,7 +176,7 @@ padding: 15px;
     margin-right: 0;
   }
   .information .more-information {
-    margin-left: 0;
+    margin-left: 100px;
     margin-top: 15px;
     text-align: center;
   }
