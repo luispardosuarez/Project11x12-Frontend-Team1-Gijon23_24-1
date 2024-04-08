@@ -304,8 +304,10 @@ input[type="email"], input[type="password"] {
 label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
         margin-left: 10px;
         color: #fff; 
-        font-weight: 600;
+        font-weight: 100;
+        border: white;
     }
+
 
     .privacy-policy-popup {
     position: fixed;
@@ -383,7 +385,7 @@ h3{
     margin-bottom: 20px;
 }
 
-@media only screen and (max-width : 767px) {
+@media only screen and (max-width : 768px) {
     .container {
 
         max-width: 800px;
@@ -391,8 +393,11 @@ h3{
     }
 
     img {
+        width: 50%;
         max-width: 100%;
         height: auto;
+        margin-top: 15%;
+        
     }
 
 
@@ -403,7 +408,7 @@ h3{
     }
 
     button{
-        margin-top: 3%;
+        margin-top: 9%;
     }
 
     .privacy-policy-content, .error-content {
@@ -422,15 +427,18 @@ h3{
 }
 
 
-@media only screen and (min-width : 992px) {
+@media only screen and (max-width : 992px) {
     .container {
         max-width: 900px;
         margin: 0 auto;
     }
 
     img {
-        width: 40%;
+        width: 50%;
         height: auto;
+        margin-top: 40%
+
+        
     }
 
     input[type="email"], input[type="password"] {

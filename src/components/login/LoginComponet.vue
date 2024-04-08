@@ -16,18 +16,9 @@ let password = ref("")
 let errorMessage = ref("")
 
 
-function validateEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-}
-
 
 async function login() {
 
-    if (!validateEmail(username.value)) {
-        errorMessage.value = 'Por favor, ingresa una dirección de correo electrónico válida.';
-        return; 
-    }
 
     const dataConnection = {
         username: username.value,
@@ -35,6 +26,12 @@ async function login() {
     }
 
 let isAuthenticated = await store.login(dataConnection)
+
+if (!isAuthenticated) {
+        errorMessage.value = "El correo no coincide o no está registrado."
+        return
+    }
+
 
     if (isAuthenticated && store.user.roles == "ROLE_ADMIN") {
         const redirectPath = route.query.redirect || '/admin'
@@ -45,7 +42,8 @@ let isAuthenticated = await store.login(dataConnection)
         const redirectPath = route.query.redirect || '/user'
         router.push(redirectPath)
     }
-}
+} 
+
 
 function redirectToRegister() {
     const redirectPath = route.query.redirect || '/register'
@@ -65,13 +63,24 @@ function redirectToRegister() {
             <div class="inputs">
         
                 <input type="text" id="username" placeholder="Usuario" v-model="username" ></div>
-                <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+                
                 
             <div class="inputs">
             
             <input type="password" id="password" placeholder="Contraseña" required v-model="password"></div>
             
         </form>
+<!-- 
+        <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div> -->
+
+
+        <div v-if="errorMessage" class="error-popup">
+    <div class="error-content">
+        <p>{{ errorMessage }}</p>
+        <button @click="errorMessage = ''">Cerrar</button>
+    </div>
+</div>
+
 
         <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()"> <b>Regístrate aquí</b></a></p>
 
@@ -150,6 +159,61 @@ button {
     font-size: large;
 }
 
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+
+.error-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.error-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.error-content p {
+    margin-bottom: 20px;
+}
+
+
+/* .error-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.error-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+} */
+
 @media only screen and (max-width: 768px) {
     .container {
         padding: 0 10px;
@@ -167,7 +231,7 @@ button {
     p {
     text-align: center;
     color: white;
-    margin-right: 25%;
+    margin-right: 20%;
 
 }
 
