@@ -73,7 +73,7 @@ function redirectToRegister() {
             
         </form>
 
-        <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()">Regístrate aquí</a></p>
+        <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()"> <b>Regístrate aquí</b></a></p>
 
         <button type="submit" @click="login">ENTRAR</button></div>
     
@@ -128,13 +128,13 @@ input {
 p {
     text-align: center;
     color: white;
-    margin-right: 40%;
+    margin-right: 0%;
 
 }
 
 a {
     color: white;
-    text-decoration: none;
+    
 }
 
 button {

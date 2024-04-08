@@ -85,7 +85,7 @@ const handleAceptoCondicionesChange = () => {
 <template>
 
     <div class="container">
-        <div class="image"><img src="../../assets/imageLogin/11x12.png" alt=""></div>
+    <img src="../../assets/imageLogin/11x12 recortada.png" alt="">
 
         <h2>REGISTRO</h2>
 
@@ -100,13 +100,13 @@ const handleAceptoCondicionesChange = () => {
             </div>
 
 
-            <div class="inputs">
+            <div class="input-group">
                 <input type="password" id="confirmPassword" placeholder="Confirmar Contraseña" v-model="confirmPassword"
-                    required>
+                    required> </div>
 
                 <div class="checkbox-container">
                     <input type="checkbox" id="mayorDeEdad" v-model="isAdult" @change="handleMayorDeEdadChange">
-                    <label for="mayorDeEdad">Soy mayor de edad</label>
+                    <label for="mayorDeEdad">Soy mayor de edad</label> 
 
                     <div class="checkbox-container">
                         <input type="checkbox" id="aceptoCondiciones" v-model="aceptoCondiciones"
@@ -114,7 +114,7 @@ const handleAceptoCondicionesChange = () => {
                         <label for="aceptoCondiciones">Acepto las condiciones legales </label>
                     </div>
                 </div>
-            </div>
+            
         </form>
 
         <div v-if="errorMessage" class="error-popup">
@@ -166,7 +166,7 @@ const handleAceptoCondicionesChange = () => {
                     sitios con otras páginas web.<br><br>
 
 
-                    • REUTILIZACIÓN DE INFORMACIÓN QUE CONTENGA DATOS PERSONALES <br><br>
+                    <b>  • DELEGADO/A DE PROTECCIÓN DE DATOS PERSONALES</b><br><br>
 
                     El Ayuntamiento de Gijón/Xixón le recuerda que los datos personales publicados en la Página Web
                     tienen como finalidad la transparencia e información pública de conformidad con la legislación
@@ -182,7 +182,7 @@ const handleAceptoCondicionesChange = () => {
                     responder directamente de las posibles infracciones y sanciones que puedan derivarse de los
                     incumplimientos de la normativa de protección de datos personales.<br><br>
 
-                    • DELEGADO/A DE PROTECCIÓN DE DATOS PERSONALES<br><br>
+                  <b>  • DELEGADO/A DE PROTECCIÓN DE DATOS PERSONALES</b><br><br>
 
                     El Ayuntamiento de Gijón/Xixón ha designado una persona como Delegada de Protección de Datos
                     Personales que incluye en su ámbito de actuación al propio Ayuntamiento de Gijón, sus Organismos
@@ -198,7 +198,7 @@ const handleAceptoCondicionesChange = () => {
                     Española de Protección de Datos). Si lo desea puede ponerse en contacto con la Delegada de
                     Protección de Datos a través de la dirección de correo electrónico: dpd@gijon.es<br><br>
 
-                    • CÓMO PUEDE EJERCITAR SUS DERECHOS EN LA PROTECCIÓN DE LOS DATOS PESONALES<br><br>
+                   <b>  • DELEGADO/A DE PROTECCIÓN DE DATOS PERSONALES</b><br><br>
 
                     Si desea ejercitar los derechos reconocidos en la normativa de protección de datos, el Ayuntamiento
                     de Gijón/Xixón dispone de diferentes medios, bien de forma presencial en nuestras oficinas de
@@ -223,10 +223,9 @@ const handleAceptoCondicionesChange = () => {
             </div>
         </div>
 
-        <button type="submit" :disabled="!canRegister"><a href="#" class="mi-clase"
-                @click="register">REGISTRARSE</a></button>
+        <button type="submit" :disabled="!canRegister"  @click="register" class="register-button">REGISTRARSE</button> 
+    
 
-                
     </div>
 
 
@@ -236,50 +235,50 @@ const handleAceptoCondicionesChange = () => {
 
 <style scoped>
 
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-img{
-    width: 35%;
+
+img {
+    width: 30%;
+    height: 20%;
     justify-content: center;
-    margin-left: 31%;
-    
+    margin-top: 8%;
 }
 
 p{
     color: black;
     margin-left: 3%;
+    text-align: center;
 }
+
 
 h2 {
     color: white;
-    margin-left: 41%;
+    text-align: center;
+    margin-top: 2%;
     margin-bottom: 3%;
 }
 
-a{
-    text-decoration: none;
-    color: white;
-    transition: color 0.3s ease;
-}
 
 button{
-    margin-left: 39%;
-    width: 20%;
-    height: 6vh;
-    margin-top: 40px;
+    width: auto;
+    margin-top: 3%;
+    margin-bottom: 2%;
     border-radius: 4px;
+    border: none;
+    background-color: white;
+    padding:1%; 
+    color: #858585;
+}
+
+.register-button {
     cursor: pointer;
-    border: none;
-    background-color: white
-    
 }
 
-
-.mi-clase{
-    padding: 10px 20px; 
-    text-decoration: none; 
-    border: none;
-    color: #000000;
-}
 
 form {
     display: flex;
@@ -291,25 +290,22 @@ form {
     margin: 0 auto;
 }
 
+
 input[type="email"], input[type="password"] {
     width: 500px;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 16px;
     border-radius: 4px;
     border: none;
-    
+    background-color: rgba(255, 255, 255, 0.773);
 }
-
-#confirmPassword {
-            width: 400px;
-        }
 
 label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
         margin-left: 10px;
         color: #fff; 
+        font-weight: 600;
     }
-
 
     .privacy-policy-popup {
     position: fixed;
@@ -322,7 +318,9 @@ label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
     align-items: center;
     z-index: 1000;
     overflow: auto; 
+    text-align: center;
 }
+
 
 .privacy-policy-content {
     background-color: white;
@@ -336,10 +334,8 @@ label[for="mayorDeEdad"], label[for="aceptoCondiciones"] {
     
 }
 
-
 .accept-button {
     background-color: rgba(255, 0, 0, 0.873);
-    margin-left: 35%;
     border-radius: 5px;
     color: #fff;
     width: 30%;
@@ -366,7 +362,7 @@ h3{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -387,10 +383,74 @@ h3{
     margin-bottom: 20px;
 }
 
-@media only screen and (min-width : 768px) {
+@media only screen and (max-width : 767px) {
+    .container {
+
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 
 
+    input[type="email"], input[type="password"] {
 
+        width: 100%;
+        max-width: 400px;
+    }
+
+    button{
+        margin-top: 3%;
+    }
+
+    .privacy-policy-content, .error-content {
+        max-width: 600px;
+    }
+
+    .accept-button {
+        width: auto;
+        padding: 10px 20px;
+    }
+
+    h3 {
+        text-align: center;
+        font-size: 1.5em;
+    }
 }
+
+
+@media only screen and (min-width : 992px) {
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    img {
+        width: 40%;
+        height: auto;
+    }
+
+    input[type="email"], input[type="password"] {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .privacy-policy-content, .error-content {
+        max-width: 800px;
+    }
+
+    .accept-button {
+        width: auto;
+        padding: 15px 30px;
+    }
+
+    h3 {
+        font-size: 2em;
+    }
+}
+
 
 </style>
