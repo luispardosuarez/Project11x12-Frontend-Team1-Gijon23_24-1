@@ -30,4 +30,23 @@ import RegisterComponet from '@/components/login/RegisterComponet.vue';
     
 }
 
+@media only screen and (max-width: 767px) {
+
+
+.register{
+
+    background-size: cover;
+    background-position: center;
+}
+
+}
+
+
+@media only screen and (min-width: 992px) {
+    .register {
+        background-size: cover;
+        background-position: center;
+    }
+}
+
 </style>

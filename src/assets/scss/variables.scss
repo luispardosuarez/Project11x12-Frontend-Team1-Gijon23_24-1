@@ -1,4 +1,6 @@
 
+// COLORES
+
 $black: #252525;
 $red: #D0003E;
 $blue-card: #6E8EBC;
@@ -6,5 +8,16 @@ $green-card: #5FC68E;
 $yellow-card: #F5D872;
 $gray: #6F6F6F;
 $gray-form: #ECE7E7;
+$gray-bottom: #858585;
 
+
+// MEDIA QUERYS (siempre mobile first, después media query para tablet y media query para desktop)
+
+// Tablet
+
+// @media only screen and (min-width : 768px)
+
+// Desktop
+
+// @media only screen and (min-width : 992px)
 

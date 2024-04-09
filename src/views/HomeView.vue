@@ -11,7 +11,10 @@ import Body from "@/components/Body.vue";
   <main>
     <Body />
     <div>
-      <h3>Campamentos</h3>
+<<<<<<< HEAD
+      
+=======
+>>>>>>> feature/cards_home
       <FetchCampamentos />
     </div>
 
@@ -19,11 +22,17 @@ import Body from "@/components/Body.vue";
 
 </template>
 
+<style lang="scss" scoped>
+
+<<<<<<< HEAD
 
     
    
     
  
+=======
+</style>
+>>>>>>> feature/cards_home
 
 
 
