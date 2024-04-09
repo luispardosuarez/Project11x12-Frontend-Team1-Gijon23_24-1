@@ -325,7 +325,7 @@ watch(() => props.campamento, setColors, { immediate: true });
 
       .nav_event {
         .flag {
-    
+          width: 5vw;
         }
       }
     }
