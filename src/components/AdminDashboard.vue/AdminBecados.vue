@@ -67,18 +67,18 @@ const añadirBecado = () => {
     </div>
     <img src="@/assets/img/11x12.jpg" alt="" class= "my-image" />
 
-    <v-list v-if="mostrarLista" class="lista-dnis-container">
+     <!-- <v-list v-if="mostrarLista" class="lista-dnis-container">
       <v-list-item v-for="(dni, index) in becados" :key="index">
         <v-list-item-content>
           <v-text-field v-model="dni.dni" outlined></v-text-field>
         </v-list-item-content>
         <v-list-item-action>
-          <v-icon @click="editarBecado(index)">mdi-pencil</v-icon>
+        <i class="bi bi-pencil-square" @click="editarBecado(index)">mdi-pencil</i>
           <v-icon @click="borrarBecado(index)">mdi-delete</v-icon>
         </v-list-item-action>
       </v-list-item>
-    </v-list>
-    <v-pagination v-model="paginaActual" :length="totalPaginas" @click="cambiarPagina" />
+    </v-list> -->
+    <v-pagination v-model="paginaActual" :length="totalPaginas" @click="cambiarPagina" /> 
     
   </div>
 
