@@ -1,7 +1,7 @@
 <script setup>
 
-  import FetchCampamentos from '../components/cards/FetchCampamentos.vue';
-import Body from "@/components/Body.vue";
+  import Body from "@/components/Body.vue";
+import FetchCampamentos from '../components/cards/FetchCampamentos.vue';
 
 
 </script>
@@ -11,10 +11,7 @@ import Body from "@/components/Body.vue";
   <main>
     <Body />
     <div>
-<<<<<<< HEAD
       
-=======
->>>>>>> feature/cards_home
       <FetchCampamentos />
     </div>
 
@@ -24,15 +21,11 @@ import Body from "@/components/Body.vue";
 
 <style lang="scss" scoped>
 
-<<<<<<< HEAD
 
-    
+    </style>
    
     
  
-=======
-</style>
->>>>>>> feature/cards_home
 
 
 

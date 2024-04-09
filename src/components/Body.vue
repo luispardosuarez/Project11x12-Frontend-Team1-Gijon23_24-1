@@ -144,18 +144,13 @@ font-size: 28px;
   background-color: white;
   padding: 20px;
   border: 2px solid white;
+  z-index:99!important;
 }
 
 .information td {
 padding: 15px;
 }
 
-<<<<<<< HEAD
-
-
-  
-
-=======
 @media screen and (max-width: 768px) {
     .container {
       flex-direction: column; 
@@ -191,5 +186,4 @@ padding: 15px;
 }
 
 
->>>>>>> feature/body
 </style>
