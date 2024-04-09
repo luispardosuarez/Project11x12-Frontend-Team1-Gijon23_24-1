@@ -41,6 +41,13 @@ const router = createRouter({
       
     },
 
+    {
+      path: '/add',
+      name: 'AddParticipant',
+      component: () => import('../views/AddParticipantView.vue')
+      
+    },
+
 
 
   ]
