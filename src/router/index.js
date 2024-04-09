@@ -48,6 +48,13 @@ const router = createRouter({
       
     },
 
+    {
+      path: '/edit',
+      name: 'EditParticipant',
+      component: () => import('../views/EditParticipantView.vue')
+      
+    },
+
 
 
   ]
