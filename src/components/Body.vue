@@ -132,6 +132,7 @@ font-size: 28px;
   font-size: 16px;
   cursor: pointer;
   text-align: justify;
+ 
   
 }
 
@@ -176,9 +177,10 @@ padding: 15px;
     margin-right: 0;
   }
   .information .more-information {
-    margin-left: 100px;
+    /* margin-left: 100px; */
     margin-top: 15px;
     text-align: center;
+    align-items: center;
   }
 }
 
