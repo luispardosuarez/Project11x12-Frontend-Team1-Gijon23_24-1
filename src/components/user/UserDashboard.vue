@@ -1,5 +1,15 @@
 <script setup>
 
+import { useRouter } from 'vue-router';
+  const router = useRouter();
+
+  const redirectToAdd = () => {
+    router.push('/add');
+  };
+
+  const redirectToEdit = () => {
+    router.push('/edit');
+  };
 
 </script>
 
@@ -59,7 +69,7 @@
 
         <div class="participants">
             <h6>Participantes registrados</h6>
-            <button class="addParticipant">Añadir participante</button>
+            <button @click="redirectToAdd" class="addParticipant">Añadir participante</button>
         </div>
 
         <div id="registeredParticipant" class="registeredItem">
@@ -68,7 +78,7 @@
 
             <div class="participantIcons">
                 <img src="../../assets/icons/see.svg">
-                <img src="../../assets/icons/edit.svg">
+                <img src="../../assets/icons/edit.svg" @click="redirectToEdit">
                 <img src="../../assets/icons/delete.svg">
             </div>
 

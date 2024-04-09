@@ -90,7 +90,7 @@
 
         </div>
 
-        <button class="saveButton">Guardar</button>
+        <button class="save">Guardar</button>
 
     </div>
     
@@ -142,7 +142,7 @@
         }
     }
 
-    .saveButton {
+    .save {
         color: white;
         background-color: $red;
         width: 30%;
@@ -174,7 +174,7 @@
             }
         }
 
-        .saveButton {
+        .save {
             font-size: 20px;
         }
     }
@@ -265,7 +265,7 @@
             }
         }
 
-        .saveButton {
+        .save {
             width: 10%;
             align-items: center;
             margin-left: 750px;
