@@ -160,6 +160,7 @@ watch(() => props.campamento, setColors, { immediate: true });
         border-radius: 20px;
         border: none;
         color: white;
+        padding: 1em;
       }
     }
   }

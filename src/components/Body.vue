@@ -132,6 +132,7 @@ font-size: 28px;
   font-size: 16px;
   cursor: pointer;
   text-align: justify;
+ 
   
 }
 
@@ -143,6 +144,7 @@ font-size: 28px;
   background-color: white;
   padding: 20px;
   border: 2px solid white;
+  z-index:99!important;
 }
 
 .information td {
