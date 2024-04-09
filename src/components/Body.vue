@@ -151,12 +151,6 @@ font-size: 28px;
 padding: 15px;
 }
 
-<<<<<<< HEAD
-
-
-  
-
-=======
 @media screen and (max-width: 768px) {
     .container {
       flex-direction: column; 
@@ -192,5 +186,4 @@ padding: 15px;
 }
 
 
->>>>>>> feature/body
 </style>
