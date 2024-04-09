@@ -1,23 +1,23 @@
 <script setup>
 
-  import { ref } from 'vue';
-  import CardsCampamentos from "./CardsCampamentos.vue";
-  
-  const campamentos = ref([]);
+import { ref } from 'vue';
+import CardsCampamentos from "./CardsCampamentos.vue";
 
-  const fetchCampamentos = async () => {
-    try {
-      const response = await fetch("/campamentos.json");
-      const data = await response.json();
-      // console.log(data.campamentos);
-      campamentos.value = data.campamentos;
-      // console.log(campamentos.value);
-    } catch (error) {
-      console.error('Error al cargar el archivo JSON de campamentos:', error);
-    }
-  };
+const campamentos = ref([]);
 
-  fetchCampamentos();
+const fetchCampamentos = async () => {
+  try {
+    const response = await fetch("/campamentos.json");
+    const data = await response.json();
+
+    campamentos.value = data.campamentos;
+
+  } catch (error) {
+    console.error('Error al cargar el archivo JSON de campamentos:', error);
+  }
+};
+
+fetchCampamentos();
 
 </script>
 
@@ -33,14 +33,12 @@
 </template>
 
 <style scoped lang="scss">
-
 .contenedorCards {
-
   .cardsContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-    gap:5%;
-    padding: 3%;
-}
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 50px;
+    padding: 20px;
+  }
 }
 </style>

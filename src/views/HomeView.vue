@@ -11,7 +11,6 @@ import Body from "@/components/Body.vue";
   <main>
     <Body />
     <div>
-      <h3>Campamentos</h3>
       <FetchCampamentos />
     </div>
 
@@ -19,17 +18,9 @@ import Body from "@/components/Body.vue";
 
 </template>
 
-<<<<<<< HEAD
 <style lang="scss" scoped>
 
 </style>
-=======
-
-    
-   
-    
- 
->>>>>>> dev
 
 
 
