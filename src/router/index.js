@@ -38,7 +38,29 @@ const router = createRouter({
       name: 'inscription',
       component: () => import('../views/InscriptionsView.vue')
       
-    }
+    },
+
+    {
+      path: '/user',
+      name: 'UserDashboard',
+      component: () => import('../views/UserDashboardView.vue')
+      
+    },
+
+    {
+      path: '/add',
+      name: 'AddParticipant',
+      component: () => import('../views/AddParticipantView.vue')
+      
+    },
+
+    {
+      path: '/edit',
+      name: 'EditParticipant',
+      component: () => import('../views/EditParticipantView.vue')
+      
+    },
+
 
 
   ]
