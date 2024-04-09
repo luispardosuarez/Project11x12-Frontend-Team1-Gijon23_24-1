@@ -59,8 +59,6 @@
 
     #footerContainer {
 
-        
-
         .gijonLogo {
             width: 10%;
         }
