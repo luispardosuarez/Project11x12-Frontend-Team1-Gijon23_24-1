@@ -13,9 +13,12 @@ const store = useAuthStore()
 
 let username = ref("")
 let password = ref("")
+let errorMessage = ref("")
+
 
 
 async function login() {
+
 
     const dataConnection = {
         username: username.value,
@@ -23,6 +26,12 @@ async function login() {
     }
 
 let isAuthenticated = await store.login(dataConnection)
+
+if (!isAuthenticated) {
+        errorMessage.value = "El correo no coincide o no está registrado."
+        return
+    }
+
 
     if (isAuthenticated && store.user.roles == "ROLE_ADMIN") {
         const redirectPath = route.query.redirect || '/admin'
@@ -33,13 +42,13 @@ let isAuthenticated = await store.login(dataConnection)
         const redirectPath = route.query.redirect || '/user'
         router.push(redirectPath)
     }
-}
+} 
+
 
 function redirectToRegister() {
     const redirectPath = route.query.redirect || '/register'
     router.push(redirectPath)
 }
-
 
 </script>
 
@@ -53,162 +62,194 @@ function redirectToRegister() {
         <form @submit.prevent="login">
             <div class="inputs">
         
-                <input type="text" id="username" placeholder="Usuario" v-model="username"></div>
+                <input type="text" id="username" placeholder="Usuario" v-model="username" ></div>
+                
                 
             <div class="inputs">
             
-                <input type="password" id="password" placeholder="Contraseña" required v-model="password"></div>
+            <input type="password" id="password" placeholder="Contraseña" required v-model="password"></div>
             
         </form>
+<!-- 
+        <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div> -->
 
-        <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()">Regístrate</a></p>
 
-        <button type="submit" @click="login">Entrar</button></div>
+        <div v-if="errorMessage" class="error-popup">
+    <div class="error-content">
+        <p>{{ errorMessage }}</p>
+        <button @click="errorMessage = ''">Cerrar</button>
+    </div>
+</div>
+
+
+        <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()"> <b>Regístrate aquí</b></a></p>
+
+        <button type="submit" @click="login">ENTRAR</button></div>
     
 </template>
 
 
 <style scoped>
 
-img{
-    width: 30%;
-    height: 40%;
-    justify-content: center;
-    margin-left: 35%;
-    margin-top: 8%;
 
+.container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-h2{
-        color: white;
-        margin-left: 39%;
-        margin-bottom: 3%;
-    }
-
-.inputs{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
+.image {
+    text-align: center;
+    margin-top: 5%;
 }
 
-input{
-    width: 30%;
-    height: 6vh;
+.image img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
+h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: white;
+    
+}
+
+.inputs {
+    margin-bottom: 15px;
+    justify-content: center;
+    
+}
+
+input {
+    width: 80%;
+    height: 45px;
     padding: 5px;
     border-radius: 3px;
     border: none;
+    margin-left: 10%;
 
 }
 
-p{
+p {
+    text-align: center;
     color: white;
-    margin-left: 35%;
+    margin-right: 0%;
+
 }
 
-a{
+a {
+    color: white;
     
-    text-decoration: none; 
-    color: white;
-    transition: color 0.3s ease;
 }
 
-a:hover {
-    color: #383e7d;
-}
-
-button{
-    margin-left: 40%;
-    width: 20%;
-    height: 6vh;
-    margin-top: 20px;
+button {
+    width: 40%;
+    height: 40px;
     border-radius: 3px;
     border: none;
+    background-color: white;
+    color: black;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin-left: 30%;
+    margin-top: 20px;
+    font-size: large;
 }
 
 
-.mi-clase{
-    color:black;
+.error-message {
+    color: red;
+    margin-top: 10px;
 }
 
 
-@media (min-width: 769px) {
-    img{
-        width: 30%;
-        height: 40%;
-        margin-left: 35%;
-        margin-top: 8%;
-    }
+.error-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
 
-    h2{
-        color: white;
-        margin-left: 39%;
-        margin-bottom: 3%;
-    }
+.error-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
 
-    .inputs{
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-
-    input{
-        width: 30%;
-        height: 6vh;
-        padding: 5px;
-        border-radius: 3px;
-        border: none;
-    }
-
-    p{
-        color: white;
-        margin-left: 35%;
-    }
-
-    button{
-        margin-left: 40%;
-        width: 20%;
-        height: 6vh;
-        margin-top: 20px;
-        border-radius: 3px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+.error-content p {
+    margin-bottom: 20px;
 }
 
 
-@media (max-width: 768px) {
-    img{
+/* .error-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.error-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+} */
+
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+
+    .image img {
+    margin-top: 15%;
+}
+
+    input {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    p {
+    text-align: center;
+    color: white;
+    margin-right: 20%;
+
+}
+
+    button {
         width: 50%;
-        height: auto;
-        margin-left: 25%;
-    }
-
-    h2{
-        margin-left: 25%;
-    }
-
-    .inputs{
-        flex-direction: column;
-        align-items: center;
-    }
-
-    input{
-        width: 80%;
-    }
-
-    p{
-        margin-left: 25%;
-    }
-
-    button{
-        width: 60%;
-        margin-left: 20%;
+        margin-left: 20p;
     }
 }
 
+@media only screen and (min-width: 992px) {
+    .container {
+        max-width: 700px;
+        padding: 0 50px;
+        
+    }
+
+
+}
 
 
 
