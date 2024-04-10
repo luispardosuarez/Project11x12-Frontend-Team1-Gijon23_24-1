@@ -9,7 +9,6 @@ import Boarp from '@/components/Boarp.vue';
     <div>
       <Boarp />
     </div>
-
   </main> 
 
 </template>
