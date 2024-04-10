@@ -56,33 +56,45 @@ const añadirBecado = () => {
 </script>
 
 <template>
-
   <div>
     <h1 class="titulo">¡Hola Admin!</h1>
 
     <div class="botones-container">
-    <v-btn class="boton becados-btn" color="#D0003E" @click="mostrarLista = !mostrarLista">Becados</v-btn>
-    <v-btn class="boton" color="#D0003E" @click="mostrarCampamentos">Campamentos</v-btn>
-    <v-btn class="boton" color="#D0003E" @click="mostrarInscritos">Inscritos</v-btn>
+      <v-btn class="boton becados-btn" color="#D0003E" @click="mostrarLista = !mostrarLista">Becados</v-btn>
+      <v-btn class="boton" color="#D0003E" @click="mostrarCampamentos">Campamentos</v-btn>
+      <v-btn class="boton" color="#D0003E" @click="mostrarInscritos">Inscritos</v-btn>
     </div>
-    <img src="@/assets/img/11x12.jpg" alt="" class= "my-image" />
 
-     <!-- <v-list v-if="mostrarLista" class="lista-dnis-container">
+    <div class="contenido-container">
+      <div class="contenido-izquierda">
+        <p>Añadir Becado:</p>
+        <div>
+          <p>DNI Becado:</p>
+          <v-text-field v-model="nuevoDni" outlined></v-text-field>
+        </div>
+      </div>
+      <div class="contenido-derecha">
+        <v-btn class="añadir-btn" @click="añadirBecado">Añadir Becado</v-btn>
+      </div>
+    </div>
+
+    <img src="@/assets/img/11x12.jpg" alt="" class="my-image" />
+
+    <v-list v-if="mostrarLista" class="lista-dnis-container">
       <v-list-item v-for="(dni, index) in becados" :key="index">
         <v-list-item-content>
           <v-text-field v-model="dni.dni" outlined></v-text-field>
         </v-list-item-content>
         <v-list-item-action>
-        <i class="bi bi-pencil-square" @click="editarBecado(index)">mdi-pencil</i>
+          <v-icon @click="editarBecado(index)">mdi-pencil</v-icon>
           <v-icon @click="borrarBecado(index)">mdi-delete</v-icon>
         </v-list-item-action>
       </v-list-item>
-    </v-list> -->
-    <v-pagination v-model="paginaActual" :length="totalPaginas" @click="cambiarPagina" /> 
-    
+    </v-list>
+    <v-pagination v-model="paginaActual" :length="totalPaginas" @click="cambiarPagina" />
   </div>
-
 </template>
+
 
 <style scoped>
 
