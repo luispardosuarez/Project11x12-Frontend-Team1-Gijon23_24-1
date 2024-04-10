@@ -132,12 +132,12 @@
         padding: 5px;
 
         input {
-            border: 1px solid $red;
+            border: 0.1px solid $red;
             width: 80%;
         }
 
         textarea {
-            border: 1px solid $red;
+            border: 0.1px solid $red;
             width: 80%;
         }
     }
