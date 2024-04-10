@@ -146,7 +146,7 @@ import { useRouter } from 'vue-router';
         padding: 5px; 
         width: calc(100% - 30px); 
         margin-right: 10px; 
-        border: 1px solid $red;
+        border: 0.1px solid $red;
     }
 
     .telephone1 {
@@ -194,7 +194,7 @@ import { useRouter } from 'vue-router';
     display: flex;
     justify-content: space-between; 
     align-items: center; 
-    border: 1px solid $red;
+    border: 0.5px solid $red;
     margin-top: 30px;
     padding: 10px; 
 

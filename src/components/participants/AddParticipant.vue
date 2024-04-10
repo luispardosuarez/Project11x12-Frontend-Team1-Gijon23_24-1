@@ -132,12 +132,12 @@
         padding: 5px;
 
         input {
-            border: 1px solid $red;
+            border: 0.1px solid $red;
             width: 80%;
         }
 
         textarea {
-            border: 1px solid $red;
+            border: 0.1px solid $red;
             width: 80%;
         }
     }
@@ -156,7 +156,7 @@
 
 // Tablet
 
-@media only screen and (min-width : 768px) and (max-width : 992px) {
+@media only screen and (min-width : 768px) and (max-width : 1023px) {
 
     #participantWelcome {
         h2 {
@@ -182,7 +182,7 @@
 
 // Desktop 
 
-@media only screen and (min-width : 992px) {
+@media only screen and (min-width : 1024px) {
 
     #participantWelcome {
 
