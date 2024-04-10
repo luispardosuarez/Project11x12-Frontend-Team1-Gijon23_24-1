@@ -19,4 +19,20 @@
 
 <style scoped lang="scss">
 @import "../../assets/scss/variables.scss";
+
+.combFecha {
+  font-family: Arial;
+  
+  
+
+  #comboFecha {
+    font-family: Arial;
+    border-color: $red;
+    border-radius: 0.2em;
+    margin: 10px;
+    padding: 5px;
+    background-color: $gray-checkbox;
+    box-shadow: 5px;
+  }
+}
 </style>

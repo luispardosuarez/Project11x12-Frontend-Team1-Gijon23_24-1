@@ -1,5 +1,6 @@
 <script setup>
 import BarraLateral from "@/components/inscriptions/BarraLateral.vue";
+import BotonSiguiente from "@/components/inscriptions/BotonSiguiente.vue";
 import InscripcionPaso1 from "@/components/inscriptions/InscripcionPaso1.vue";
 import { useAuthStore } from "@/stores/auth";
 
@@ -21,7 +22,7 @@ const authStore = useAuthStore();
         <InscripcionPaso1/>
         <div class="Siguiente">
           <!-- <button>Atras</button> -->
-          <button>Siguiente</button>
+          <BotonSiguiente/>
         </div>
       </div>
       </div>
