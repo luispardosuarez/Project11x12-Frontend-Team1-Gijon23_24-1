@@ -218,8 +218,6 @@ watch(() => props.campamento, setColors, { immediate: true });
 
       .nav_event {
         padding-top: 5px;
-        .flag {
-        }
       }
     }
   }
