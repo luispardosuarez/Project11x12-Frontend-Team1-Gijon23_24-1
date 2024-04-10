@@ -15,9 +15,6 @@ const authStore = useAuthStore();
     router.push('/edit');
   };
 
-  const redirectToInscription = () => {
-    router.push('/inscription');
-  };
 
 
 </script>
@@ -102,7 +99,7 @@ const authStore = useAuthStore();
 
         <div class="camps">
             <h6>Campamentos registrados</h6>
-            <button class="addCamp" @click="redirectToInscription">Inscribirse</button>
+            <button class="addCamp">Inscribirse</button>
         </div>
 
         <div class="registeredCamp registeredItem">

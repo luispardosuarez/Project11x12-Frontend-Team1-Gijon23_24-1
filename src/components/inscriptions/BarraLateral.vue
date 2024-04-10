@@ -31,8 +31,8 @@
 
     }
 
-    #paso1 {
-            background-color: $red;
-        }
+    // #paso1 {
+    //         background-color: $red;
+    //     }
 }
 </style>

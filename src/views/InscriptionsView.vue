@@ -1,5 +1,5 @@
 <script setup>
-import BarraLateral from "@/components/inscriptions/BarraLateral.vue";
+import BotonesLaterales from "@/components/inscriptions/BotonesLaterales.vue";
 import BotonSiguiente from "@/components/inscriptions/BotonSiguiente.vue";
 import InscripcionPaso1 from "@/components/inscriptions/InscripcionPaso1.vue";
 import { useAuthStore } from "@/stores/auth";
@@ -15,7 +15,7 @@ const authStore = useAuthStore();
       </div>
       <div class="bajoSaludo">
         <aside class="barraLateral">
-        <BarraLateral />
+        <BotonesLaterales/>
         <img class="logo11x12" src="../assets/img/11x12.jpg" alt="imagen 11x12 rosa con letras blancas">
       </aside>
       <div class="cuerpoInscripcion">
@@ -33,6 +33,10 @@ const authStore = useAuthStore();
 
 <style scoped lang="scss">
 @import '../assets/scss/variables.scss';
+
+#paso1 {
+            background-color: $red;
+        }
 
 h2 {
   padding-left: 2%;
@@ -61,6 +65,11 @@ aside {
   width: 100%;
   height: 550px;
   margin-right: 1%;
+}
+
+.Siguiente {
+  text-align: right;
+  margin-right: 2%;
 }
 
 @media only screen and (max-width: 768px){
