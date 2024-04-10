@@ -1,6 +1,10 @@
 <script setup>
 
 import { useRouter } from 'vue-router';
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
+
   const router = useRouter();
 
   const redirectToAdd = () => {
@@ -11,13 +15,18 @@ import { useRouter } from 'vue-router';
     router.push('/edit');
   };
 
+  const redirectToInscription = () => {
+    router.push('/inscription');
+  };
+
+
 </script>
 
 <template>
 
 <div class="userWelcome">
-
-    <h3>¡Hola, Menganito Fulanito de Tal!</h3>
+   
+    <h3>¡Hola, {{authStore.user.username}}!</h3>
     <img src="../../assets/img/11x12-horizontal.jpg">
 
 </div>
@@ -93,7 +102,7 @@ import { useRouter } from 'vue-router';
 
         <div class="camps">
             <h6>Campamentos registrados</h6>
-            <button class="addCamp">Inscribirse</button>
+            <button class="addCamp" @click="redirectToInscription">Inscribirse</button>
         </div>
 
         <div class="registeredCamp registeredItem">
