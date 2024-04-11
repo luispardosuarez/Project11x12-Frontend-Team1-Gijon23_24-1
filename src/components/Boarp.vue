@@ -1,14 +1,11 @@
 <template>
-    <h1>¡Hola, Admin!</h1>
     <div class="container_admin">
-        <div class="container_global">
-            <div class="container_btn">
-                <div class="btn">Becados</div>
-                <div class="btn">Campamentos</div>
-                <div class="btn">Inscritos</div>
-            </div>
-            <div class="image"><img src="../assets/img/11x12.jpg" alt="11x12"></div>
+        <div class="container_btn">
+            <div class="btn">Becados</div>
+            <div class="btn">Campamentos</div>
+            <div class="btn">Inscritos</div>
         </div>
+        <div class="image"><img src="../assets/img/11x12.jpg" alt="11x12"></div>
     </div>
 </template>
 <style scoped lang="scss">
@@ -19,24 +16,20 @@ h1 {
 }
 
 .container_admin {
-    display: flex;
-    gap: 2em;
     width: 100%;
-    padding: 1.5em;
-
-    .container_global {
-        width: 20vw;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        background-color: $gray-form;
-        overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: $gray-form;
+    overflow: hidden;        
 
         .container_btn {
             display: flex;
             flex-direction: column;
             gap: 2em;
-            padding: 50px 15px 60px 15px;
+            padding: 30% 5%;
         }
 
         .btn {
@@ -47,7 +40,6 @@ h1 {
             text-align: center;
             border-radius: 0;
         }
-    }
 
     .image {
         width: 100%;
