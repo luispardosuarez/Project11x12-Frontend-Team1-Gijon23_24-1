@@ -16,4 +16,4 @@ import Boarp from '@/components/Boarp.vue';
 <style lang="scss" scoped>
 
 
-    </style>
+</style>
