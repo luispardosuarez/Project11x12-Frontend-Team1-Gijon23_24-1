@@ -44,9 +44,9 @@ const closeModal = () => {
 </script>
 <template>
 
-  <b-modal v-model="modalOpen" title="Formulario">
+  <b-modal v-model="modalOpen" title="Formulario" >
 
-    <img src="../../assets/img/11x12-horizontal.jpg" alt="imagen 11x12 horizontal" class="mb-5">
+    <img src="../../assets/img/11x12-horizontal.jpg" alt="imagen 11x12 horizontal" class=" img-form mb-5">
     <div class="form d-flex flex-column modal-camp">
       <label>Nombre Campamento:
         <input type="text" class="form-control w-100 mb-3" aria-label="Sizing example input"
@@ -91,7 +91,7 @@ const closeModal = () => {
 <style scoped lang="scss">
 
 .modal-camp {
-  
+  padding: 2rem;
   background-color:$gray-form;
 font-family: Arial, Helvetica, sans-serif;
   .form {

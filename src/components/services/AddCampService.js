@@ -5,9 +5,12 @@ const API_URL = import.meta.env.VITE_API_ENDPOINT_CAMPS;
 const addCamp = async (campData) => {
  try {
     const response = await axios.post(API_URL, campData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+      
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      
     });
     return response.data;
  } catch (error) {

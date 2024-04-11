@@ -7,11 +7,12 @@ const showPopup = ref(false);
 
 <template>
     <div class="admin-panel">
-      <button class="add-button" @click="showPopup = true">Añadir Campamento</button>
+      <button class="add-button btn btn-danger" @click="showPopup = true">Añadir Campamento</button>
       
       <div v-if="showPopup" class="popup">
        <PopUpAddCamp/>
-        <button @click="showPopup = false">Cerrar</button>
+       <button type="button" class="btn-close " aria-label="Close" @click="showPopup = false"></button>
+       
       </div>
     </div>
   </template>
@@ -28,13 +29,20 @@ const showPopup = ref(false);
       left: 50%;
       transform: translate(-50%, -50%);
       background-color:$gray-form;
-      padding: 20px;
+    
       border: 1px solid #ccc;
       z-index: 9999;
       
       button {
         margin-top: 10px;
       }
+      .btn-close{
+        position: relative;
+        top: -50rem;
+        left: 45rem;
+        font-size: x-large;
+        color: $gray-form;
+            }
     }
   }
   </style>
