@@ -3,7 +3,13 @@ import BotonesLaterales from "@/components/inscriptions/BotonesLaterales.vue";
 import BotonSiguiente from "@/components/inscriptions/BotonSiguiente.vue";
 import InscripcionPaso1 from "@/components/inscriptions/InscripcionPaso1.vue";
 import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
+
+const goStep2 = () => {
+  router.push('/inscriptionPaso2');
+}
 const authStore = useAuthStore();
 </script>
 <template>
@@ -28,7 +34,7 @@ const authStore = useAuthStore();
           <InscripcionPaso1 />
           <div class="Siguiente">
             <!-- <button>Atras</button> -->
-            <BotonSiguiente />
+            <BotonSiguiente @goToNextStep="goStep2"/>
           </div>
         </div>
       </div>
