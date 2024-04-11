@@ -45,6 +45,12 @@ const router = createRouter({
       component: () => import('../views/InscriptionsView2.vue')
       
     },
+    {
+      path: '/inscriptionPaso3',
+      name: 'inscriptionPaso3',
+      component: () => import('../views/InscriptionsView3.vue')
+      
+    },
 
     {
       path: '/user',
