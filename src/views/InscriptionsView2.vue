@@ -4,7 +4,16 @@ import BotonesLaterales from "@/components/inscriptions/BotonesLaterales.vue";
 import BotonSiguiente from "@/components/inscriptions/BotonSiguiente.vue";
 import ComboColes from "@/components/inscriptions/ComboColes.vue";
 import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
+
+const goStep1 = () => {
+  router.push('/inscription');
+}
+const goStep3 = () => {
+  router.push('/inscriptionPaso3');
+}
 const authStore = useAuthStore();
 </script>
 <template>
@@ -29,16 +38,17 @@ const authStore = useAuthStore();
           </div>
           <div class="colegio">
             <h3>Seleccionar Colegio:</h3>
-            <!--  <ComboColes/>   <h4>Plazas disponibles {places_num}</h4> -->
+             <ComboColes/>   <h4>Plazas disponibles {places_num}</h4>
           </div>
 
           <div class="AtrasSiguiente">
-            <div class="Atras">
-              <BotonAtras />
-            </div>
             <div class="Siguiente">
-              <BotonSiguiente />
+              <BotonSiguiente @goToNextStep="goStep3" />
             </div>
+            <div class="Atras">
+              <BotonAtras @goToPreviusStep="goStep1"/>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -85,6 +95,8 @@ aside {
 .AtrasSiguiente {
   display: flex;
   flex-direction: row-reverse;
+  margin: 1%;
+  gap: 1%;
 }
 .Siguiente {
   text-align: right;
