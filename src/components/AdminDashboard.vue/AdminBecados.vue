@@ -25,7 +25,7 @@ const editarBecado = async (index) => {
     console.log('Becado editado:', response.data);
   } catch (error) {
     console.error('Error editando becado:', error);
-  }
+  } 
 };
 
 const borrarBecado = async (index) => {

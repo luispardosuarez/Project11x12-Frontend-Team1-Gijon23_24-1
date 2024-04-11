@@ -20,6 +20,7 @@ const borrarDni = (index) => {
     <div class="container">
        <div class="row justify-content-center">
          <div class="col-md-6">
+          
           <table class="table" >
              <thead>
                <tr>
@@ -49,9 +50,10 @@ const borrarDni = (index) => {
                </tr>
              </tbody>
            </table>
+           </div>
          </div>
        </div>
-    </div>
+    
 
  
  <nav aria-label="Page navigation example">
@@ -77,9 +79,10 @@ const borrarDni = (index) => {
    <style scoped>
 
 .container {
- margin-top: 20px;
 
-}
+margin-top:  10vh;
+ 
+ }
 
 .table {
 border-collapse: collapse;
