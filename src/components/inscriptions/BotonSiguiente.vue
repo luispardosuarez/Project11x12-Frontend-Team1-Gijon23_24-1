@@ -1,9 +1,10 @@
 <script setup>
 
+const emit = defineEmits(['goToNextStep']);
 
 </script>
 <template>
-  <button class="btn_next">Siguiente</button>
+  <button class="btn_next" @click="emit('goToNextStep')">Siguiente</button>
 </template>
 
 <style scoped lang="scss">
