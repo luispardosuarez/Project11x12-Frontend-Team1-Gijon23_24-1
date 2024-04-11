@@ -89,7 +89,9 @@ const closeModal = () => {
 </template>
 
 <style scoped lang="scss">
-
+.img-form{
+  width: 100%;
+}
 .modal-camp {
   padding: 2rem;
   background-color:$gray-form;

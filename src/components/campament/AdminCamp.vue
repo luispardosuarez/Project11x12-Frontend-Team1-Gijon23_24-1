@@ -21,9 +21,9 @@ const showPopup = ref(false);
   <style lang="scss">
   .admin-panel {
     background-color: rgba(217, 217, 217, 1);
-    
+  
     .popup {
-     
+      width: 70%;
       position: fixed;
       top: 50%;
       left: 50%;
@@ -38,8 +38,8 @@ const showPopup = ref(false);
       }
       .btn-close{
         position: relative;
-        top: -50rem;
-        left: 45rem;
+        top: -54rem;
+        left: 53rem;
         font-size: x-large;
         color: $gray-form;
             }

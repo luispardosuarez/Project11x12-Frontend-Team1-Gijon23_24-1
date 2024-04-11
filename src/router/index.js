@@ -59,13 +59,8 @@ const router = createRouter({
       name: 'EditParticipant',
       component: () => import('../views/EditParticipantView.vue')
       
-    },
-    {
-      path: '/admin',
-      name: 'AdminDashboard',
-      component: () => import('../views/AdminDashboardView.vue')
-      
-    },
+    }
+
 
 
 
