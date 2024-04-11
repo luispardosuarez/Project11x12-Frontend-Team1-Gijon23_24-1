@@ -1,5 +1,12 @@
 <script setup>
 import { defineProps, watch } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const redirectInscriptions = () => {
+    router.push('/inscription');
+  };
 
 const props = defineProps({
   campamento: Object,
@@ -54,7 +61,7 @@ watch(() => props.campamento, setColors, { immediate: true });
         <p><img class="flag" src="../../assets/icons/flag.svg" alt=""> {{ campamento['date flag'] }} </p>
         <p><img class="flag" src="../../assets/icons/people.svg" alt=""> {{ campamento['date user'] }} </p>
         <p class="diferent">{{ campamento['date diner'] }}</p>
-        <button :style="'background-color: ' + btnColor" type="button" id="btn_ins">INSCRIBIRME</button>
+        <button :style="'background-color: ' + btnColor" type="button" id="btn_ins" @click="redirectInscriptions">INSCRIBIRME</button>
       </div>
     </div>
   </div>
