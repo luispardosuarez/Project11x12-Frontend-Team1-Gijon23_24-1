@@ -48,9 +48,17 @@ async function register() {
 
         console.log(status);
         redirectToDashboard()
+
+        console.log(status);
+    redirectToLogin()
     } catch (error) {
         throw new Error('Error occured during API fetch POST request while login : ' + error)
     }
+}
+
+function redirectToLogin() {
+    const redirectPath = '/login'
+    router.push(redirectPath)
 }
 
 
@@ -58,6 +66,9 @@ function redirectToDashboard() {
     const redirectPath = '/user'
     router.push(redirectPath)
 }
+
+
+
 
 const isAdult = ref(false);
 const canRegister = ref(false);
