@@ -29,7 +29,7 @@ const authStore = useAuthStore();
           </div>
           <div class="colegio">
             <h3>Seleccionar Colegio:</h3>
-            <!-- <ComboColes/>   <h4>Plazas disponibles {places_num}</h4> -->
+            <!--  <ComboColes/>   <h4>Plazas disponibles {places_num}</h4> -->
           </div>
 
           <div class="AtrasSiguiente">
