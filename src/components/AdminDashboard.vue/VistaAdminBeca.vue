@@ -13,8 +13,39 @@ const editarDni = (index) => {
 
 const borrarDni = (index) => {
  console.log(`Borrar DNI: ${dnis.value[index]}`);
+ };
+
+
+const itemsPerPage = 2;
+const currentPage = ref(1);
+
+const totalPages = computed(() => Math.ceil(dnis.value.length / itemsPerPage));
+
+const paginatedDnis = computed(() => {
+ const start = (currentPage.value - 1) * itemsPerPage;
+ const end = start + itemsPerPage;
+ return dnis.value.slice(start, end);
+});
+
+const nextPage = () => {
+ if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+ }
+};
+
+const prevPage = () => {
+ if (currentPage.value > 1) {
+    currentPage.value--;
+ }
+};
+
+const goToPage = (page) => {
+ if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page;
+ }
 };
 </script>
+
 
 <template>
     <div class="container">
@@ -133,7 +164,7 @@ border-collapse: collapse;
  padding-left: 0;
  margin: 20px 0;
  border-radius: 4px;
-justify-content: center!important; 
+justify-content: center; 
 }
 
 .pagination > li {

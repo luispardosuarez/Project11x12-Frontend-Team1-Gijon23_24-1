@@ -32,14 +32,14 @@ import VistaAdminBeca from '@/components/adminDashboard.vue/VistaAdminBeca.vue';
 
 <style scoped>
 
-/* .vistaBecados{
+.vistaBecados{
 display: flex;
  justify-content: center;
  align-items: center;
  flex-direction: column;
  background-color: #ECE7E7;
  margin-bottom: 10%;
-} */
+} 
 
 
     </style>
