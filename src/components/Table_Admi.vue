@@ -33,13 +33,17 @@ scholarship()
         <table>
 
             <tr v-for="dni in dniList" :key="dni">
-                <td> {{ dni.dni }}</td>
-                <td>
-                    <img src="../assets/icons/see.svg" alt="">
-                    <img src="../assets/icons/edit.svg" alt="">
+                <td> {{ dni.dni }}
+            
+
                     <img src="../assets/icons/delete.svg" alt="">
+                        <img src="../assets/icons/edit.svg" alt="">
+
                 </td>
+
             </tr>
+
+
 
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -65,13 +69,16 @@ scholarship()
 </template>
 
 <style scoped lang="scss">
+
 .table_becados {
+
     height: auto;
     background-color: $gray-form;
     padding: 2% 2%;
 
     h4 {
         font-weight: 650;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
     table {
@@ -80,24 +87,29 @@ scholarship()
         display: flex;
         flex-direction: column;
         font-size: 0.8em;
-        gap: 6px;
+        gap: 15px;
 
         tr{
             height:5vh;
+            
 
             td {
-                padding: 0.3em;
+                
                 width: 1%;
                 border: 1px solid $red;
                 background-color: white;
-        //         text-align: right;
+                padding: 5px;
             }
 
             img {
                 width: 30px;
                 padding-left: 3px;
+                float: right;
+                display: flex;
+                margin-right: 1.5%;
             }
 
+        
 
         }
     }
