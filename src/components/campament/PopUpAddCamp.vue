@@ -1,4 +1,3 @@
-// src/components/campament/PopUpAddCamp.vue
 <script setup>
 import { ref } from 'vue';
 import AddCampService from '../services/AddCampService';
