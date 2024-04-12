@@ -1,31 +1,11 @@
 <script setup>
-
-  import Body from "@/components/Body.vue";
-import FetchCampamentos from '../components/cards/FetchCampamentos.vue';
-
-
+import Home from "@/components/home/Home.vue";
 </script>
 
-<template> 
-
+<template>
   <main>
-    <Body />
-    <div>
-      
-      <FetchCampamentos />
-    </div>
-
-  </main> 
-
+    <Home />
+  </main>
 </template>
 
-<style lang="scss" scoped>
-
-
-    </style>
-   
-    
- 
-
-
-
+<style lang="scss" scoped></style>

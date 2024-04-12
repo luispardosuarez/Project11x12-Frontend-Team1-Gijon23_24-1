@@ -2,6 +2,7 @@
 import BecadosForm from '@/components/Becados/BecadosForm.vue';
 import Boarp from '@/components/Boarp.vue';
 import Table_Admi from '@/components/Table_Admi.vue';
+import AdminCamp from '@/components/campament/AdminCamp.vue';
 </script>
 
 <template>
@@ -21,11 +22,16 @@ import Table_Admi from '@/components/Table_Admi.vue';
         <div class="table_cont_body">
             <Table_Admi />
             <BecadosForm />
+            <div class="admin-camp">
+  <AdminCamp />
+</div>
+
         </div>
+ 
       </div>
     </div>
 
-
+<!-- admin@gijon11x12.com // AdminGijon11x12 -->
 
   </main>
 
@@ -59,3 +65,5 @@ import Table_Admi from '@/components/Table_Admi.vue';
 
 }
 </style>
+
+
