@@ -98,7 +98,7 @@ border-collapse: collapse;
 }
 
 .table tbody tr {
- border: 2px solid red;
+ border: 2px solid #D0003E;
   
 }
 
