@@ -1,20 +1,46 @@
 <script setup>
 
+import { ref } from "vue"
+import { useRoute, useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/scholarship";
+
+const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
+
+
+const route = useRoute()
+const router = useRouter()
+const store = useAuthStore()
+
+
+const dniList = ref([])
+
+async function scholarship () {
+
+    dniList.value = await store.scholarship()
+    console.log(dniList.value);
+}
+
+scholarship()
+
+
+
+
 </script>
 
 <template>
     <div class="table_becados">
         <h4>Becados</h4>
         <table>
-            <tr>
-                <td >DNI: 55555555Y</td>
+
+            <tr v-for="dni in dniList" :key="dni">
+                <td> {{ dni.dni }}</td>
                 <td>
                     <img src="../assets/icons/see.svg" alt=""> 
                     <img src="../assets/icons/edit.svg" alt="">
                     <img src="../assets/icons/delete.svg" alt="">
                 </td>
             </tr>
-          
+        
         </table>
 
     </div>
@@ -59,3 +85,4 @@
     }
 }
 </style>
+@/stores/scholarship
