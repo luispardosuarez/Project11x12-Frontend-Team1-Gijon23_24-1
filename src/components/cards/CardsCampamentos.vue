@@ -190,7 +190,7 @@ watch(() => props.campamento, setColors, { immediate: true });
 
       p {
         font-size: xx-small;
-        color: white;
+        color: white!important;;
         margin-bottom: 0;
       }
 

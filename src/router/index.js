@@ -77,7 +77,8 @@ const router = createRouter({
       name: 'EditParticipant',
       component: () => import('../views/EditParticipantView.vue')
       
-    },
+    }
+
 
 
 
