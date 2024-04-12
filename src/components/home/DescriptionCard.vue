@@ -19,7 +19,7 @@ const showPopup = ref(false);
         </div>
         <div class="col-md-4">
           <img
-            class="logocamp img-fluid rounded-end"
+            class="logocamp w-50 img-fluid"
             src="../../assets/img/11x12.jpg"
             alt="imagen logo 11x12"
           />
@@ -47,7 +47,8 @@ const showPopup = ref(false);
   }
 
   .logocamp {
-    margin-left: 18rem;
+    margin-left: 7rem;
+    margin-top:-5rem;
     border: none;
    
   }
@@ -58,14 +59,14 @@ const showPopup = ref(false);
 
     .card-body {
       text-align: justify;
-      width: 120%;
+      width: 100%;
       font-size: x-large;
     }
 
     .text-center {
       text-align: center;
     }
-  }
+  }}
   @media only screen and (min-width: 1280px) {
   .container {
     width: 90%;
@@ -112,5 +113,5 @@ const showPopup = ref(false);
 
 
 }
-}
+
 </style>

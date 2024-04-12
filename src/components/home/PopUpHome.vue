@@ -9,7 +9,7 @@ import { useProjectStore } from '../../stores/dataHomeStore';
   </script>
 
 <template>
-  <MDBModal  size="xl" :show="modalOpen" @hidden="closeModal"   centered>
+  <MDBModal  size="lg" :show="modalOpen" @hidden="closeModal"   centered>
     <MDBModalHeader>
       <MDBModalTitle>Proyecto 11X12. Campamentos Urbanos 2024</MDBModalTitle>
     </MDBModalHeader>
@@ -41,21 +41,18 @@ import { useProjectStore } from '../../stores/dataHomeStore';
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    height:100%;
+
      font-size: x-large;
   }
 
-  .modal.show {
-    display: block;
-  }
+  
 
   .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+  
     width: 80%;
    
   }
@@ -67,12 +64,6 @@ import { useProjectStore } from '../../stores/dataHomeStore';
     font-weight: bold;
   }
 
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
   @media only screen and (min-width: 1280px) {
     
   .modal {
@@ -83,8 +74,8 @@ import { useProjectStore } from '../../stores/dataHomeStore';
     top: 0;
     width: 80%;
     height: 80%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    
+   
      font-size: x-large;
   }
 

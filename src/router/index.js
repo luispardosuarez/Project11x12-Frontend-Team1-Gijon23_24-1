@@ -77,8 +77,13 @@ const router = createRouter({
       name: 'EditParticipant',
       component: () => import('../views/EditParticipantView.vue')
       
-    }
-
+    },
+    {
+      path: '/camp',
+      name: 'camp',
+      component: () => import('../views/AdminDashboardCampView.vue')
+      
+    },
 
 
 
