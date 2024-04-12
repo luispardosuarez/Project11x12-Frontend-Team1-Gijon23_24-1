@@ -18,7 +18,7 @@
     position: fixed;
     z-index: -50;
     margin-top: -38rem;
-
+display: flex;
 
 }
 </style>

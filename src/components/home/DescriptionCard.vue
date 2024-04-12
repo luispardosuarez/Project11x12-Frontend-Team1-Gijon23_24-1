@@ -80,5 +80,37 @@ const showPopup = ref(false);
   }
 
 }
+
+@media only screen and (min-width: 820px) {
+  .container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .logocamp {
+    margin-left: 9rem;
+    margin-top: 8rem;
+  }
+  .card {
+    width: 80%;
+  }
+}
+@media only screen and (min-width: 360px) {
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .logocamp {
+   margin:0;
+  margin-left: 2rem;
+    margin-top: 8rem;
+  }
+  .card {
+    width: 80%;
+    margin:0;
+    
+  }
+
+
+}
 }
 </style>
