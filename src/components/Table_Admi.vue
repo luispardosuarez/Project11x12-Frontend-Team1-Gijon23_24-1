@@ -43,6 +43,7 @@
 
             td {
                 padding: 0.3em;
+               
                 width: 1%;
                 border: 1px solid $red;
                 background-color: white;
@@ -52,6 +53,7 @@
             img {
                 width: 30px;
                 padding-left: 3px;
+                
             }
         }
     }
