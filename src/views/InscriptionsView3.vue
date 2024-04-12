@@ -3,6 +3,7 @@ import BotonAtras from "@/components/inscriptions/BotonAtras.vue";
 import BotonesLaterales from "@/components/inscriptions/BotonesLaterales.vue";
 import BotonSiguiente from "@/components/inscriptions/BotonSiguiente.vue";
 import ComboParticipante from "@/components/inscriptions/ComboParticipante.vue";
+import ParticipantesOpciones from "@/components/inscriptions/ParticipantesOpciones.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 
@@ -44,6 +45,9 @@ const authStore = useAuthStore();
             <h3>Seleccionar Participante:</h3>
             <ComboParticipante/>
             
+          </div>
+          <div class="opcionesParticipantes">
+            <ParticipantesOpciones/>
           </div>
 
           <div class="AtrasSiguiente">
@@ -111,5 +115,13 @@ aside {
   .barraLateral {
     display: none;
   }
+
+  .AtrasSiguiente {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 2%;
+  gap: 1%;
+  justify-content: space-evenly;
+}
 }
 </style>

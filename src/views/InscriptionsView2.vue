@@ -107,5 +107,14 @@ aside {
   .barraLateral {
     display: none;
   }
+  .AtrasSiguiente {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  margin: 2%;
+  gap: 1%;
 }
+}
+
+
 </style>

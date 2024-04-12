@@ -17,4 +17,10 @@ const emit = defineEmits(['goToNextStep']);
     width: 250px;
     border: none;
 }
+
+@media only screen and (max-width: 768px) {
+  .btn_next {
+    width: 150px;
+  }
+}
 </style>
