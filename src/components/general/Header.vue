@@ -32,7 +32,7 @@ const isLoggedIn = ref(false);
 
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 
 .wrapper {
     width: 100%;
@@ -61,7 +61,7 @@ const isLoggedIn = ref(false);
     align-items: center;
     gap: 1rem;
     margin-right: 15px;
-    font-size: 15px;
+    font-size: 1.5rem!important;
 }
 
 .headerLinkLogged {
