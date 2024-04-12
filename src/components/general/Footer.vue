@@ -6,7 +6,6 @@
     <div id="footerContainer">
         <img class="gijonLogo" src="../../assets/icons/gijon.png">
         <div class="footerIcons">
-            <img src="../../assets/icons/xLogo.png">
             <img src="../../assets/icons/instagram-1-svgrepo-com.svg">
             <img src="../../assets/icons/youtube-color-svgrepo-com.svg">
             <img src="../../assets/icons/apple-color-svgrepo-com.svg">
