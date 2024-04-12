@@ -12,18 +12,21 @@ const showPopup = ref(false);
     <h1 class="text-center p-5 me-5">Descripción</h1>
     <div class="card mb-3">
       <div class="row g-0">
-        <div class="col-md-8">
+        <div class="col-md-16">
+        <div class="col-md-16">
           <div class="card-body">
             <p class="card-text ms-5">{{ projectStore.description }}</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <img
-            class="logocamp w-50 img-fluid"
-            src="../../assets/img/11x12.jpg"
-            alt="imagen logo 11x12"
-          />
-        </div>
+        
+                <img
+                  class="logocamp img-fluid w-25 "
+                  src="../../assets/img/11x12.jpg"
+                  alt="imagen logo 11x12"
+                />
+          </div>  
+      </div>
+        
+               
+      </div>
       </div>
     </div>
     <div class="text-center">
@@ -38,9 +41,12 @@ const showPopup = ref(false);
 
 <style scoped lang="scss">
 .container {
+ border:none!important;
+ border:none!important;
   background-color: white;
   width: 100%;
-  margin-top: 22rem;
+  margin-top: 12rem;
+  margin-top: 12rem;
 
   h1 {
     color: #d0003e;
@@ -56,11 +62,17 @@ const showPopup = ref(false);
   .card {
     width: 100%;
     border: none;
-
     .card-body {
+      display: flex;
+      display: flex;
       text-align: justify;
       width: 100%;
-      font-size: x-large;
+      font-size: large;
+      .logocamp {
+margin-left:10rem;
+   border: none;
+  
+ }
     }
 
     .text-center {
