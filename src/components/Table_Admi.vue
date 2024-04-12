@@ -2,14 +2,14 @@
 
 import { ref } from "vue"
 import { useRoute, useRouter } from "vue-router";
-import { useAuthStore } from "@/stores/scholarship";
+import { usescholarshipStore } from "@/stores/scholarship";
 
 const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
 
 
 const route = useRoute()
 const router = useRouter()
-const store = useAuthStore()
+const store = usescholarshipStore()
 
 
 const dniList = ref([])
@@ -83,4 +83,3 @@ scholarship()
     }
 }
 </style>
-@/stores/scholarship
