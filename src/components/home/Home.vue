@@ -1,13 +1,15 @@
 <script setup>
-
+import FetchCampamentos from '../cards/FetchCampamentos.vue';
 import Banner from './Banner.vue';
-import DescriptionCard from './DescriptionCard.vue';
+import CardDescription from './CardDescription.vue';
+
 
 </script>
 <template>
     <div>
         <Banner/>
-        <DescriptionCard/>
+        <CardDescription/>
+        <FetchCampamentos/>
           </div>
 </template>
 <style scoped lang="scss">
