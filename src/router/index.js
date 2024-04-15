@@ -84,14 +84,6 @@ const router = createRouter({
       component: () => import('../views/AdminDashboardCampView.vue')
       
     },
-    {
-      path: '/new',
-      name: 'newhome',
-      component: () => import('../views/HomeNewView.vue')
-      
-    },
-
-
   ]
 })
 
