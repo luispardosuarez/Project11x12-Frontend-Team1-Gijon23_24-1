@@ -30,19 +30,17 @@ import axios from 'axios'
         }
     }
 
-    const deleteDNI = async (dni, dataConnection) => {
+    const deleteDNI = async (id) => {
 
         const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
     
         isLoading.value = true
         const options = {
             baseURL: uri,
-            auth: dataConnection, 
             withCredentials: true
         }
     
         try {
-            // ruta del delete por verificar
             const response = await axios.delete(`${uri}/${id}`, options)
             
             const status = response.status
@@ -53,12 +51,8 @@ import axios from 'axios'
             }
         } catch (error) {
             console.error('Error Deleting dni:', error);
-        } finally {
-            isLoading.value = false
         }
-        
-        return false
-    }
+        }
 
     return { user, scholarship, deleteDNI }
 })

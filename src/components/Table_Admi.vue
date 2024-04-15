@@ -18,12 +18,12 @@ async function scholarship () {
     console.log(dniList.value);
 }
 
-const deleteScholarship = async (dni) => {
-    const isDeleted = await store.deleteDNI(dni)
+const deleteScholarship = async (id) => {
+    const isDeleted = await store.deleteDNI(id)
 
     if (isDeleted) {
 
-        dniList.value = dniList.value.filter(item => item.dni !== dni)
+        dniList.value = dniList.value.filter(item => item.id !== id)
     } else {
 
         console.error('No se pudo borrar el registro');
