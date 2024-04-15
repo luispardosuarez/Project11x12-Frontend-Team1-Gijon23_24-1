@@ -84,9 +84,6 @@ const router = createRouter({
       component: () => import('../views/AdminDashboardCampView.vue')
       
     },
-
-
-
   ]
 })
 
