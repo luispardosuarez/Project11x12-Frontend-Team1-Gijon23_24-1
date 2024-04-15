@@ -19,19 +19,22 @@ async function scholarship () {
 }
 
 const deleteScholarship = async (id) => {
+
+    const confirmation = window.confirm('¿Estás seguro de querer borrar este DNI?');
+    if (!confirmation) {
+        return;
+    }
+
     const isDeleted = await store.deleteDNI(id)
 
     if (isDeleted) {
-
         dniList.value = dniList.value.filter(item => item.id !== id)
     } else {
-
         console.error('No se pudo borrar el registro');
     }
 }
 
 scholarship()
-
 
 </script>
 
