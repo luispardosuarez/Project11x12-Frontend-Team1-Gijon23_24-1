@@ -11,18 +11,26 @@ const route = useRoute()
 const router = useRouter()
 const store = usescholarshipStore()
 
-
 const dniList = ref([])
 
 async function scholarship () {
-
     dniList.value = await store.scholarship()
     console.log(dniList.value);
 }
 
+const deleteScholarship = async (id) => {
+    const isDeleted = await store.deleteDNI(id)
+
+    if (isDeleted) {
+
+        dniList.value = dniList.value.filter(item => item.id !== id)
+    } else {
+
+        console.error('No se pudo borrar el registro');
+    }
+}
+
 scholarship()
-
-
 
 
 </script>
@@ -32,18 +40,16 @@ scholarship()
         <h4>Becados</h4>
         <table>
 
-            <tr v-for="dni in dniList" :key="dni">
+            <tr v-for="dni in dniList" :key="dni.dni">
                 <td> {{ dni.dni }}
             
 
-                    <img src="../assets/icons/delete.svg" alt="">
+                    <img src="../assets/icons/delete.svg" alt=""  @click="deleteScholarship(dni.id)">
                         <img src="../assets/icons/edit.svg" alt="">
 
                 </td>
 
             </tr>
-
-
 
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
