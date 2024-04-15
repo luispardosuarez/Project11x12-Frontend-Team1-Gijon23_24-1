@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue';
+import { inject } from 'vue';
 
 // Definir el estado del paso actual
-const pasoActual = ref(1);
+const pasoActual = inject('pasoActual');
 
 // Función para cambiar el paso actual
 const cambiarPaso = (nuevoPaso) => {
