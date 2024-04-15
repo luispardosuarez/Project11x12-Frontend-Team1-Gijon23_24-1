@@ -1,58 +1,36 @@
-import { ref, reactive } from 'vue'
-import { defineStore } from 'pinia'
-import axios from 'axios'
+<script setup>
 
-    export const usescholarshipStore = defineStore('scholarship', () => {
-    const user = reactive({
-        dni: ''
-    })
+import { ref } from "vue"
+import { useRoute, useRouter } from "vue-router";
+import { usescholarshipStore } from "@/stores/scholarship";
 
-    const isLoading = ref(false)
+const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
 
-    const scholarship = async (dataConnection) => {
 
-        const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
-    
-        try {
-            isLoading.value = true
-            const options = {
-                baseURL: uri,
-                auth: dataConnection,
-                withCredentials: true
-            }
-    
-            const response = await axios.get(`${uri}`, options)
-            const data = await response.data
-            isLoading.value = false
-            return data;
-        } catch (error) {
-            throw new Error('Error Loading API: ' + error)
-        }
+const route = useRoute()
+const router = useRouter()
+const store = usescholarshipStore()
+
+const dniList = ref([])
+
+async function scholarship () {
+    dniList.value = await store.scholarship()
+    console.log(dniList.value);
+}
+
+const deleteScholarship = async (id) => {
+    const isDeleted = await store.deleteDNI(id)
+
+    if (isDeleted) {
+
+        dniList.value = dniList.value.filter(item => item.id !== id)
+    } else {
+
+        console.error('No se pudo borrar el registro');
     }
+}
 
-    const deleteDNI = async (id) => {
+scholarship()
 
-        const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
-    
-        isLoading.value = true
-        const options = {
-            baseURL: uri,
-            withCredentials: true
-        }
-    
-        try {
-            const response = await axios.delete(`${uri}/${id}`, options)
-            
-            const status = response.status
-    
-            if (status == 200) { 
-                await scholarship()
-                return true
-            }
-        } catch (error) {
-            console.error('Error Deleting dni:', error);
-        }
-        }
 
-    return { user, scholarship, deleteDNI }
-})
+</script>
