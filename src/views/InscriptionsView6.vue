@@ -11,15 +11,15 @@ import { provide } from "vue";
 
 const router = useRouter();
 
-const goStep2 = () => {
-  router.push("/inscriptionPaso2");
+const goStep5 = () => {
+  router.push("/inscriptionPaso5");
 };
-const goStep4 = () => {
-  router.push("/inscriptionPaso4");
+const goStep7 = () => {
+  router.push("/inscriptionPaso7");
 };
 const authStore = useAuthStore();
 
-const pasoActual = ref(3);
+const pasoActual = ref(6);
 provide('pasoActual', pasoActual);
 
 </script>
@@ -45,23 +45,20 @@ provide('pasoActual', pasoActual);
           </div>
           <div class="colegio">
             <h3>{Colegio}</h3>
-            <h4>Plazas disponibles {places_num}</h4>
+            <h4>{places_num} {horario}</h4>
           </div>
-          <div class="participantes">
-            <h3>Seleccionar Participante:</h3>
-            <ComboParticipante/>
-            
+          <div class="pasarelaPago">
+            <h2>pasarera de pago</h2>
+                        
           </div>
-          <div class="opcionesParticipantes">
-            <ParticipantesOpciones/>
-          </div>
+          
 
           <div class="AtrasSiguiente">
             <div class="Siguiente">
-              <BotonSiguiente @goToNextStep="goStep4" />
+              <BotonSiguiente @goToNextStep="goStep7" />
             </div>
             <div class="Atras">
-              <BotonAtras @goToPreviusStep="goStep2" />
+              <BotonAtras @goToPreviusStep="goStep5" />
             </div>
           </div>
         </div>

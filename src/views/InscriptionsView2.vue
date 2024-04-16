@@ -5,6 +5,8 @@ import BotonSiguiente from "@/components/inscriptions/BotonSiguiente.vue";
 import ComboColes from "@/components/inscriptions/ComboColes.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
+import { ref } from "vue";
+import { provide } from "vue";
 
 const router = useRouter();
 
@@ -15,6 +17,10 @@ const goStep3 = () => {
   router.push('/inscriptionPaso3');
 }
 const authStore = useAuthStore();
+
+const pasoActual = ref(2);
+provide('pasoActual', pasoActual);
+
 </script>
 <template>
   <main>
