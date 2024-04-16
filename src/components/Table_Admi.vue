@@ -73,7 +73,6 @@ scholarship()
             </nav>
 
         </table>
-
     </div>
 </template>
 
