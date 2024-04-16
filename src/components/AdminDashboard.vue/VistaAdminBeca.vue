@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const dnis = ref(['12345678', '87654321', '23456789']);
 
@@ -44,6 +44,9 @@ const goToPage = (page) => {
     currentPage.value = page;
  }
 };
+
+
+
 </script>
 
 
@@ -87,9 +90,9 @@ const goToPage = (page) => {
     
 
  
- <nav aria-label="Page navigation example">
+ <!-- <nav aria-label="Page navigation example">
   <ul class="pagination">
-    <li class="page-item">
+    <li class="page-item" @click="prevPage"  >
       <a class="page-link" href="#" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
@@ -103,7 +106,25 @@ const goToPage = (page) => {
       </a>
     </li>
   </ul>
+</nav> -->
+<nav aria-label="Page navigation example">
+ <ul class="pagination">
+    <li class="page-item" @click="prevPage">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item" v-for="page in totalPages" :key="page" @click="goToPage(page)">
+      <a class="page-link" href="#">{{ page }}</a>
+    </li>
+    <li class="page-item" @click="nextPage">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+ </ul>
 </nav>
+
    </template>
 
 
