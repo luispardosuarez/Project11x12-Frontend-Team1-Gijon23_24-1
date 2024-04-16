@@ -11,19 +11,30 @@ const route = useRoute()
 const router = useRouter()
 const store = usescholarshipStore()
 
-
 const dniList = ref([])
 
 async function scholarship () {
-
     dniList.value = await store.scholarship()
     console.log(dniList.value);
 }
 
+const deleteScholarship = async (id) => {
+
+    const confirmation = window.confirm('¿Estás seguro de querer borrar este DNI?');
+    if (!confirmation) {
+        return;
+    }
+
+    const isDeleted = await store.deleteDNI(id)
+
+    if (isDeleted) {
+        dniList.value = dniList.value.filter(item => item.id !== id)
+    } else {
+        console.error('No se pudo borrar el registro');
+    }
+}
+
 scholarship()
-
-
-
 
 </script>
 
@@ -32,13 +43,15 @@ scholarship()
         <h4>Becados</h4>
         <table>
 
-            <tr v-for="dni in dniList" :key="dni">
-                <td> {{ dni.dni }}</td>
-                <td>
-                    <img src="../assets/icons/see.svg" alt="">
-                    <img src="../assets/icons/edit.svg" alt="">
-                    <img src="../assets/icons/delete.svg" alt="">
+            <tr v-for="dni in dniList" :key="dni.dni">
+                <td> {{ dni.dni }}
+            
+
+                    <img src="../assets/icons/delete.svg" alt=""  @click="deleteScholarship(dni.id)">
+                        <img src="../assets/icons/edit.svg" alt="">
+
                 </td>
+
             </tr>
 
             <nav aria-label="Page navigation example">
@@ -65,13 +78,16 @@ scholarship()
 </template>
 
 <style scoped lang="scss">
+
 .table_becados {
+
     height: auto;
     background-color: $gray-form;
     padding: 2% 2%;
 
     h4 {
         font-weight: 650;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
     table {
@@ -80,26 +96,29 @@ scholarship()
         display: flex;
         flex-direction: column;
         font-size: 0.8em;
-        gap: 6px;
+        gap: 15px;
 
         tr{
             height:5vh;
+            
 
             td {
-                padding: 0.3em;
-               
+                
                 width: 1%;
                 border: 1px solid $red;
                 background-color: white;
-        //         text-align: right;
+                padding: 5px;
             }
 
             img {
                 width: 30px;
                 padding-left: 3px;
-                
+                float: right;
+                display: flex;
+                margin-right: 1.5%;
             }
 
+        
 
         }
     }
