@@ -27,15 +27,13 @@
 
   select {
     font-family: Arial;
-    font-size: large;
-    // appearance: none;
+    appearance: none;
     outline: 1px $red;
     border-color: $red;
     flex: 1;
     padding: 0 1em;
     color: $black;
     background-color: $gray-checkbox;
-    font-size: small;
     cursor: pointer;
 
     select::-ms-expand {
@@ -72,7 +70,8 @@
     cursor: pointer;
     color: $black;
     background-color: $gray-checkbox;
-    font-size: small;
+    font-family: Arial;
+    font-size: medium;
     transition: background-color 0.3s;
   }
 
