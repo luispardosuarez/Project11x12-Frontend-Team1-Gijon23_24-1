@@ -1,31 +1,46 @@
 <script setup>
-import { ref, computed } from 'vue';
 
-const dnis = ref(['12345678', '87654321', '23456789']);
+import { ref } from "vue"
+import { useRoute, useRouter } from "vue-router";
+import { usescholarshipStore } from "@/stores/scholarship";
 
-const verDni = (index) => {
- console.log(`Ver DNI: ${dnis.value[index]}`);
-};
-
-const editarDni = (index) => {
- console.log(`Editar DNI: ${dnis.value[index]}`);
-};
-
-const borrarDni = (index) => {
- console.log(`Borrar DNI: ${dnis.value[index]}`);
- };
+const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
 
 
-const itemsPerPage = 2;
+const route = useRoute()
+const router = useRouter()
+const store = usescholarshipStore()
+
+const dniList = ref([])
+
+async function scholarship () {
+    dniList.value = await store.scholarship()
+    console.log(dniList.value);
+}
+
+const deleteScholarship = async (id) => {
+
+    const confirmation = window.confirm('¿Estás seguro de querer borrar este DNI?');
+    if (!confirmation) {
+        return;
+    }
+
+    const isDeleted = await store.deleteDNI(id)
+
+    if (isDeleted) {
+        dniList.value = dniList.value.filter(item => item.id !== id)
+    } else {
+        console.error('No se pudo borrar el registro');
+    }
+}
+
+scholarship()
+
+// Funcionalidad paginacion
+const itemsPerPage = ref(6); 
 const currentPage = ref(1);
 
-const totalPages = computed(() => Math.ceil(dnis.value.length / itemsPerPage));
-
-const paginatedDnis = computed(() => {
- const start = (currentPage.value - 1) * itemsPerPage;
- const end = start + itemsPerPage;
- return dnis.value.slice(start, end);
-});
+const totalPages = computed(() => Math.ceil(dniList.value.length / itemsPerPage.value));
 
 const nextPage = () => {
  if (currentPage.value < totalPages.value) {
@@ -44,181 +59,128 @@ const goToPage = (page) => {
     currentPage.value = page;
  }
 };
+const paginatedDnis = computed(() => {
+ const start = (currentPage.value - 1) * itemsPerPage.value;
+ const end = start + itemsPerPage.value;
+ return dniList.value.slice(start, end);
+});
 
 
 
 </script>
 
-
 <template>
-    <div class="container">
-       <div class="row justify-content-center">
-         <div class="col-md-6">
-          
-          <table class="table" >
-             <thead>
-               <tr>
-                 <th>Becados</th>
+    <div class="table_becados">
+        <h4>Becados</h4>
+        <table>
+
+         <tr v-for="dni in paginatedDnis" :key="dni.dni">
+
+           <td> {{ dni.dni }}
+            
+
+              <img src="../assets/icons/delete.svg" alt=""  @click="deleteScholarship(dni.id)">
+                 <img src="../assets/icons/edit.svg" alt="">
+
+                </td>
+
+            </tr>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" @click="prevPage" >
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+           <li class="page-item" v-for="page in totalPages" :key="page" @click="goToPage(page)">
+          <a class="page-link" href="#">{{ page }}</a>
+        </li>
+        <li class="page-item" @click="nextPage">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+                </ul>
+            </nav>
+
+        </table>
+    </div>
+</template>
+
+<style scoped lang="scss">
+
+.table_becados {
+
+    height: auto;
+    background-color: $gray-form;
+    padding: 2% 2%;
+
+    h4 {
+        font-weight: 650;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    table {
+        border: none;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        font-size: 0.8em;
+        gap: 15px;
+
+        tr{
+            height:5vh;
+            
+
+            td {
                 
-               </tr>
-             </thead>
-             <tbody>
-               <tr v-for="(dni, index) in dnis" :key="index">
-                 <td>{{ dni }}</td>
-                 <td class="action-buttons">
-                 
-                   <button class="btn btn-primary" @click="verDni(index)">
-                   
-                    <img src="../../assets/icons/see.svg" alt="Ver" />
-                   </button>
-                   <button class="btn btn-warning" @click="editarDni(index)">
-                    
-                    <img src="../../assets/icons/edit.svg" alt="Editar" />
-                   </button>
-                   <button class="btn btn-danger" @click="borrarDni(index)">
-                    
-                    <img src="../../assets/icons/delete.svg" alt="Borrar" />
-                   </button>
-                 
-                 </td>
-               </tr>
-             </tbody>
-           </table>
-           </div>
-         </div>
-       </div>
-    
+                width: 1%;
+                border: 1px solid $red;
+                background-color: white;
+                padding: 5px;
+            }
 
- 
- <!-- <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item" @click="prevPage"  >
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav> -->
-<nav aria-label="Page navigation example">
- <ul class="pagination">
-    <li class="page-item" @click="prevPage">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item" v-for="page in totalPages" :key="page" @click="goToPage(page)">
-      <a class="page-link" href="#">{{ page }}</a>
-    </li>
-    <li class="page-item" @click="nextPage">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
- </ul>
-</nav>
+            img {
+                width: 30px;
+                padding-left: 3px;
+                float: right;
+                display: flex;
+                margin-right: 1.5%;
+            }
 
-   </template>
+        
 
-
-   <style scoped>
-
-.container {
-
-margin-top:  10vh;
- 
- }
-
-.table {
-border-collapse: collapse;
- width: 100%;
-
-}
-
-.action-buttons {
+        }
+    }
+    .pagination {
  display: flex;
- justify-content: flex-end;
- gap: 10px;
- border: none;
-}
-
-.table tbody tr {
- border: 2px solid #D0003E;
-  
-}
-
-.btn {
- padding: 5px 10px;
- background-color: transparent;
- border: none; 
-}
-.btn-primary {
- background-color: transparent;
- padding: 5px 5px; 
-}
-
-.btn-warning {
- background-color: transparent;
- padding: 5px 5px; 
-}
-
-.btn-danger {
- background-color: transparent;
- padding: 5px 5px; 
-}
-
-
-.btn img {
- width: 20px;
- height: 20px;
-}
-
-.pagination {
- display: flex;
- padding-left: 0;
- margin: 20px 0;
+ /* padding-left: 0; */
+/*  margin: 20px 0; */
  border-radius: 4px;
-justify-content: center; 
+ padding-top: 15px;
+justify-content: center!important;
 }
-
 .pagination > li {
  display: inline-flex;
 }
-
 .pagination > li > a,
 .pagination > li > span {
  position: relative;
- float: left;
+/*  float: left; */
  padding: 6px 12px;
- margin-left: -1px;
+ /* margin-left: -1px; */
  line-height: 1.42857143;
  color: #252525;
  text-decoration: none;
  background-color: #fff;
  border: 1px solid #ddd;
 }
-
 .pagination > li.active > a,
 .pagination > li.active > span {
- background-color: #337ab7;
- border-color: #337ab7;
+ background-color: red;
+ border-color: red;
  color: #fff;
 }
-
-tr{
-
-  margin-bottom: 15%;
 }
-
-
 </style>
-
-
-   
