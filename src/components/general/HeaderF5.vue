@@ -20,12 +20,13 @@ const isLoggedIn = ref(false);
 </template>
 
 
-<style lang="scss">
+<style scoped lang="scss">
 
 .wrapper {
     width: 100%;
     display: flex;
     justify-content: center;
+    background-color: white;
 }
 
 #headerContainer2 {

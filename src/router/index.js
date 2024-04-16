@@ -39,6 +39,24 @@ const router = createRouter({
       component: () => import('../views/RegisterView.vue')
       
     },
+    {
+      path: '/inscription',
+      name: 'inscription',
+      component: () => import('../views/InscriptionsView.vue')
+      
+    },
+    {
+      path: '/inscriptionPaso2',
+      name: 'inscriptionPaso2',
+      component: () => import('../views/InscriptionsView2.vue')
+      
+    },
+    {
+      path: '/inscriptionPaso3',
+      name: 'inscriptionPaso3',
+      component: () => import('../views/InscriptionsView3.vue')
+      
+    },
 
     {
       path: '/user',
@@ -66,9 +84,12 @@ const router = createRouter({
       component: () => import('../views/EditParticipantView.vue')
       
     },
-
-
-
+    {
+      path: '/camp',
+      name: 'camp',
+      component: () => import('../views/AdminDashboardCampView.vue')
+      
+    },
   ]
 })
 
