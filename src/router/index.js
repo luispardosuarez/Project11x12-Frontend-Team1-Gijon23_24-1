@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-// import AdminBecadosView from '@/views/AdminBecadosView.vue'
+// import AdminBecadosView from '@/views/adminBecadosView.vue'
 
 
 const router = createRouter({
