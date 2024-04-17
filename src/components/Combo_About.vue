@@ -29,7 +29,7 @@
     padding: 0 1em;
     color: $black;
     background-color: $gray-checkbox;
-    font-size: small;
+    font-size: small;                 
     cursor: pointer;
 
     select::-ms-expand {
@@ -66,7 +66,7 @@
     cursor: pointer;
     color: $black;
     background-color: $gray-checkbox;
-    font-size: small;
+    font-size: xx-smal;
     transition: background-color 0.3s;
   }
 
