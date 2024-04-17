@@ -39,7 +39,7 @@
             outline: none;
             border: none;
             color: $black;
-            border: .5px $red solid;
+            border: .6px $red solid;
         }
     }
 }
