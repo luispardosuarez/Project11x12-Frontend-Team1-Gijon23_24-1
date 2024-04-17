@@ -1,14 +1,24 @@
-<script setup></script>
+<script setup>
+import { useCampWeeksStore } from '@/stores/campWeeksStore';
+import { onMounted, ref } from 'vue';
+
+
+const store = useCampWeeksStore();
+const weeks = store.weeks;
+const selectedWeek = ref(null);
+onMounted(async () => {
+  await store.fetchWeeks();
+});
+
+</script>
 <template>
   <div class="contenedorPaso1">
     <div class="container">
     <div class="select">
-      <select>
+      <select v-model="selectedWeek">
         <option value="null">Seleccione Fecha:</option>
-        <option value="uno">01/07/2024 - 05/07/2024</option>
-        <option value="dos">08/07/2024 - 12/07/2024</option>
-        <option value="tres">14/07/2024 - 18/07/2024</option>
-        <option value="cuatro">21/07/2024 - 25/07/2024</option>
+        <option v-for="week in weeks" :key="week.id_week" :value="week.id_week">{{ week.start_date }} - {{ week.end_date }}</option>
+        
       </select>
     </div>
   </div>
