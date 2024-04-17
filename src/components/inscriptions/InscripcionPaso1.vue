@@ -10,6 +10,11 @@ onMounted(async () => {
   await store.fetchWeeks();
 });
 
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('es-ES');
+};
+
 </script>
 <template>
   <div class="contenedorPaso1">
@@ -17,7 +22,7 @@ onMounted(async () => {
     <div class="select">
       <select v-model="selectedWeek">
         <option value="null">Seleccione Fecha:</option>
-        <option v-for="week in weeks" :key="week.id_week" :value="week.id_week">{{ week.start_date }} - {{ week.end_date }}</option>
+        <option v-for="week in weeks" :key="week.id_week" :value="week.id_week">{{ formatDate(week.start_date) }} - {{ formatDate(week.end_date) }}</option>
         
       </select>
     </div>
