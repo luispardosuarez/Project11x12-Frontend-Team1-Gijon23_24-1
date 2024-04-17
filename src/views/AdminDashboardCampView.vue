@@ -1,6 +1,5 @@
 <script setup>
 import Boarp from '@/components/Boarp.vue';
-
 import AdminCamp from '@/components/campament/AdminCamp.vue';
 </script>
 
@@ -18,16 +17,13 @@ import AdminCamp from '@/components/campament/AdminCamp.vue';
           <Boarp />
         </div>
 
-        
-  <AdminCamp />
-</div>
 
-        </div>
- 
-     
-  
+        <AdminCamp />
+      </div>
 
-<!-- admin@gijon11x12.com // AdminGijon11x12 -->
+    </div>
+
+    <!-- admin@gijon11x12.com // AdminGijon11x12 -->
 
   </main>
 
@@ -36,6 +32,7 @@ import AdminCamp from '@/components/campament/AdminCamp.vue';
 <style lang="scss" scoped>
 .admin_cont {
   padding: 2% 3%;
+
   h1 {
     margin-bottom: 2%;
   }
@@ -44,7 +41,7 @@ import AdminCamp from '@/components/campament/AdminCamp.vue';
     display: flex;
     justify-content: space-between;
 
-    .bar_lateral{
+    .bar_lateral {
       width: 23%;
     }
 
@@ -57,9 +54,5 @@ import AdminCamp from '@/components/campament/AdminCamp.vue';
       gap: 1em;
     }
   }
-
-
 }
 </style>
-
-
