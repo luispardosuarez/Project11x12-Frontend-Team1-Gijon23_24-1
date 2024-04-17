@@ -1,9 +1,6 @@
 <script setup></script>
 <template>
   <div class="contenedorPaso1">
-    <div class="campamento">
-      <h2>Campamento Verano</h2>
-    </div>
     <div class="container">
     <div class="select">
       <select>
@@ -28,7 +25,7 @@
   select {
     font-family: Arial;
     appearance: none;
-    outline: 1px $red;
+    outline: 0.5px $red;
     border-color: $red;
     flex: 1;
     padding: 0 1em;
@@ -48,7 +45,7 @@
   width: 15em;
   height: 2em;
   overflow: hidden;
-  box-shadow: 0 1px 1px rgb(59, 59, 59);
+  box-shadow: 0 0.5px 1px rgb(59, 59, 59);
 }
 
 .select::after {
