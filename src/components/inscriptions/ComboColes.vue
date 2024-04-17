@@ -8,7 +8,8 @@ const allSchools = ref([]);
 const fetchColes = ref(null);
 
 const fetchSchools = async () => {
-    const response = await axios.get("http://localhost:8080/api/v1/schools");
+    // const response = await axios.get("http://localhost:8080/api/v1/schools");
+    const response = await axios.get("VITE_API_ENDPOINT_SCHOOLS");
     allSchools.value = response.data;
     console.log(response.data);
 }

@@ -51,6 +51,30 @@ const router = createRouter({
       component: () => import('../views/InscriptionsView3.vue')
       
     },
+    {
+      path: '/inscriptionPaso4',
+      name: 'inscriptionPaso4',
+      component: () => import('../views/InscriptionsView4.vue')
+      
+    },
+    {
+      path: '/inscriptionPaso5',
+      name: 'inscriptionPaso5',
+      component: () => import('../views/InscriptionsView5.vue')
+      
+    },
+    {
+      path: '/inscriptionPaso6',
+      name: 'inscriptionPaso6',
+      component: () => import('../views/InscriptionsView6.vue')
+      
+    },
+    {
+      path: '/inscriptionPaso7',
+      name: 'inscriptionPaso7',
+      component: () => import('../views/InscriptionsView7.vue')
+      
+    },
 
     {
       path: '/user',
