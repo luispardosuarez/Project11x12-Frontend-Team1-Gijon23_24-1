@@ -85,6 +85,7 @@ const formatDate = (dateString) => {
     font-family: Arial;
     font-size: medium;
     transition: background-color 0.3s;
+    text-align: left;
   }
 
   .option:hover {
