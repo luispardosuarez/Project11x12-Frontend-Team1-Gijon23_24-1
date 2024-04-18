@@ -4,13 +4,13 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import { ref, watch } from 'vue';
 import InputWeek from './InputWeek.vue';
 
-const startDate = ref(null);
-const endDate = ref(null);
+const start_date = ref(null);
+const end_date = ref(null);
 const weeks = ref([]);
 
-function weeksBetween(startDate, endDate) {
- const start = new Date(startDate);
- const end = new Date(endDate);
+function weeksBetween(start_date, end_date) {
+ const start = new Date(start_date);
+ const end = new Date(end_date);
 
  // Adjust start to be the first Monday
  while (start.getDay() !== 1) {
@@ -29,7 +29,7 @@ function weeksBetween(startDate, endDate) {
  return numberOfWeeks;
 }
 
-watch([startDate, endDate], ([newStart, newEnd]) => {
+watch([start_date, end_date], ([newStart, newEnd]) => {
  if (newStart && newEnd) {
     const numberOfWeeks = weeksBetween(newStart, newEnd);
     weeks.value = Array.from({ length: numberOfWeeks }, (_, i) => {
@@ -48,10 +48,10 @@ watch([startDate, endDate], ([newStart, newEnd]) => {
 <template>
  <div class="date-pickers-container">
     <label>Fecha inicial:
-      <VueDatePicker class="w-75" v-model="startDate"></VueDatePicker>
+      <VueDatePicker class="w-75" v-model="start_date"></VueDatePicker>
     </label>
     <label>Fecha final:
-      <VueDatePicker class="w-75" v-model="endDate"></VueDatePicker>
+      <VueDatePicker class="w-75" v-model="end_date"></VueDatePicker>
     </label>
     <InputWeek :weeks="weeks" />
  </div>

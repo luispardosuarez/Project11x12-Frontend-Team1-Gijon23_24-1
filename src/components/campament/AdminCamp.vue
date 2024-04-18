@@ -23,7 +23,7 @@ const showPopup = ref(false);
     background-color: rgba(217, 217, 217, 1);
   
     .popup {
-      width: 70%;
+      width: 50%;
       position: fixed;
       top: 50%;
       left: 50%;
@@ -36,12 +36,14 @@ const showPopup = ref(false);
       button {
         margin-top: 10px;
       }
+      
       .btn-close{
-        position: relative;
-        top: -54rem;
-        left: 53rem;
-        font-size: x-large;
-        color: $gray-form;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+    font-size: x-large;
+    color: #ECE7E7;
+        z-index: 9999; 
             }
     }
   }

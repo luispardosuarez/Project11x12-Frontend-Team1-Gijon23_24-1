@@ -2,22 +2,20 @@
 import { ref } from 'vue';
 import AddCampService from '../services/AddCampService';
 import SelectDate from './SelectDate.vue';
+
 const modalOpen = ref(false);
 
-const getSelectedDateRange = () => {
-
-	return { start_date: new Date(), end_date: new Date() };
-};
 const resetForm = () => {
-	camp_name.value = "";
-	price.value
-	start_date.value = "";
-	end_date.value = "";
-	schedule.value = "";
-	description.value = "";
-	img.value = "";
-	numdays.value = "";
-}
+    camp_name.value = "";
+    price.value = "";
+    start_date.value = "";
+    end_date.value = "";
+    schedule.value = "";
+    description.value = "";
+    selectedImg.value = [];
+    numdays.value = "";
+};
+
 const campId = ref();
 
 // Form data.
@@ -28,63 +26,35 @@ const schedule = ref("");
 const description = ref("");
 const selectedImg = ref([]);
 const numdays = ref("");
-
-// Handle MAIN IMAGE upload.
-const img = (event) => {
-	selectedImg.value = event.target.files[0];
-};
-
+const price = ref("");
 
 async function handlePost() {
-	try {
-		await createCamp();
-		await uploadImages(productId.value);
+    try {
+        const data = {
+            camp_name: camp_name.value,
+            price: price.value,
+            start_date: start_date.value,
+            end_date: end_date.value,
+            schedule: schedule.value,
+            description: description.value,
+            numdays: numdays.value,
+        };
 
-		console.log("Proceso completado exitosamente.");
-	} catch (error) {
-		console.error("Error al crear el producto", error);
+        const response = await AddCampService.createCamp(data);
+        campId.value = response.id; // Assuming the response contains an id for the newly created camp
 
-		deleteCamp(campId);
-	}
+        await AddCampService.addPrice(campId.value, price.value);
+        console.log("Proceso completado exitosamente.");
+        resetForm();
+    } catch (error) {
+        console.error("Error al crear el campamento", error);
+    }
 }
 
-async function createCamp() {
-	const data = {
-		camp_name: camp_name.value,
-		price: price.value,
-		categoryId: categoryId.value,
-		productDescription: productDescription.value,
-		start_date: start_date.value,
-		end_date: end_date.value,
-		schedule: schedule.value,
-		description: description.value,
-		selectedImg: img.value,
-		numdays: numdays.value,
-
-
-	}
-
-
-
-console.log(data);const submitForm = async () => {
- const data = prepareData(); // Prepare your data
-
- try {
-    const response = await AddCampService.createCamp(data); // Use the service method
-    productId.value = response.id; // Assuming the response contains the ID directly
-    console.log(productId);
- } catch (error) {
-    console.error("Error al crear el producto:", error);
-    throw error;
- }
-};
-
-}
 const closeModal = () => {
-	modalOpen.value = false;
-	emit("close");
+    modalOpen.value = false;
+    emit("close");
 };
-
 </script>
 <template>
 
@@ -124,7 +94,7 @@ const closeModal = () => {
 			</div>
 			<div class=" clearfix">
 				<div class="d-grid gap-2">
-					<button class="btn btn-danger" type="button" @click="submitForm"> Añadir Campamento</button>
+					<button class="btn btn-danger" type="button" @click="handlePost"> Añadir Campamento</button>
 				</div>
 			</div>
 		</div>

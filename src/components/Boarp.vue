@@ -2,7 +2,7 @@
     <div class="container_admin">
         <div class="container_btn">
             <div class="btn">Becados</div>
-            <div class="btn">Campamentos</div>
+            <router-link class="btn" to="/camp">Campamentos</router-link>
             <div class="btn">Inscritos</div>
         </div>
         <div class="image"><img src="../assets/img/11x12.jpg" alt="11x12"></div>
