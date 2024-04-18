@@ -1,6 +1,6 @@
 <script setup>
 
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { useRoute, useRouter } from "vue-router";
 import { usescholarshipStore } from "@/stores/scholarship";
 
@@ -36,8 +36,8 @@ const deleteScholarship = async (id) => {
 
 scholarship()
 
-// Funcionalidad paginacion
-const itemsPerPage = ref(6); 
+
+const itemsPerPage = ref(8); 
 const currentPage = ref(1);
 
 const totalPages = computed(() => Math.ceil(dniList.value.length / itemsPerPage.value));

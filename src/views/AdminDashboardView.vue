@@ -1,7 +1,9 @@
 <script setup>
+import VistaAdminBeca from '@/components/AdminDashboard.vue/VistaAdminBeca.vue';
 import BecadosForm from '@/components/Becados/BecadosForm.vue';
 import Boarp from '@/components/Boarp.vue';
-import Table_Admi from '@/components/Table_Admi.vue';
+// import Table_Admi from '@/components/Table_Admi.vue';
+
 </script>
 
 <template>
@@ -19,7 +21,8 @@ import Table_Admi from '@/components/Table_Admi.vue';
         </div>
 
         <div class="table_cont_body">
-            <Table_Admi />
+            <!-- <Table_Admi /> -->
+          <VistaAdminBeca /> 
             <BecadosForm />
   
 
