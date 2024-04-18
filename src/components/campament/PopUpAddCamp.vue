@@ -3,6 +3,14 @@ import { ref } from 'vue';
 import AddCampService from '../services/AddCampService';
 import SelectDate from './SelectDate.vue';
 
+
+
+// Método para actualizar las fechas de inicio y fin
+const updateDates = ({ startDate, endDate }) => {
+ console.log("Recibiendo fechas:", { startDate, endDate });
+ start_date.value = startDate;
+ end_date.value = endDate;
+};
 const modalOpen = ref(false);
 
 const resetForm = () => {
@@ -66,7 +74,7 @@ const closeModal = () => {
 				<input type="text" class="form-control w-100 mb-3" aria-label="Sizing example input"
 					aria-describedby="inputGroup-sizing-lg" v-model="camp_name">
 			</label>
-			<SelectDate />
+			<SelectDate @update:dates="updateDates" />
 			<label>Horario:
 				<input type="text" class="form-control w-100 mb-3" v-model="schedule" aria-label="Sizing example input"
 					aria-describedby="inputGroup-sizing-lg">
@@ -80,8 +88,8 @@ const closeModal = () => {
 				<label>Tipo de Semana:
 					<select class="form-select" v-model="numdays" aria-label="Default select example">
 						<option value="1">Cantidad de días </option>
-						<option value="2">4 Días</option>
-						<option value="3">5 Días</option>
+						<option value="4">4 Días</option>
+						<option value="5">5 Días</option>
 					</select>
 				</label>
 				<label>Precio:
