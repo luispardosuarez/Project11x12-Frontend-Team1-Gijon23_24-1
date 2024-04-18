@@ -63,7 +63,7 @@ import axios from 'axios'
                 baseURL: uri,
                 withCredentials: true,
                 data: {
-                    dni: newValue // newValue, representa el nuevo valor que se quiere establecer para la variable o propiedad dni.
+                    dni: newValue 
                 }
             }
         

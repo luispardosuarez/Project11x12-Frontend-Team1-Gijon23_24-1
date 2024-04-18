@@ -23,12 +23,12 @@ const editScholarship = async (id, newValue) => {
     await scholarship()
 }
 
-const updateDNI = (dni, newValue) => {   //Esta funcion actualiza el valor del Dni
+const updateDNI = (dni, newValue) => {  
     dni.dni = newValue
 }
 
 const toggleEditMode = (dni,id) => {
-    dni.isEditing = !dni.isEditing; // Este  Activa o desactiva el modo de edición
+    dni.isEditing = !dni.isEditing;
 }
 
 
