@@ -15,8 +15,25 @@ const dniList = ref([])
 
 async function scholarship () {
     dniList.value = await store.scholarship()
-    console.log(dniList.value);
+    dniList.value = dniList.value.map(dni => ({ ...dni, isEditing: false }))
 }
+
+const editScholarship = async (id, newValue) => {
+    await store.editDNI(id, newValue)
+    await scholarship()
+}
+
+const updateDNI = (dni, newValue) => {   //Esta funcion actualiza el valor del Dni
+    dni.dni = newValue
+}
+
+const toggleEditMode = (dni,id) => {
+    dni.isEditing = !dni.isEditing; // Este  Activa o desactiva el modo de edición
+}
+
+
+
+
 
 const deleteScholarship = async (id) => {
 
@@ -44,11 +61,13 @@ scholarship()
         <table>
 
             <tr v-for="dni in dniList" :key="dni.dni">
-                <td> {{ dni.dni }}
+                <td> 
+                    <span v-if="!dni.isEditing">{{ dni.dni }}</span>  
+                    <input v-else :value="dni.dni" @keyup.enter="updateDNI(dni, $event.target.value)" @blur="editScholarship(dni.id, dni.dni)" />
             
 
                     <img src="../assets/icons/delete.svg" alt=""  @click="deleteScholarship(dni.id)">
-                        <img src="../assets/icons/edit.svg" alt="">
+                        <img src="../assets/icons/edit.svg" alt="" @click="toggleEditMode(dni)">
 
                 </td>
 
