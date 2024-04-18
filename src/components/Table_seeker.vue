@@ -8,7 +8,7 @@
         <div class="center">
             <div class="temp_box">
                 <input type="text" id="dni_pas" placeholder="Buscar DNI">
-                <label>🔍</label>
+                <label>🔍</label> 
             </div>
         </div>
     </div>
@@ -24,10 +24,9 @@
             display: flex;
             align-items: center;
             position: relative;
-           
         }
 
-        .temp_box label {
+        .temp_box label{
             position: absolute;
             left: 200px;
             filter: grayscale(1);
