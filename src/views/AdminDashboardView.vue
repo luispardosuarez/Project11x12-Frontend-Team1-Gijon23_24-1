@@ -1,5 +1,5 @@
 <script setup>
-import VistaAdminBeca from '@/components/AdminDashboard.vue/VistaAdminBeca.vue';
+import VistaAdminBeca from '@/components/AdminDashboard/VistaAdminBeca.vue';
 import BecadosForm from '@/components/Becados/BecadosForm.vue';
 import Boarp from '@/components/Boarp.vue';
 // import Table_Admi from '@/components/Table_Admi.vue';
