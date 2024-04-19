@@ -54,5 +54,37 @@ import axios from 'axios'
         }
         }
 
-    return { user, scholarship, deleteDNI }
+
+        const editDNI = async (id, newValue) => {
+            const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
+        
+            isLoading.value = true
+            const options = {
+                baseURL: uri,
+                withCredentials: true,
+                data: {
+                    dni: newValue 
+                }
+            }
+        
+            try {
+                const response = await axios.put(`${uri}/${id}`, options.data)
+        
+                const status = response.status
+        
+                if (status === 200) {
+                    await scholarship()
+                    return true
+                }
+            } catch (error) {
+                console.error('Error Editing dni:', error);
+            } finally {
+                isLoading.value = false
+            }
+        }
+    
+
+
+
+    return { user, scholarship, deleteDNI, editDNI }
 })

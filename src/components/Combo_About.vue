@@ -65,6 +65,7 @@
     cursor: pointer;
     color: $black;
     background-color: $gray-checkbox;
+    font-size: xx-smal;
     transition: background-color 0.3s;
   }
 
