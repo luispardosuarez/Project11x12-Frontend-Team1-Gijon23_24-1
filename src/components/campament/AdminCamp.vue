@@ -1,13 +1,15 @@
 <script setup>
 import { ref } from 'vue';
 import PopUpAddCamp from './PopUpAddCamp.vue';
+import TableCamps from './TableCamps.vue';
 
 const showPopup = ref(false);
 </script>
 
 <template>
+  <TableCamps/>
     <div class="admin-panel">
-      <button class="add-button btn btn-danger" @click="showPopup = true">Añadir Campamento</button>
+      <button class="add-button " @click="showPopup = true">Añadir Campamento</button>
       
       <div v-if="showPopup" class="popup">
        <PopUpAddCamp/>
@@ -20,7 +22,19 @@ const showPopup = ref(false);
   
   <style lang="scss">
   .admin-panel {
-    background-color: rgba(217, 217, 217, 1);
+    
+  font-family: Arial;
+  display: flex;
+  flex-direction: column;
+  background-color: $gray-form;
+  padding: 1%;
+
+ 
+  .add-button{
+        color: white;
+        background-color: $red;
+        border: none;
+    }
   
     .popup {
       width: 50%;
@@ -47,5 +61,10 @@ const showPopup = ref(false);
             }
     }
   }
+  
+  
+
+   
+  
   </style>
   
