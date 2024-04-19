@@ -3,6 +3,7 @@
 import { ref } from "vue"
 import { useRoute, useRouter } from "vue-router";
 import { usescholarshipStore } from "@/stores/scholarship";
+import { onMounted } from 'vue';
 
 const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
 
@@ -11,7 +12,7 @@ const route = useRoute()
 const router = useRouter()
 const store = usescholarshipStore()
 
-const dniList = ref([])
+const dniList = store.dniList
 
 async function scholarship () {
     dniList.value = await store.scholarship()
@@ -20,7 +21,6 @@ async function scholarship () {
 
 const editScholarship = async (id, newValue) => {
     await store.editDNI(id, newValue)
-    await scholarship()
 }
 
 const updateDNI = (dni, newValue) => {  
@@ -30,8 +30,6 @@ const updateDNI = (dni, newValue) => {
 const toggleEditMode = (dni,id) => {
     dni.isEditing = !dni.isEditing;
 }
-
-
 
 
 
@@ -45,13 +43,15 @@ const deleteScholarship = async (id) => {
     const isDeleted = await store.deleteDNI(id)
 
     if (isDeleted) {
-        dniList.value = dniList.value.filter(item => item.id !== id)
+        store.dniList.value = store.dniList.value.filter(item => item.id !== id)
     } else {
         console.error('No se pudo borrar el registro');
     }
 }
 
-scholarship()
+onMounted(async () => {
+    await scholarship();
+});
 
 </script>
 
@@ -60,7 +60,7 @@ scholarship()
         <h4>Becados</h4>
         <table>
 
-            <tr v-for="dni in dniList" :key="dni.dni">
+            <tr v-for="dni in store.dniList" :key="dni.dni">
                 <td> 
                     <span v-if="!dni.isEditing">{{ dni.dni }}</span>  
                     <input v-else :value="dni.dni" @keyup.enter="updateDNI(dni, $event.target.value)" @blur="editScholarship(dni.id, dni.dni)" />

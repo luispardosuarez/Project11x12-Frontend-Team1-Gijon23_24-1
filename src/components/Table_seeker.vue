@@ -1,5 +1,23 @@
 <script setup>
 
+import { ref, computed } from 'vue';
+import { usescholarshipStore } from "@/stores/scholarship";
+import { watchEffect } from 'vue';
+
+const store = usescholarshipStore();
+const searchQuery = ref('');
+
+const filteredDniList = computed(() => {
+    watchEffect(() => {
+ console.log(filteredDniList.value);
+});
+    const dniList = store.dniList.value || [];
+    return dniList.filter(dni => String(dni).includes(searchQuery.value));
+
+  
+});
+
+
 </script>
 
 <template>
@@ -7,9 +25,13 @@
     <div class="contain">
         <div class="center">
             <div class="temp_box">
-                <input type="text" id="dni_pas" placeholder="Buscar DNI">
+                <input type="text" id="dni_pas" placeholder="Buscar DNI" v-model="searchQuery">
                 <label>🔍</label> 
             </div>
+
+            <ul>
+        <li v-for="dni in filteredDniList" :key="dni">{{ dni }}</li>
+        </ul>
         </div>
     </div>
 

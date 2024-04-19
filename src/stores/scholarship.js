@@ -3,9 +3,8 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 
     export const usescholarshipStore = defineStore('scholarship', () => {
-    const user = reactive({
-        dni: ''
-    })
+
+        const dniList = ref([])
 
     const isLoading = ref(false)
 
@@ -23,7 +22,10 @@ import axios from 'axios'
     
             const response = await axios.get(`${uri}`, options)
             const data = await response.data
-            isLoading.value = false
+            dniList.value = data
+            console.log(dniList.value)
+
+            /* isLoading.value = false */
             return data;
         } catch (error) {
             throw new Error('Error Loading API: ' + error)
@@ -85,5 +87,5 @@ import axios from 'axios'
 
 
 
-    return { user, scholarship, deleteDNI, editDNI }
+    return { dniList, scholarship, deleteDNI, editDNI }
 })
