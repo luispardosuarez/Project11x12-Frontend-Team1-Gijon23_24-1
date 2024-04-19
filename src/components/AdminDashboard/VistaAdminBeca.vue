@@ -15,8 +15,22 @@ const dniList = ref([])
 
 async function scholarship () {
     dniList.value = await store.scholarship()
-    console.log(dniList.value);
+    dniList.value = dniList.value.map(dni => ({ ...dni, isEditing: false }))
 }
+
+const editScholarship = async (id, newValue) => {
+    await store.editDNI(id, newValue)
+    await scholarship()
+}
+
+const updateDNI = (dni, newValue) => {  
+    dni.dni = newValue
+}
+
+const toggleEditMode = (dni,id) => {
+    dni.isEditing = !dni.isEditing;
+}
+
 
 const deleteScholarship = async (id) => {
 
@@ -74,18 +88,18 @@ const paginatedDnis = computed(() => {
         <h4>Becados</h4>
         <table>
 
-         <tr v-for="dni in paginatedDnis" :key="dni.dni">
-
-           <td> {{ dni.dni }}
+            <tr v-for="dni in paginatedDnis" :key="dni.dni">
+                <td> 
+                    <span v-if="!dni.isEditing">{{ dni.dni }}</span>  
+                    <input v-else :value="dni.dni" @keyup.enter="updateDNI(dni, $event.target.value)" @blur="editScholarship(dni.id, dni.dni)" />
             
 
-              <img src="../assets/icons/delete.svg" alt=""  @click="deleteScholarship(dni.id)">
-                 <img src="../assets/icons/edit.svg" alt="">
+                    <img src="../../assets/icons/delete.svg" alt=""  @click="deleteScholarship(dni.id)">
+                        <img src="../../assets/icons/edit.svg" alt="" @click="toggleEditMode(dni)">
 
                 </td>
 
             </tr>
-
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item" @click="prevPage" >

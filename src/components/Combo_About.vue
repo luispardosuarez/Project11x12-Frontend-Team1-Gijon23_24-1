@@ -29,7 +29,6 @@
     padding: 0 1em;
     color: $black;
     background-color: $gray-checkbox;
-    font-size: small;                 
     cursor: pointer;
 
     select::-ms-expand {

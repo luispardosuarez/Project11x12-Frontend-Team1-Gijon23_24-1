@@ -32,9 +32,6 @@ const toggleEditMode = (dni,id) => {
 }
 
 
-
-
-
 const deleteScholarship = async (id) => {
 
     const confirmation = window.confirm('¿Estás seguro de querer borrar este DNI?');
