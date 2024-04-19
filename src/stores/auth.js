@@ -12,6 +12,8 @@ export const useAuthStore = defineStore('auth', () => {
 
     const isLoading = ref(false)
 
+    const isAuthenticated = computed(() => user.isAuthenticated)
+
     const login = async (dataConnection) => {
 
         const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
@@ -30,13 +32,15 @@ export const useAuthStore = defineStore('auth', () => {
             user.username = data.username
             user.roles = data.roles
             isLoading.value = false
-            return true
+            return {success: true}
         } catch (error) {
-            throw new Error('Error Loading API: ' + error)
+            isLoading.value = false
+            return {success: false, error: 'Error al autenticar: ' + error.message}
+            
         }
 
 
     }
 
-    return { user, login }
+    return { user, login, isAuthenticated, isLoading }
 })
