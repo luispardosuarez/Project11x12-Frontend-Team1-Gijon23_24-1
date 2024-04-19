@@ -1,9 +1,8 @@
 <script setup>
 
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { useRoute, useRouter } from "vue-router";
 import { usescholarshipStore } from "@/stores/scholarship";
-import { onMounted } from 'vue';
 
 const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
 
@@ -12,7 +11,7 @@ const route = useRoute()
 const router = useRouter()
 const store = usescholarshipStore()
 
-const dniList = store.dniList
+const dniList = ref([])
 
 async function scholarship () {
     dniList.value = await store.scholarship()
@@ -21,6 +20,7 @@ async function scholarship () {
 
 const editScholarship = async (id, newValue) => {
     await store.editDNI(id, newValue)
+    await scholarship()
 }
 
 const updateDNI = (dni, newValue) => {  
@@ -30,7 +30,6 @@ const updateDNI = (dni, newValue) => {
 const toggleEditMode = (dni,id) => {
     dni.isEditing = !dni.isEditing;
 }
-
 
 
 const deleteScholarship = async (id) => {
@@ -43,15 +42,44 @@ const deleteScholarship = async (id) => {
     const isDeleted = await store.deleteDNI(id)
 
     if (isDeleted) {
-        store.dniList.value = store.dniList.value.filter(item => item.id !== id)
+        dniList.value = dniList.value.filter(item => item.id !== id)
     } else {
         console.error('No se pudo borrar el registro');
     }
 }
 
-onMounted(async () => {
-    await scholarship();
+scholarship()
+
+
+const itemsPerPage = ref(8); 
+const currentPage = ref(1);
+
+const totalPages = computed(() => Math.ceil(dniList.value.length / itemsPerPage.value));
+
+const nextPage = () => {
+ if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+ }
+};
+
+const prevPage = () => {
+ if (currentPage.value > 1) {
+    currentPage.value--;
+ }
+};
+
+const goToPage = (page) => {
+ if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page;
+ }
+};
+const paginatedDnis = computed(() => {
+ const start = (currentPage.value - 1) * itemsPerPage.value;
+ const end = start + itemsPerPage.value;
+ return dniList.value.slice(start, end);
 });
+
+
 
 </script>
 
@@ -60,33 +88,33 @@ onMounted(async () => {
         <h4>Becados</h4>
         <table>
 
-            <tr v-for="dni in store.dniList" :key="dni.dni">
+            <tr v-for="dni in paginatedDnis" :key="dni.dni">
                 <td> 
                     <span v-if="!dni.isEditing">{{ dni.dni }}</span>  
                     <input v-else :value="dni.dni" @keyup.enter="updateDNI(dni, $event.target.value)" @blur="editScholarship(dni.id, dni.dni)" />
             
+
+                    <img src="../../assets/icons/delete.svg" alt=""  @click="deleteScholarship(dni.id)">
+                        <img src="../../assets/icons/edit.svg" alt="" @click="toggleEditMode(dni)">
+
                 </td>
 
-                <img src="../assets/icons/delete.svg" alt=""  @click="deleteScholarship(dni.id)">
-                <img src="../assets/icons/edit.svg" alt="" @click="toggleEditMode(dni)">
-
             </tr>
-
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item">
+                    <li class="page-item" @click="prevPage" >
                         <a class="page-link" href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
+           <li class="page-item" v-for="page in totalPages" :key="page" @click="goToPage(page)">
+          <a class="page-link" href="#">{{ page }}</a>
+        </li>
+        <li class="page-item" @click="nextPage">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
                 </ul>
             </nav>
 

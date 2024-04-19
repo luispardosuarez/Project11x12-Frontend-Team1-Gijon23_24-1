@@ -17,6 +17,7 @@ const authStore = useAuthStore();
 const pasoActual = ref(1);
 provide('pasoActual', pasoActual);
 
+
 </script>
 <template>
   <main>
@@ -35,7 +36,7 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h2>Campamento Verano</h2>
+            <h2>{{this.$route.params.campamentoName}}</h2>
           </div>
           <InscripcionPaso1 />
           <div class="Siguiente">

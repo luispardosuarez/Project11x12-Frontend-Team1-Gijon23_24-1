@@ -24,8 +24,6 @@ import axios from 'axios'
             const data = await response.data
             dniList.value = data
             console.log(dniList.value)
-
-            /* isLoading.value = false */
             return data;
         } catch (error) {
             throw new Error('Error Loading API: ' + error)
