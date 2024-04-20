@@ -42,8 +42,9 @@ const editCamp = (camp) => {
       <tr v-for="camp in campsList" :key="camp.id">
         <td>
           {{ camp.camp_name }}
-          <button @click="deleteCamp(camp.id)">Borrar</button>
-          <button @click="editCamp(camp)">Editar</button>
+          <img src="../../assets/icons/delete.svg" alt="borrar"  @click="deleteCamp(camp.id)">
+                        <img src="../../assets/icons/edit.svg" alt="editar" @click="editCamp(camp)">
+       
         </td>
       </tr>
     </table>
@@ -56,7 +57,7 @@ const editCamp = (camp) => {
   height: auto;
   background-color: $gray-form;
   padding: 2% 2%;
-
+width: 100%;
   h4 {
     font-weight: 650;
     font-family: Arial, Helvetica, sans-serif;

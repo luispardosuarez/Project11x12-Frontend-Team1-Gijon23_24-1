@@ -18,7 +18,7 @@ export const useCampStore = defineStore('campsList', () => {
 
  const editCamp = async (camp) => {
     const updatedCamp = await service.editCamp(camp);
-    const index = camps.value.findIndex(c => c.id === camp.id);
+    const index = campsList.value.findIndex(c => c.id === camp.id);
     if (index !== -1) {
       campsList.value[index] = updatedCamp;
     }
