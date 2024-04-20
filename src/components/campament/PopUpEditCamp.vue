@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useCampStore } from '../../stores/campStore.js';
-
+import SelectDate from './SelectDate.vue';
 const store = useCampStore();
 const modalOpen = ref(false);
 const camp = ref(null);
@@ -81,6 +81,7 @@ const closeModal = () => {
 	.form {
 		height: 100%;
 		width: 50%;
+		z-index: 100!important;
 	}
 }
 </style>
