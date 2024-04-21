@@ -1,8 +1,7 @@
-
+import AddCampService from '@/components/services/AddCampService';
 import { defineStore } from 'pinia';
-import PriceService from '../components/services/PriceService';
 
-export const usePriceStore = defineStore({
+export const useAddCampService= defineStore({
   id: 'price',
   state: () => ({
     prices: [],
@@ -12,7 +11,7 @@ export const usePriceStore = defineStore({
   actions: {
     async addPrice(campId, price) {
       try {
-        const response = await PriceService.addPrice(campId, price);
+        const response = await AddCampService.addPrice(campId, price);
         // Manejar la respuesta si es necesario
       } catch (error) {
         console.error("Error al cargar el precio:", error);
@@ -20,7 +19,7 @@ export const usePriceStore = defineStore({
     },
     async updatePrice(campId, data) {
       try {
-        const response = await PriceService.updatePrice(campId, data);
+        const response = await AddCampService.updatePrice(campId, data);
         // Manejar la respuesta si es necesario
       } catch (error) {
         console.error("Error al actualizar el precio:", error);

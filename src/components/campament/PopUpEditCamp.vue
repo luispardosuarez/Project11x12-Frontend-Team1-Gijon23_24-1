@@ -2,9 +2,14 @@
 import { ref } from 'vue';
 import { useCampStore } from '../../stores/campStore.js';
 import SelectDate from './SelectDate.vue';
+
+const props = defineProps({
+ camp: Object, // Asegúrate de que el tipo de dato coincida con lo que esperas recibir
+});
+
 const store = useCampStore();
 const modalOpen = ref(false);
-const camp = ref(null);
+const camp = ref(props.camp);
 
 const emit = defineEmits(['close']);
 
@@ -31,28 +36,28 @@ const closeModal = () => {
 		<div class="form d-flex flex-column modal-camp" @submit.prevent="handleEdit">
 			<label>Nombre Campamento:
 				<input type="text" class="form-control w-100 mb-3" aria-label="Sizing example input"
-					aria-describedby="inputGroup-sizing-lg" v-model="camp_name">
+					aria-describedby="inputGroup-sizing-lg" v-model="camp.camp_name">
 			</label>
 			<SelectDate @update:dates="updateDates" />
 			<label>Horario:
-				<input type="text" class="form-control w-100 mb-3" v-model="schedule" aria-label="Sizing example input"
+				<input type="text" class="form-control w-100 mb-3" v-model="camp.schedule" aria-label="Sizing example input"
 					aria-describedby="inputGroup-sizing-lg">
 			</label>
 			<label>
 				Descripción:
-				<textarea class="form-control w-100" v-model="description" aria-label="Sizing example input"
+				<textarea class="form-control w-100" v-model="camp.description" aria-label="Sizing example input"
 					aria-describedby="inputGroup-sizing-xlg"></textarea>
 			</label>
 			<div class="d-flex justify-content-between mb-3">
 				<label>Tipo de Semana:
-					<select class="form-select" v-model="numdays" aria-label="Default select example">
+					<select class="form-select" v-model="camp.numdays" aria-label="Default select example">
 						<option value="1">Cantidad de días </option>
 						<option value="4">4 Días</option>
 						<option value="5">5 Días</option>
 					</select>
 				</label>
 				<label>Precio:
-					<input type="text" v-model="priceData" class="form-control w-50"/>
+					<input type="text" v-model="camp.priceData" class="form-control w-50"/>
 				</label>
 			</div>
 			<div class="input-group">

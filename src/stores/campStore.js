@@ -1,23 +1,22 @@
-import CampService from "@/components/services/CampService";
+import AddCampService from "@/components/services/AddCampService";
 import { defineStore } from 'pinia';
 import { ref } from "vue";
 
 export const useCampStore = defineStore('campsList', () => {
  const campsList = ref([]);
- const service = new CampService();
 
  const fetchCamps = async () => {
-    const data = await service.getCamps();
+    const data = await AddCampService.getCamp(); // Asegúrate de que el método exista en AddCampService
     campsList.value = data;
  };
 
  const deleteCamp = async (campId) => {
-    await service.deleteCamp(campId);
+    await AddCampService.deleteCamp(campId);
     campsList.value = camps.value.filter(camp => camp.id !== campId);
  };
 
  const editCamp = async (camp) => {
-    const updatedCamp = await service.editCamp(camp);
+    const updatedCamp = await AddCampService.editCamp(camp);
     const index = campsList.value.findIndex(c => c.id === camp.id);
     if (index !== -1) {
       campsList.value[index] = updatedCamp;
