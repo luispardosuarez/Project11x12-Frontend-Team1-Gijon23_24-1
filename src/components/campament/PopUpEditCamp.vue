@@ -4,7 +4,7 @@ import { useCampStore } from '../../stores/campStore.js';
 import SelectDate from './SelectDate.vue';
 
 const props = defineProps({
- camp: Object, // Asegúrate de que el tipo de dato coincida con lo que esperas recibir
+  camp: Object, // Asegúrate de que el tipo de dato coincida con lo que esperas recibir
 });
 
 const store = useCampStore();
@@ -14,21 +14,24 @@ const camp = ref(props.camp);
 const emit = defineEmits(['close']);
 
 const handleEdit = async () => {
- try {
-    await store.editCamp(camp.value);
+  try {
+    console.log('Datos del campamento a editar:', camp.value);
+    await store.editCamp(camp.value.id, camp.value);
     modalOpen.value = false;
     emit('close');
- } catch (error) {
+  } catch (error) {
     console.error("Error al editar el campamento", error);
- }
+  }
 };
+
 const handleUpdateDates = ({ startDate, endDate }) => {
- // Aquí puedes manejar las fechas actualizadas, por ejemplo, actualizando un estado local o enviando una solicitud a una API
- console.log('Fechas actualizadas:', { startDate, endDate });
+  // Aquí puedes manejar las fechas actualizadas, por ejemplo, actualizando un estado local o enviando una solicitud a una API
+  console.log('Fechas actualizadas:', { startDate, endDate }); // Agregar console.log para verificar las fechas actualizadas
 };
+
 const closeModal = () => {
- modalOpen.value = false;
- emit('close');
+  modalOpen.value = false;
+  emit('close');
 };
 </script>
 

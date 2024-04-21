@@ -45,9 +45,16 @@ async getCamp(data)  {
      throw error;
   }
  },
- 
- async editCamp(campId, data)  {
-  try {
+ async editCamp(campId, camp) {
+   try {
+     const data = {
+       camp_name: camp.camp_name,
+       start_date: camp.start_date,
+       end_date: camp.end_date,
+       schedule: camp.schedule,
+       description: camp.description,
+       numdays: camp.numdays,
+     };
      const response = await axios.put(`${this.uri}/${campId}`, data, {
        headers: {
          "Content-Type": "application/json",
@@ -55,12 +62,12 @@ async getCamp(data)  {
        withCredentials: true,
      });
      return response.data;
-  } catch (error) {
-     console.error("Error al actualizar el campamento:", error);
+   } catch (error) {
+     console.error("Error al editar el campamento:", error);
      throw error;
-  }
+   }
  },
-
+ 
 
 //  const myHeaders = new Headers();
 //  myHeaders.append("Cookie", "JSESSIONID=1485ACC09FEDFBC10A123FC00CEB5F8B");
