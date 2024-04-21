@@ -10,18 +10,19 @@ export const useCampStore = defineStore('campsList', () => {
     campsList.value = data;
  };
 
- const deleteCamp = async (campId) => {
-    await AddCampService.deleteCamp(campId);
-    campsList.value = camps.value.filter(camp => camp.id !== campId);
+ const deleteCamp = async (id) => {
+    await AddCampService.deleteCamp(id);
+    campsList.value = camp.value.filter(camp => camp.id !== campId);
  };
 
- const editCamp = async (camp) => {
-    const updatedCamp = await AddCampService.editCamp(camp);
-    const index = campsList.value.findIndex(c => c.id === camp.id);
-    if (index !== -1) {
-      campsList.value[index] = updatedCamp;
-    }
- };
-
+const editCamp = async (campId, data) => {
+   try {
+      const response = await AddCampService.editCamp(campId, data);
+      // Manejar la respuesta
+   } catch (error) {
+      console.error("Error al editar el campamento:", error);
+      throw error;
+   }
+  };
  return { campsList, fetchCamps, deleteCamp, editCamp };
 });

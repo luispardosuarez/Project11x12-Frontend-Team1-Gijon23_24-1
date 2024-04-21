@@ -22,7 +22,10 @@ const handleEdit = async () => {
     console.error("Error al editar el campamento", error);
  }
 };
-
+const handleUpdateDates = ({ startDate, endDate }) => {
+ // Aquí puedes manejar las fechas actualizadas, por ejemplo, actualizando un estado local o enviando una solicitud a una API
+ console.log('Fechas actualizadas:', { startDate, endDate });
+};
 const closeModal = () => {
  modalOpen.value = false;
  emit('close');
@@ -38,7 +41,7 @@ const closeModal = () => {
 				<input type="text" class="form-control w-100 mb-3" aria-label="Sizing example input"
 					aria-describedby="inputGroup-sizing-lg" v-model="camp.camp_name">
 			</label>
-			<SelectDate @update:dates="updateDates" />
+			<SelectDate @update:dates="handleUpdateDates" />
 			<label>Horario:
 				<input type="text" class="form-control w-100 mb-3" v-model="camp.schedule" aria-label="Sizing example input"
 					aria-describedby="inputGroup-sizing-lg">

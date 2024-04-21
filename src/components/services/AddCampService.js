@@ -46,7 +46,7 @@ async getCamp(data)  {
   }
  },
  
- async updateCamp(campId, data)  {
+ async editCamp(campId, data)  {
   try {
      const response = await axios.put(`${this.uri}/${campId}`, data, {
        headers: {
@@ -61,6 +61,35 @@ async getCamp(data)  {
   }
  },
 
+
+//  const myHeaders = new Headers();
+//  myHeaders.append("Cookie", "JSESSIONID=1485ACC09FEDFBC10A123FC00CEB5F8B");
+ 
+//  const requestOptions = {
+//    method: "DELETE",
+//    headers: myHeaders,
+//    redirect: "follow"
+//  };
+ 
+//  try {
+//    const response = await fetch("http://localhost:8080/api/v1/camps/6", requestOptions);
+//    const result = await response.text();
+//    console.log(result)
+//  } catch (error) {
+//    console.error(error);
+//  };
+
+//VITE_API_ENDPOINT_CAMPS=http://localhost:8080/api/v1/camps
+
+ async deleteCamp(id) {
+    try {
+      await axios.delete(`${this.uri}/${id}`);
+      console.log("Campamento borrado exitosamente.");
+    } catch (error) {
+      console.error("Error al borrar el campamento:", error);
+      throw error;
+    }
+ },
 
 
  

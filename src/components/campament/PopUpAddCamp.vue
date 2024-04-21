@@ -51,7 +51,7 @@ async function handlePost() {
         const response = await AddCampService.createCamp(data);
         campId.value = response.id; // Assuming the response contains an id for the newly created camp
 
-        await AddCampService.addPrice(campId.value, price.value);
+        await AddCampService.createPrice(campId.value, price.value);
         console.log("Proceso completado exitosamente.");
         resetForm();
     } catch (error) {
