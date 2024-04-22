@@ -6,6 +6,7 @@ import { useAuthStore } from "@/stores/auth";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { provide } from "vue";
+import selectedCampStore from "@/stores/selectedCampStore";
 
 const router = useRouter();
 
@@ -13,6 +14,8 @@ const goStep2 = () => {
   router.push('/inscriptionPaso2');
 }
 const authStore = useAuthStore();
+
+const selectedCamp = selectedCampStore.state.selectedCamp;
 
 const pasoActual = ref(1);
 provide('pasoActual', pasoActual);
@@ -36,7 +39,8 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h2>{{this.$route.params.campamentoName}}</h2>
+            <!-- <h2>{{this.$route.params.campamentoName}}</h2> -->
+            <h2>{{selectedCamp}}</h2>
           </div>
           <InscripcionPaso1 />
           <div class="Siguiente">

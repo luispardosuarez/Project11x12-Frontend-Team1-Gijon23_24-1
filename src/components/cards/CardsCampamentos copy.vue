@@ -2,12 +2,10 @@
 import { defineProps, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
-import selectedCampStore from '@/stores/selectedCampStore';
 
 const router = useRouter();
 
 const redirectInscriptions = (campamentoName) => {
-  selectedCampStore.mutations.setSelectedCamp(campamentoName);
     router.push(`/inscription/${campamentoName}`);
   };
 
