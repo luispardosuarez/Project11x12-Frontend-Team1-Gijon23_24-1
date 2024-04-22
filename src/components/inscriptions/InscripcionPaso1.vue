@@ -1,6 +1,6 @@
 <script setup>
 import { useCampWeeksStore } from '@/stores/campWeeksStore';
-import { onMounted, ref, watchEffect } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 
 const store = useCampWeeksStore();
@@ -16,17 +16,19 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString('es-ES');
 };
 
-watchEffect(() => {
- if (selectedWeek.value) {
-    const selectedWeekData = weeks.value.find(week => week.id_week === selectedWeek.value);
+watch(selectedWeek, (newValue, oldValue) => {
+ if (newValue != null) {
+    const selectedWeekData = weeks.value.find(week => week.id_week === newValue);
     if (selectedWeekData) {
-      store.$patch({
-        selectedDateRange: {
+      store.setSelectedDateRange({
+      
           start: formatDate(selectedWeekData.start_date),
           end: formatDate(selectedWeekData.end_date),
-        },
+        
       });
     }
+ } else {
+  store.setSelectedDateRange(null);
  }
 });
 
