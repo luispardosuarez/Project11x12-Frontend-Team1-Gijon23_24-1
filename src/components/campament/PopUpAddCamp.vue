@@ -1,11 +1,13 @@
 <script setup>
+import { useCampStore } from '@/stores/campStore';
 import { ref } from 'vue';
 import { useImageStore } from '../../stores/imageStore';
 import AddCampService from '../services/AddCampService';
 import SelectDate from './SelectDate.vue';
-
 // Pinia store for images
 const imageStore = useImageStore();
+const store = useCampStore();
+const newCamp = ref({});
 
 // Método para actualizar las fechas de inicio y fin
 const updateDates = ({ startDate, endDate }) => {
@@ -23,7 +25,7 @@ const start_date = ref("");
 const end_date = ref("");
 const schedule = ref("");
 const description = ref("");
-const selectedImg = ref(null); // Cambiado a null para manejar la imagen
+const selectedImg = ref(null); 
 const numdays = ref("");
 const price = ref("");
 
@@ -41,9 +43,8 @@ function convertImageToBase64(file) {
 const handleImageChange = (event) => {
   selectedImg.value = event.target.files[0];
 };
-
 async function handlePost() {
-  try {
+ try {
     // Create a FormData object for the camp data (excluding image)
     const campData = {
       camp_name: camp_name.value,
@@ -67,9 +68,12 @@ async function handlePost() {
 
     console.log("Proceso completado exitosamente.");
     resetForm();
-  } catch (error) {
+
+    // Actualiza la lista de campamentos para incluir el nuevo campamento
+    await store.fetchCamps();
+ } catch (error) {
     console.error("Error al crear el campamento ", error);
-  }
+ }
 }
 
 function resetForm() {
