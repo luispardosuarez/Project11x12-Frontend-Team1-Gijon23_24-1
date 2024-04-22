@@ -12,6 +12,15 @@ export const useAuthStore = defineStore('auth', () => {
 
     const isLoading = ref(false)
 
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        user.username = parsedUser.username;
+        user.roles = parsedUser.roles;
+        user.isAuthenticated = parsedUser.isAuthenticated;
+    }
+ 
+
     const login = async (dataConnection) => {
 
         const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
@@ -30,11 +39,11 @@ export const useAuthStore = defineStore('auth', () => {
             user.username = data.username
             user.roles = data.roles
             isLoading.value = false
+            localStorage.setItem('user', JSON.stringify(user));
             return true
         } catch (error) {
             throw new Error('Error Loading API: ' + error)
         }
-
 
     }
 

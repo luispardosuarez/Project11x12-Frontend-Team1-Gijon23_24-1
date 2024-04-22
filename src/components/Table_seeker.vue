@@ -16,7 +16,6 @@ const filteredDniList = computed(() => {
 
 });
 
-
 const noResultsFound = computed(() => filteredDniList.value.length === 0);
 
 const editScholarship = async (id, newValue) => {
