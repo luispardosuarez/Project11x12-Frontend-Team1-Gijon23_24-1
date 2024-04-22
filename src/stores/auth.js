@@ -3,7 +3,6 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 
 export const useAuthStore = defineStore('auth', () => {
-
     const user = reactive({
         username: '',
         roles: '',
@@ -13,9 +12,7 @@ export const useAuthStore = defineStore('auth', () => {
     const isLoading = ref(false)
 
     const login = async (dataConnection) => {
-
         const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
-
         try {
             isLoading.value = true
             const options = {
@@ -23,7 +20,6 @@ export const useAuthStore = defineStore('auth', () => {
                 auth: dataConnection,
                 withCredentials: true
             }
-
             const response = await axios.get(`${uri}/login`, options)
             const data = await response.data
             user.isAuthenticated = true
@@ -34,9 +30,27 @@ export const useAuthStore = defineStore('auth', () => {
         } catch (error) {
             throw new Error('Error Loading API: ' + error)
         }
-
-
     }
 
-    return { user, login }
+    const logout = async () => {
+        try {
+            const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL;
+            await axios.post(`${uri}/logout`, {}, {
+                withCredentials: true, 
+            });
+            userLogout(); 
+            router.push({ path: '/' }); 
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
+    };
+
+    const userLogout = () => {
+        user.username = '';
+        user.roles = '';
+        user.isAuthenticated = false;
+
+    };
+
+    return { user, login, logout, userLogout }
 })
