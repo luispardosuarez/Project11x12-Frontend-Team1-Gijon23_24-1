@@ -40,7 +40,7 @@ provide('pasoActual', pasoActual);
         <div class="cuerpoInscripcion">
           <div class="campamento">
             <!-- <h2>{{this.$route.params.campamentoName}}</h2> -->
-            <h2>{{selectedCamp}}</h2>
+            <h2>Campamento {{selectedCamp}}</h2>
           </div>
           <InscripcionPaso1 />
           <div class="Siguiente">

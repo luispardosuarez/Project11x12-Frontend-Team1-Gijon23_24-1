@@ -33,7 +33,7 @@ fetchSchools();
 <style scoped lang="scss">
 @import "../../assets/scss/variables.scss";
 .container {
-  padding: 20px;
+  padding: 10px;
 
   select {
     font-family: Arial;
