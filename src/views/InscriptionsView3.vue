@@ -66,7 +66,7 @@ provide('pasoActual', pasoActual);
               <BotonSiguiente @goToNextStep="goStep4" />
             </div>
             <div class="Atras">
-              <BotonAtras @goToPreviusStep="goStep2" />
+              <!-- <BotonAtras @goToPreviusStep="goStep2" /> -->
             </div>
           </div>
         </div>

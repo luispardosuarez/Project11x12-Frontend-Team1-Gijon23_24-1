@@ -1,13 +1,14 @@
 <script setup>
 
-import { useSelectedParticipant } from '@/stores/SelectedParticipantStore';
+
+import { useSelectedParticipantStore } from '@/stores/selectedParticipantStore';
 import axios from 'axios';
 import { ref } from 'vue';
 
 
 const allParticipants = ref([]);
 const fetchParticipant = ref(null);
-const selectedParticipant = useSelectedParticipant();
+const selectedParticipantStore = useSelectedParticipantStore();
 
 const fetchParticipants = async () => {
     const response = await axios.get(import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS);
@@ -18,7 +19,10 @@ const fetchParticipants = async () => {
 fetchParticipants();
 
 const updateSelectedParticipant = (event) => {
- selectedParticipant.setSelectedParticipant(event.target.value);
+ const selectedParticipant = allParticipants.value.find(participant => participant.id_participant === event.target.value);
+ if (selectedParticipant) {
+    selectedParticipantStore.addSelectedParticipant(selectedParticipant); // Asegúrate de que estás utilizando la referencia correcta aquí
+ }
 };
 </script>
 <template>
@@ -31,6 +35,7 @@ const updateSelectedParticipant = (event) => {
       </option>
     </select>
   </div>
+  
 </div>
 </template>
 

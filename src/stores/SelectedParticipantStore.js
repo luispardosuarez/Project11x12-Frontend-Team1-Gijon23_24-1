@@ -1,14 +1,17 @@
 import { defineStore } from "pinia";
 
-export const useSelectedParticipant = defineStore({
+export const useSelectedParticipantStore = defineStore({
     id: 'participant',
     state:() => ({
-        selectedParticipant: null,
+        selectedParticipants: [],
     }),
 
     actions: {
-        setSelectedParticipant(participant) {
-            this.selectedParticipant = participant;
+        addSelectedParticipant(participant) {
+          this.selectedParticipants.push(participant);
         },
-    },
-});
+        clearSelectedParticipants() {
+          this.selectedParticipants = [];
+        }
+     }
+    });
