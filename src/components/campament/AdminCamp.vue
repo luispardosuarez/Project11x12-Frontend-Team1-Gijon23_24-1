@@ -24,11 +24,14 @@ const showPopup = ref(false);
   .admin-panel {
     
   font-family: Arial;
-  display: flex;
-  flex-direction: column;
+
+
   background-color: $gray-form;
   padding: 1%;
-
+  display: flex;
+    column-gap: 0.7%;
+    align-items: center;
+    justify-content: space-between;
  
   .add-button{
         color: white;

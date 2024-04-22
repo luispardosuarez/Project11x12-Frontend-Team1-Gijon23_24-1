@@ -1,16 +1,18 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useCampStore } from '../../stores/campStore.js';
 import SelectDate from './SelectDate.vue';
 
 const props = defineProps({
-  camp: Object, // Asegúrate de que el tipo de dato coincida con lo que esperas recibir
+ camp: Object,
+ showModal: Boolean, // Nueva propiedad para controlar la visibilidad
 });
 
 const store = useCampStore();
-const modalOpen = ref(false);
+const modalOpen = ref(props.showModal);
 const camp = ref(props.camp);
-
+const editCamp = ref(null); // Store a copy for modifications
+const selectedImg = ref(null); // Track selected image
 const emit = defineEmits(['close']);
 
 const handleEdit = async () => {
@@ -23,12 +25,32 @@ const handleEdit = async () => {
     console.error("Error al editar el campamento", error);
   }
 };
-
 const handleUpdateDates = ({ startDate, endDate }) => {
-  // Aquí puedes manejar las fechas actualizadas, por ejemplo, actualizando un estado local o enviando una solicitud a una API
-  console.log('Fechas actualizadas:', { startDate, endDate }); // Agregar console.log para verificar las fechas actualizadas
-};
+ 
+  editCamp.value.start_date = startDate;
+  editCamp.value.end_date = endDate;
 
+  console.log('Fechas actualizadas:', { startDate, endDate }); 
+};
+watch(
+ () => store.campsList,
+ (newCampsList) => {
+    campsList.value = newCampsList;
+ },
+ { deep: true }
+);
+function convertImageToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
+
+const handleImageChange = (event) => {
+  selectedImg.value = event.target.files[0];
+};
 const closeModal = () => {
   modalOpen.value = false;
   emit('close');
@@ -63,11 +85,11 @@ const closeModal = () => {
 					</select>
 				</label>
 				<label>Precio:
-					<input type="text" v-model="camp.priceData" class="form-control w-50"/>
+					<input type="text" v-model="camp.price" class="form-control w-50"/>
 				</label>
 			</div>
 			<div class="input-group">
-				<input type="file" class="form-control" id="inputGroupFile04" @change="img"
+				<input type="file" class="form-control" id="inputGroupFile04" @change="handleImageChange"
 					aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 			</div>
 			<div class=" clearfix">

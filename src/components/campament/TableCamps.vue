@@ -6,19 +6,17 @@ const store = useCampStore();
 const campsList = ref([]);
 
 
-// En TableCamps
-const selectedCamp = ref(null); // Añade esta línea para mantener el estado del campamento seleccionado
-
-const editCamp = (camp) => {
+const selectedCamp = ref(null); const editCamp = (camp) => {
  console.log('Intentando editar campamento:', camp);
- selectedCamp.value = camp; // Actualiza el estado del campamento seleccionado
- showPopup.value = true; // Abre el popup
+ selectedCamp.value = camp; 
+ showPopup.value = true; 
 };
-// Observa los cambios en store.campsList y actualiza campsList.value en consecuencia
+
+
 watch(
  () => store.campsList,
  (newCampsList) => {
-    console.log('store.campsList actualizado:', newCampsList); // Log para ver el nuevo estado de campsList
+    console.log('store.campsList actualizado:', newCampsList); 
     campsList.value = newCampsList;
  },
  { deep: true }
@@ -40,7 +38,6 @@ const deleteCamp = async (id) => {
 };
 
 const showPopup = ref(false);
-
 </script>
 
 <template>
@@ -51,17 +48,32 @@ const showPopup = ref(false);
         <td>
           {{ camp.camp_name }}
           <img src="../../assets/icons/delete.svg" alt="borrar" @click="deleteCamp(camp.id)">
-         <!-- En TableCamps -->
-<img src="../../assets/icons/edit.svg" alt="editar" @click="editCamp(camp)">
+          <img src="../../assets/icons/edit.svg" alt="editar" @click="editCamp(camp)">
         </td>
       </tr>
+      <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
     </table>
     <div v-if="showPopup" class="popup">
-  <!-- En TableCamps -->
-<PopUpEditCamp :camp="selectedCamp" v-if="showPopup" />
-      <button type="button" class="btn-close " aria-label="Close" @click="showPopup = false"></button>
-    </div>
-  </div>
+    <PopUpEditCamp :camp="selectedCamp" :showModal="showPopup" v-if="showPopup" />
+    <button type="button" class="btn-close " aria-label="Close" @click="showPopup = false"></button>
+ </div>
+      </div>
 </template>
 
 
