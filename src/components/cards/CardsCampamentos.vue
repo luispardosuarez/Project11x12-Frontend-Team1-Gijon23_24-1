@@ -1,5 +1,13 @@
 <script setup>
 import { defineProps, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+
+const router = useRouter();
+
+const redirectInscriptions = (campamentoName) => {
+    router.push(`/inscription/${campamentoName}`);
+  };
 
 const props = defineProps({
   campamento: Object,
@@ -26,15 +34,36 @@ const setColors = () => {
       navEventColor = '#F5D872';
       btnColor = '#F6FF90';
       break;
+    default:
+      colorFig = 'transparent'; 
+      navEventColor = 'transparent'; 
+      btnColor = 'transparent'; 
   }
 };
+
+const isFlipped = ref(false);
+
+const flipCard = (event) => {
+  const card = event.currentTarget.closest('.card');
+  const backFace = card.querySelector('.card__face--back');
+  isFlipped.value = !isFlipped.value;
+  if (isFlipped.value) {
+    backFace.style.backgroundColor = colorFig;
+  }
+};
+
 watch(() => props.campamento, setColors, { immediate: true });
+
+
 </script>
 
 <template>
-  <div class="card">
-    <div :style="'background-color: ' + colorFig" class="color_fig"></div>
-    <img :src="'/img/' + campamento.image" alt="Imagen de {{ campamento.name }}" />
+  <div id="card-container">
+  <div class="card" @click="flipCard">
+    <div :class="{ 'card__inner': true, 'is-flipped': isFlipped }">
+      <div class="card__face card__face--front">
+        <div class="color_fig" :style="{ backgroundColor: colorFig }"></div>
+    <img class="mainImg" :src="'/img/' + campamento.image" alt="Imagen de {{ campamento.name }}" />
 
     <div class="dates_event">
       <h5 :class="campamento.name === 'Navidad' ? 'navidad' : campamento.name === 'Verano' ? 'verano' : ''">{{
@@ -54,13 +83,27 @@ watch(() => props.campamento, setColors, { immediate: true });
         <p><img class="flag" src="../../assets/icons/flag.svg" alt=""> {{ campamento['date flag'] }} </p>
         <p><img class="flag" src="../../assets/icons/people.svg" alt=""> {{ campamento['date user'] }} </p>
         <p class="diferent">{{ campamento['date diner'] }}</p>
-        <button :style="'background-color: ' + btnColor" type="button" id="btn_ins">INSCRIBIRME</button>
+        <button :style="'background-color: ' + btnColor" type="button" id="btn_ins" @click="redirectInscriptions(campamento.name)">INSCRIBIRME</button>
+      </div>
+    </div>
+    </div>
+    <div class="card__face card__face--back">
+        <p>Más información</p>
+        <p class="descrip_events">{{ campamento['description'] }}</p>
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <style scoped lang="scss">
+
+#card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card {
   display: flex;
   width: 100%;
@@ -71,19 +114,21 @@ watch(() => props.campamento, setColors, { immediate: true });
   overflow: hidden;
 
   .color_fig {
-    width: 5vw;
-    height: 75%;
-    position: absolute;
-    border-radius: 0 0 10px 0;
-  }
+  width: 5vw;
+  height: 75%;
+  position: absolute;
+  border-radius: 0 0 10px 0;
+  top: 0; 
+  left: 0; 
+}
 
-  img {
-    width: 100.5%;
-    height: 64%;
+  .mainImg {
+    width: 95%;
+    height: 60%;
     z-index: 1;
-    padding: 10px 0 10px 16px;
-    object-fit: fill;
-    image-rendering: optimizeQuality;
+    float: right;
+    margin-left: auto;
+    object-fit: cover;
   }
 
   .dates_event {
@@ -118,7 +163,7 @@ watch(() => props.campamento, setColors, { immediate: true });
   }
 
   .descrip_events {
-    font-size: x-small;
+    font-size: small;
     text-align: center;
     padding-top: 7px;
     font-weight: 500;
@@ -128,25 +173,26 @@ watch(() => props.campamento, setColors, { immediate: true });
   .main_event {
     display: flex;
     justify-content: space-between;
-    padding: 0 5px;
+    width: 95%;
 
     .nav_event {
       width: 100%;
       display: flex;
       justify-content: space-around;
       gap: 14px;
-      align-items: baseline;
+      align-items: center;
       padding-right: 10px;
       font-weight: 600;
 
       .flag {
-        width: 39px;
-        image-rendering: optimizeSpeed;
+        width: 35px;
+        image-rendering: auto;
+        padding: 5px;
       }
 
       p {
         font-size: xx-small;
-        color: white;
+        color: white!important;;
         margin-bottom: 0;
       }
 
@@ -160,7 +206,7 @@ watch(() => props.campamento, setColors, { immediate: true });
         border-radius: 20px;
         border: none;
         color: white;
-        padding: 1em;
+        padding: 6px;
       }
     }
   }
@@ -180,6 +226,52 @@ watch(() => props.campamento, setColors, { immediate: true });
   padding-right: 45px;
 }
 
+.card__inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card__inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.card__face--front {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+.card__face--back {
+  background-color: inherit; 
+  transform: rotateY(180deg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 @media only screen and (max-width: 1258px) and (min-width: 649px) {
   .card {
     .main_event {
@@ -190,6 +282,7 @@ watch(() => props.campamento, setColors, { immediate: true });
 
         .flag {
           width: 24px;
+          image-rendering: auto;
         }
       }
     }
@@ -201,10 +294,13 @@ watch(() => props.campamento, setColors, { immediate: true });
     .main_event {
       padding: 0 4px;
 
+
       .nav_event {
         padding-top: 5px;
+
         .flag {
           width: 30px;
+          image-rendering: auto;
         }
       }
     }
@@ -218,8 +314,6 @@ watch(() => props.campamento, setColors, { immediate: true });
 
       .nav_event {
         padding-top: 5px;
-        .flag {
-        }
       }
     }
   }

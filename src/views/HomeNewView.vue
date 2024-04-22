@@ -1,10 +1,10 @@
 <script setup>
-import Home from "@/components/home/Home.vue";
+import HomeNew from '../components/home/HomeNew.vue';
 </script>
 
 <template>
   <main>
-    <Home />
+    <HomeNew />
   </main>
 </template>
 

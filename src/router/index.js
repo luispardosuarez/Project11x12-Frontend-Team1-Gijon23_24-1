@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+// import AdminBecadosView from '@/views/adminBecadosView.vue'
 
 
 const router = createRouter({
@@ -18,7 +19,12 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
-    {
+    //  {
+    //     path: '/admin',
+    //    name: 'admin',
+    //   component: AdminBecadosView,
+    // },
+ {
       path: '/login',
       name: 'login',
       // route level code-splitting
@@ -33,6 +39,48 @@ const router = createRouter({
       component: () => import('../views/RegisterView.vue')
       
     },
+    {
+      path: '/inscription/:campamentoName',
+      name: 'inscription',
+      component: () => import('../views/InscriptionsView.vue')
+      
+    },
+    {
+      path: '/inscriptionPaso2',
+      name: 'inscriptionPaso2',
+      component: () => import('../views/InscriptionsView2.vue')
+      
+    },
+    {
+      path: '/inscriptionPaso3',
+      name: 'inscriptionPaso3',
+      component: () => import('../views/InscriptionsView3.vue')
+      
+    },
+    {
+      path: '/inscriptionPaso4',
+      name: 'inscriptionPaso4',
+      component: () => import('../views/InscriptionsView4.vue')
+      
+    },
+    {
+      path: '/inscriptionPaso5',
+      name: 'inscriptionPaso5',
+      component: () => import('../views/InscriptionsView5.vue')
+      
+    },
+    {
+      path: '/inscriptionPaso6',
+      name: 'inscriptionPaso6',
+      component: () => import('../views/InscriptionsView6.vue')
+      
+    },
+    {
+      path: '/inscriptionPaso7',
+      name: 'inscriptionPaso7',
+      component: () => import('../views/InscriptionsView7.vue')
+      
+    },
 
     {
       path: '/user',
@@ -40,9 +88,32 @@ const router = createRouter({
       component: () => import('../views/UserDashboardView.vue')
       
     },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../views/AdminDashboardView.vue')
+      
+    },
 
+    {
+      path: '/add',
+      name: 'AddParticipant',
+      component: () => import('../views/AddParticipantView.vue')
+      
+    },
 
-
+    {
+      path: '/edit',
+      name: 'EditParticipant',
+      component: () => import('../views/EditParticipantView.vue')
+      
+    },
+    {
+      path: '/camp',
+      name: 'camp',
+      component: () => import('../views/AdminDashboardCampView.vue')
+      
+    },
   ]
 })
 

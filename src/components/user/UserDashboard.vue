@@ -1,13 +1,31 @@
 <script setup>
 
+import { useRouter } from 'vue-router';
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
+
+  const router = useRouter();
+
+  const redirectToAdd = () => {
+    router.push('/add');
+  };
+
+  const redirectToEdit = () => {
+    router.push('/edit');
+  };
+
+  const redirectToHome = () => {
+    router.push('/');
+  };
 
 </script>
 
 <template>
 
 <div class="userWelcome">
-
-    <h3>¡Hola, Menganito Fulanito de Tal!</h3>
+   
+    <h3>¡Hola, {{authStore.user.username}}!</h3>
     <img src="../../assets/img/11x12-horizontal.jpg">
 
 </div>
@@ -59,7 +77,7 @@
 
         <div class="participants">
             <h6>Participantes registrados</h6>
-            <button class="addParticipant">Añadir participante</button>
+            <button @click="redirectToAdd" class="addParticipant">Añadir participante</button>
         </div>
 
         <div id="registeredParticipant" class="registeredItem">
@@ -68,7 +86,7 @@
 
             <div class="participantIcons">
                 <img src="../../assets/icons/see.svg">
-                <img src="../../assets/icons/edit.svg">
+                <img src="../../assets/icons/edit.svg" @click="redirectToEdit">
                 <img src="../../assets/icons/delete.svg">
             </div>
 
@@ -83,7 +101,7 @@
 
         <div class="camps">
             <h6>Campamentos registrados</h6>
-            <button class="addCamp">Inscribirse</button>
+            <button @click="redirectToHome" class="addCamp">Inscribirse</button>
         </div>
 
         <div class="registeredCamp registeredItem">
@@ -136,7 +154,7 @@
         padding: 5px; 
         width: calc(100% - 30px); 
         margin-right: 10px; 
-        border: 1px solid $red;
+        border: 0.1px solid $red;
     }
 
     .telephone1 {
@@ -184,7 +202,7 @@
     display: flex;
     justify-content: space-between; 
     align-items: center; 
-    border: 1px solid $red;
+    border: 0.5px solid $red;
     margin-top: 30px;
     padding: 10px; 
 
