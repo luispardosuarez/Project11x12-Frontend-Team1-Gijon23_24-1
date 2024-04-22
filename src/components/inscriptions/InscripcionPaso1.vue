@@ -1,11 +1,12 @@
 <script setup>
 import { useCampWeeksStore } from '@/stores/campWeeksStore';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
 
 
 const store = useCampWeeksStore();
 const weeks = store.weeks;
 const selectedWeek = ref(null);
+
 onMounted(async () => {
   await store.fetchWeeks();
 });
@@ -14,6 +15,20 @@ const formatDate = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleDateString('es-ES');
 };
+
+watchEffect(() => {
+ if (selectedWeek.value) {
+    const selectedWeekData = weeks.value.find(week => week.id_week === selectedWeek.value);
+    if (selectedWeekData) {
+      store.$patch({
+        selectedDateRange: {
+          start: formatDate(selectedWeekData.start_date),
+          end: formatDate(selectedWeekData.end_date),
+        },
+      });
+    }
+ }
+});
 
 </script>
 <template>

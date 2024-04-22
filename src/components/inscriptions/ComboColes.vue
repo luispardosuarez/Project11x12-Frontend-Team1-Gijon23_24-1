@@ -8,8 +8,8 @@ const allSchools = ref([]);
 const fetchColes = ref(null);
 
 const fetchSchools = async () => {
-    // const response = await axios.get("http://localhost:8080/api/v1/schools");
-    const response = await axios.get("VITE_API_ENDPOINT_SCHOOLS");
+    
+    const response = await axios.get(import.meta.env.VITE_API_ENDPOINT_SCHOOLS);
     allSchools.value = response.data;
     console.log(response.data);
 }
@@ -22,8 +22,8 @@ fetchSchools();
     <!-- <label for="coles" id="coles">Selecciona colegio</label> -->
     <select v-model="fetchColes" id="comboColes">
       <option value="null">Seleccione colegios</option>
-      <option v-for="school in allSchools" v-bind:value="school.school_name" :key="school.id_schools" selected>
-        {{ school.school_name }}
+      <option v-for="school in allSchools" :key="school.id_schools" :value="school.school_name">
+        {{ school.schoolName }}
       </option>
     </select>
   </div>

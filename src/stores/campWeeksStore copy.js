@@ -1,15 +1,14 @@
+//copia guardada antes de añadir el alamacenamiento de la fecha seleccionada en el combobox
+
 import axios from "axios";
 import { defineStore } from "pinia";
 
 export const useCampWeeksStore = defineStore({
     id: 'campWeeks',
     state: () => ({
-       weeks: [],
-       selectedDateRange: null, 
+       weeks: [], 
     }),
-
 actions: {
-
     async fetchWeeks() {
         try {
         const response = await axios.get(import.meta.env.VITE_API_ENDPOINT_CAMPWEEKS);
