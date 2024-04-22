@@ -1,7 +1,9 @@
 <script setup>
+import VistaAdminBeca from '@/components/AdminDashboard/VistaAdminBeca.vue';
 import BecadosForm from '@/components/Becados/BecadosForm.vue';
 import Boarp from '@/components/Boarp.vue';
-import Table_Admi from '@/components/Table_Admi.vue';
+// import Table_Admi from '@/components/Table_Admi.vue';
+
 </script>
 
 <template>
@@ -9,8 +11,9 @@ import Table_Admi from '@/components/Table_Admi.vue';
   <main>
     <div class="admin_cont">
 
-      <div>
+      <div class="admin_init">
         <h1>¡Hola, Admin!</h1>
+        <Table_seeker />
       </div>
 
       <div class="cont_global">
@@ -19,16 +22,17 @@ import Table_Admi from '@/components/Table_Admi.vue';
         </div>
 
         <div class="table_cont_body">
-            <Table_Admi />
+            <!-- <Table_Admi /> -->
+          <VistaAdminBeca /> 
             <BecadosForm />
   
 
         </div>
- 
+
       </div>
     </div>
 
-<!-- admin@gijon11x12.com // AdminGijon11x12 -->
+    <!-- admin@gijon11x12.com // AdminGijon11x12 -->
 
   </main>
 
@@ -37,15 +41,19 @@ import Table_Admi from '@/components/Table_Admi.vue';
 <style lang="scss" scoped>
 .admin_cont {
   padding: 2% 3%;
-  h1 {
-    margin-bottom: 2%;
+
+  .admin_init {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
   }
 
   .cont_global {
     display: flex;
     justify-content: space-between;
 
-    .bar_lateral{
+    .bar_lateral {
       width: 23%;
     }
 
@@ -62,5 +70,3 @@ import Table_Admi from '@/components/Table_Admi.vue';
 
 }
 </style>
-
-
