@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+// import AdminBecadosView from '@/views/adminBecadosView.vue'
 
 
 const router = createRouter({
@@ -18,7 +19,12 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
-    {
+    //  {
+    //     path: '/admin',
+    //    name: 'admin',
+    //   component: AdminBecadosView,
+    // },
+ {
       path: '/login',
       name: 'login',
       // route level code-splitting
@@ -34,7 +40,7 @@ const router = createRouter({
       
     },
     {
-      path: '/inscription',
+      path: '/inscription/:campamentoName',
       name: 'inscription',
       component: () => import('../views/InscriptionsView.vue')
       
