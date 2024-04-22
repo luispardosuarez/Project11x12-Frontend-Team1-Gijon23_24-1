@@ -1,9 +1,11 @@
 <script setup>
+import { useSchoolStore } from "@/stores/schoolStore";
 import axios from "axios";
 import { ref } from "vue";
 
 const allSchools = ref([]);
 const fetchColes = ref(null);
+const schoolStore = useSchoolStore();
 
 const fetchSchools = async () => {
   const response = await axios.get(import.meta.env.VITE_API_ENDPOINT_SCHOOLS);
@@ -12,11 +14,15 @@ const fetchSchools = async () => {
 };
 
 fetchSchools();
+
+const updateSelectedSchool = (event) => {
+ schoolStore.setSelectedSchool(event.target.value);
+};
 </script>
 <template>
   <div class="container">
     <div class="select">
-      <select v-model="fetchColes" id="comboColes">
+      <select v-model="fetchColes" id="comboColes" @change="updateSelectedSchool">
         <option value="null">Seleccione colegios</option>
         <option
           v-for="school in allSchools"
