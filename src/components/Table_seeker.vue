@@ -7,11 +7,10 @@ import { watchEffect } from 'vue';
 const store = usescholarshipStore();
 const searchQuery = ref('');
 
-
 const showResults = computed(() => searchQuery.value.length > 0);
 
 
-const filteredDniList = computed(() => {
+const filteredDniList = computed(() => { 
     const dniList = store.dniList || [];
     return dniList.filter(dni => dni.dni.includes(searchQuery.value));
 
@@ -20,19 +19,14 @@ const filteredDniList = computed(() => {
 
 const noResultsFound = computed(() => filteredDniList.value.length === 0);
 
-
-
-
-
 const editScholarship = async (id, newValue) => {
     await store.editDNI(id, newValue);
-    // Actualizar el estado local
     const index = store.dniList.value.findIndex(dni => dni.id === id);
     if (index !== -1) {
         store.dniList.value[index].dni = newValue;
     }
+    searchQuery.value = '';
 }
-
 
 const updateDNI = (dni, newValue) => {  
     dni.dni = newValue
@@ -44,16 +38,13 @@ const toggleEditMode = (dni,id) => {
 
 
 const deleteScholarship = async (id) => {
-
-const confirmation = window.confirm('¿Estás seguro de querer borrar este DNI?');
-if (!confirmation) {
-    return;
-}
-
-const isDeleted = await store.deleteDNI(id);
-
+    const confirmation = window.confirm('¿Estás seguro de querer borrar este DNI?');
+    if (!confirmation) {
+        return;
+    }
+    const isDeleted = await store.deleteDNI(id);
     if (isDeleted) {
-        store.dniList.value = store.dniList.value.filter(item => item.id !== id);
+        store.deleteDNI(id);
     } else {
         console.error('No se pudo borrar el registro');
     }
@@ -61,11 +52,8 @@ const isDeleted = await store.deleteDNI(id);
 
 watchEffect(() => {
     console.log(store.dniList);
- console.log(filteredDniList.value);
+    console.log(filteredDniList.value);
 });
-
-
-
 
 </script>
 
@@ -74,18 +62,15 @@ watchEffect(() => {
     <div class="contain">
         <div class="center">
             <div class="temp_box">
-                <input type="text" id="dni_pas" placeholder="Buscar DNI" v-model="searchQuery">
+                <input type="text" id="dni_pas" placeholder="Buscar DNI" v-model="searchQuery" autocomplete="off" @keyup.enter="searchQuery.value = ''">
                 <label>🔍</label> 
             </div>
 
             <table class="table table-striped table-bordered" v-if="showResults">
-                <thead>
-                    <tr>
-                        <th>DNI: </th>
-                    </tr>
-                </thead>
+                
                 <tbody>
                     <tr v-for="dni in filteredDniList" :key="dni.id">
+                        
                         <td>
                             <span v-if="!dni.isEditing">{{ dni.dni }}</span>  
                     <input v-else :value="dni.dni" @keyup.enter="updateDNI(dni, $event.target.value)" @blur="editScholarship(dni.id, dni.dni)" />
@@ -140,6 +125,7 @@ watchEffect(() => {
                 display: flex;
                 margin-right: 1.5%;
             }
+        }
     }
-}
+
 </style>

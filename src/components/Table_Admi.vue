@@ -4,6 +4,7 @@ import { ref } from "vue"
 import { useRoute, useRouter } from "vue-router";
 import { usescholarshipStore } from "@/stores/scholarship";
 import { onMounted } from 'vue';
+import { watchEffect } from 'vue';
 
 const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
 
@@ -51,6 +52,11 @@ const deleteScholarship = async (id) => {
 
 onMounted(async () => {
     await scholarship();
+});
+
+
+watchEffect(() => {
+ console.log('DNI List Updated:', store.dniList.value);
 });
 
 </script>
