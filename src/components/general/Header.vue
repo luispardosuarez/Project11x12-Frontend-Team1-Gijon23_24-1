@@ -1,117 +1,77 @@
 <script setup>
-import { ref } from 'vue';
 
-const isLoggedIn = ref(false);
+import { useAuthStore } from '@/stores/auth.js';
+import HeaderLogged from './HeaderLogged.vue';
+import { useRouter } from 'vue-router';
+
+const authStore = useAuthStore();
+
+const router = useRouter();
+
+const goToLogin = () => {
+    router.push({ path: '/login' });
+};
+
+const goToHome = () => {
+    router.push({ path: '/' });
+};
 
 </script>
 
 <template>
 
-<header class="wrapper">
-
-<div id="headerContainer">
-
-    <RouterLink to="/">
-        <img class="logo" src="../../assets/icons/gijon.png" alt="Logo">
-    </RouterLink>
-    
-    <div class="headerLinkLogged" v-if="isLoggedIn">
-        <RouterLink class="routerLink" to="/"> <img src="../../assets/icons/home.svg"> </RouterLink>
-        <RouterLink class="routerLink" to="/"> <img src="../../assets/icons/user.svg"> </RouterLink>
-        <RouterLink class="routerLink" to="/" @click="store.logout()"> <img src="../../assets/icons/signout.svg"> </RouterLink>
+    <div id="headerContainer">
+        <div v-if="!authStore.user.isAuthenticated" class="logo" @click="goToHome">
+            <img class="logo" src="../../assets/icons/gijon.png">
+        </div>
+        <div v-if="!authStore.user.isAuthenticated" class="homeContainer" @click="goToLogin">
+            <h2 class="homeContainer">Iniciar sesión</h2>
+        </div>
+        <HeaderLogged v-if="authStore.user.isAuthenticated"/>
     </div>
-
-    <div class="headerLink" v-else>
-        <RouterLink class="routerLink" to="/login">Iniciar sesión</RouterLink>
-    </div>
-
-</div>
-
-</header>
-
 
 </template>
 
-<style scoped lang="scss">
-
-.wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
+<style lang="scss" scoped>
 
 #headerContainer {
-    width: 100%;
-    height: 10vh;
-    background-color: $black;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-}
-
-.logo {
-    width: 40%;
-    padding: 20px;
-    margin-right: 150px;
-}
-
-.headerLink {
-    display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-right: 15px;
-    font-size: 1.5rem!important;
-}
+    background-color: $black;
+    padding: 10px;
 
-.headerLinkLogged {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    img {
-        width: 40%;
-    }
-}
-
-.routerLink {
-    text-decoration: none;
-    color: white;
-}
-
-img {
-    height: 90%;
-}
-
-@media only screen and (min-width: 768px){
     .logo {
-        width: 45%;
-        margin-left: 20px;
-        padding: 25px;
-    }
-
-    .headerLink {
-        margin-right: 3%;
-        font-size: 20px;
-    }
-
-    .headerLinkLogged {
-        
+        padding: 5px;
         img {
-            width: 35%;
+            width: 60px;
+            margin-right: 5px;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+    .homeContainer {
+        h2 {
+        color: white;
+        font-size: 15px;
+        padding: 5px;
+        margin-top: 10px;
+        font-family: Arial, Helvetica, sans-serif;
         }
     }
 }
 
-@media only screen and (min-width : 992px) {
-
-    .logo {
-        width: 45%;
-        padding: 20px;
-    }
-
-    .headerLink {
-        font-size: 17px;
-    }
+ @media only screen and (min-width: 768px) {
+ #headerContainer {
+  .logo {
+      img {
+      width: 90px;
+      margin-left: 20px;
+     }
+   }  
+} 
 }
+
 </style>
