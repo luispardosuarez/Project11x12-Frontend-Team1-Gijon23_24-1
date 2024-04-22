@@ -42,7 +42,7 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h3>{{selectedCamp}}</h3>
+            <h3>Campamento {{selectedCamp}}</h3>
             <h4>{fecha } { schedule }</h4>
           </div>
           <div class="colegio">
