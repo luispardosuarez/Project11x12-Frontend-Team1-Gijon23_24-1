@@ -10,7 +10,6 @@ import { ref } from "vue";
 import { provide } from "vue";
 import selectedCampStore from "@/stores/selectedCampStore";
 import { useSchoolStore } from "@/stores/schoolStore";
-import { useSelectedParticipant } from "@/stores/selectedParticipantStore";
 
 const router = useRouter();
 
@@ -23,8 +22,7 @@ const goStep6 = () => {
 const authStore = useAuthStore();
 const schoolStore = useSchoolStore();
 const selectedSchool = schoolStore.selectedSchool;
-const selectedParticipantStore = useSelectedParticipant();
-const selectedParticipant = selectedParticipantStore.state.selectecParticipant;
+
 const selectedCamp = selectedCampStore.state.selectedCamp;
 
 const pasoActual = ref(5);
@@ -55,9 +53,7 @@ provide('pasoActual', pasoActual);
             <h3>{{selectedSchool}}</h3>
             <h4>Plazas disponibles {places_num}</h4>
           </div>
-          <div class="participant">
-            <h3>{{ selectedParticipant }} </h3>
-          </div>
+          
           
           <!-- <div class="participantes">
             <h3>Seleccionar Participante:</h3>

@@ -10,7 +10,7 @@ import { ref } from "vue";
 import { provide } from "vue";
 import selectedCampStore from "@/stores/selectedCampStore";
 import { useSchoolStore } from "@/stores/schoolStore";
-import {  useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
+
 
 const router = useRouter();
 
@@ -23,8 +23,7 @@ const goStep5 = () => {
 const authStore = useAuthStore();
 const schoolStore = useSchoolStore();
 const selectedSchool = schoolStore.selectedSchool;
-const selectedParticipantStore = useSelectedParticipantStore();
-const selectedParticipant = selectedParticipantStore.selectedParticipants[0];
+
 
 const selectedCamp = selectedCampStore.state.selectedCamp;
 const pasoActual = ref(4);
@@ -55,11 +54,7 @@ provide('pasoActual', pasoActual);
             <h3>{{selectedSchool}}</h3>
             <h4>Plazas disponibles {places_num}</h4>
           </div>
-          <div v-if="selectedParticipant">
-            {{ selectedParticipant.participantName }}  {{ selectedParticipant.participantSurname }}
-
-          </div>
-          <button @click="addAnotherParticipant"> Agregar</button>
+       
           <div class="participantes">
             <h3>Seleccionar Participante:</h3>
             <ComboParticipante/>
