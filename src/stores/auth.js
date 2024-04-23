@@ -1,25 +1,18 @@
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
 export const useAuthStore = defineStore('auth', () => {
+    
 
     const user = reactive({
         username: '',
         roles: '',
         isAuthenticated: false
+        
     })
 
     const isLoading = ref(false)
-
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-        const parsedUser = JSON.parse(storedUser);
-        user.username = parsedUser.username;
-        user.roles = parsedUser.roles;
-        user.isAuthenticated = parsedUser.isAuthenticated;
-    }
- 
 
     const login = async (dataConnection) => {
 
@@ -47,5 +40,24 @@ export const useAuthStore = defineStore('auth', () => {
 
     }
 
-    return { user, login }
+    const loadUserFromLocalStorage = () => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const parsedUser = JSON.parse(storedUser);
+            user.isAuthenticated = parsedUser.isAuthenticated;
+            user.username = parsedUser.username;
+            user.roles = parsedUser.roles;
+        }
+    }
+
+    watch(user, (newUser, oldUser) => {
+        localStorage.setItem('user', JSON.stringify(newUser));
+    }, { deep: true });
+
+    
+
+    loadUserFromLocalStorage();
+
+
+    return { user, login, loadUserFromLocalStorage }
 })
