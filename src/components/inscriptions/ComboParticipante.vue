@@ -1,11 +1,13 @@
 <script setup>
 
+
+import { useSelectedParticipantStore } from '@/stores/selectedParticipantStore';
 import axios from 'axios';
 import { ref } from 'vue';
 
 
 const allParticipants = ref([]);
-const fetchParticipant = ref(null);
+const selectedParticipantStore = useSelectedParticipantStore();
 
 
 const fetchParticipants = async () => {
@@ -16,13 +18,20 @@ const fetchParticipants = async () => {
 
 fetchParticipants();
 
+const addSelectedParticipant = () => {
+  const participant = selectedParticipant.value;
+  selectedParticipantStore.addSelectedParticipant(participant);
+}
+
+const selectedParticipant = ref(null);
+
 </script>
 <template>
     <div class="container">
       <div class="select">
-        <select v-model="fetchParticipant" id="comboParticipants" @change="updateSelectedParticipant">
+        <select v-model="selectedParticipant" id="comboParticipants" @change="addSelectedParticipant">
       <option value="null">Seleccione participante</option>
-      <option v-for="participant in allParticipants" v-bind:value="participant.id_participant" :key="participant.id_participant">
+      <option v-for="participant in allParticipants" v-bind:value="participant" :key="participant.id_participant">
         {{ participant.participantName }}  {{ participant.participantSurname }}
       </option>
     </select>
