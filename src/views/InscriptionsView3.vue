@@ -32,7 +32,7 @@ provide('pasoActual', pasoActual);
   <main>
     <div>
       <div class="saludo">
-        <h2>¡Hola {{ authStore.user.username }}!</h2>
+        <h2>¡Hola {{ authStore.user.username }}! {{ authStore.user.id }}</h2>
       </div>
       <div class="bajoSaludo">
         <aside class="barraLateral">

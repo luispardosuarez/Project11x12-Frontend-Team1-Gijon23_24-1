@@ -4,6 +4,7 @@ import axios from 'axios'
 
 export const useAuthStore = defineStore('auth', () => {
     const user = reactive({
+        id: null,
         username: '',
         roles: '',
         isAuthenticated: false
@@ -23,11 +24,13 @@ export const useAuthStore = defineStore('auth', () => {
                 withCredentials: true
             }
             const response = await axios.get(`${uri}/login`, options)
-            const data = await response.data
+            const data = response.data
             user.isAuthenticated = true
+            user.id = data.id_user
             user.username = data.username
             user.roles = data.roles
             isLoading.value = false
+            console.log("ID del usuario:", user.id);
             return {success: true}
         } catch (error) {
             isLoading.value = false
@@ -50,6 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
     };
 
     const userLogout = () => {
+        user.id = null;
         user.username = '';
         user.roles = '';
         user.isAuthenticated = false;
