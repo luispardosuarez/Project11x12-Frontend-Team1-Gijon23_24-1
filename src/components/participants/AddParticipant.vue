@@ -1,5 +1,29 @@
 <script setup>
+import { ref } from 'vue';
 
+const participant = ref({
+
+ participantName: '',
+ participantSurname: '',
+ dni: '',
+ street: '',
+ pc: '',
+ city: '',
+ municipality: '', 
+ mail: '',
+ birthDate: '',
+ allergies: '',
+ remarks: '',
+
+});
+
+const saveParticipant = () => {
+ addParticipant(participant.value);
+};
+
+const addParticipant = (participantData) => {
+ console.log(participantData);
+};
 
 </script>
 
@@ -16,81 +40,81 @@
         <div class="inputGroup">
 
             <label class="name" for="Nombre">Nombre</label>
-            <input class="name" type="Nombre">
+            <input v-model="participant.participantName" type="text" class="name" placeholder="Nombre">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="surname" for="Apellidos">Apellidos</label>
-            <input class="surname" type="Apellidos">
+            <input v-model="participant.participantSurname" class="surname" type="Apellidos">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="dni" for="DNI">DNI</label>
-            <input class="dni" type="DNI">
+            <input v-model="participant.dni" class="dni" type="DNI">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="direction" for="Dirección">Dirección</label>
-            <input class="direction" type="Dirección">
+            <input v-model="participant.street" class="direction" type="Dirección">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="cp" for="CP">CP</label>
-            <input class="cp" type="CP">
+            <input v-model="participant.pc" class="cp" type="CP">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="locality" for="Localidad">Localidad</label>
-            <input class="locality" type="Localidad">
+            <input v-model="participant.city" class="locality" type="Localidad">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="municipality" for="Municipio">Municipio</label>
-            <input class="municipality" type="Municipio">
+            <input v-model="participant.municipality" class="municipality" type="Municipio">
 
         </div>
 
         <div class="inputGroup">
 
         <label class="birth" for="Fecha de nacimiento">Fecha de nacimiento</label>
-        <input class="birth" type="Fecha de nacimiento">
+        <input v-model="participant.birthDate" class="birth" type="Fecha de nacimiento">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="email" for="Email">Email</label>
-            <input class="email" type="Email">
+            <input v-model="participant.mail" class="email" type="Email">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="allergies" for="Alergias">Alergias</label>
-            <textarea class="allergies" type="Alergias"></textarea>
+            <textarea v-model="participant.allergies" class="allergies" type="Alergias"></textarea>
 
         </div>
 
         <div class="inputGroup">
 
             <label class="observations" for="Observaciones">Observaciones</label>
-            <textarea class="observations" id="Observaciones"></textarea>
+            <textarea v-model="participant.remarks" class="observations" id="Observaciones"></textarea>
 
         </div>
 
-        <button class="save">Guardar</button>
+        <button @click="saveParticipant" class="save">Guardar</button>
 
     </div>
     

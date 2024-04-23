@@ -1,9 +1,12 @@
 <script setup>
 
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from "@/stores/auth";
 
 const authStore = useAuthStore();
+const participants = ref([]);
+
 
   const router = useRouter();
 
@@ -18,6 +21,10 @@ const authStore = useAuthStore();
   const redirectToHome = () => {
     router.push('/');
   };
+
+  const addParticipant = (newParticipant) => {
+ participants.value.push(newParticipant);
+};
 
 </script>
 
@@ -78,11 +85,12 @@ const authStore = useAuthStore();
         <div class="participants">
             <h6>Participantes registrados</h6>
             <button @click="redirectToAdd" class="addParticipant">Añadir participante</button>
+            <AddParticipant :addParticipant="addParticipant" />
         </div>
 
-        <div id="registeredParticipant" class="registeredItem">
+        <div v-for="participant in participants" :key="participant.id" id="registeredParticipant" class="registeredItem">
 
-            <p>Pepa López Navarro</p>
+            <p>{{ participant.name }}</p>
 
             <div class="participantIcons">
                 <img src="../../assets/icons/see.svg">
