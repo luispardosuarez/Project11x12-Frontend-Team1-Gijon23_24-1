@@ -1,22 +1,26 @@
 <script setup>
+import BotonAtras from "@/components/inscriptions/BotonAtras.vue";
 import BotonesLaterales from "@/components/inscriptions/BotonesLaterales.vue";
 import BotonSiguiente from "@/components/inscriptions/BotonSiguiente.vue";
-import InscripcionPaso1 from "@/components/inscriptions/InscripcionPaso1.vue";
+import ComboParticipante from "@/components/inscriptions/ComboParticipante.vue";
+import ParticipantesOpciones from "@/components/inscriptions/ParticipantesOpciones.vue";
 import { useAuthStore } from "@/stores/auth";
-import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { ref } from "vue";
 import { provide } from "vue";
 
 const router = useRouter();
 
-const goStep2 = () => {
-  router.push('/inscriptionPaso2');
-}
+const goStep5 = () => {
+  router.push("/inscriptionPaso5");
+};
+const goStep7 = () => {
+  router.push("/inscriptionPaso7");
+};
 const authStore = useAuthStore();
 
-const pasoActual = ref(1);
+const pasoActual = ref(6);
 provide('pasoActual', pasoActual);
-
 
 </script>
 <template>
@@ -36,12 +40,26 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h2>{{this.$route.params.campamentoName}}</h2>
+            <h3>{campamento}</h3>
+            <h4>{fecha } { schedule }</h4>
           </div>
-          <InscripcionPaso1 />
-          <div class="Siguiente">
-            <!-- <button>Atras</button> -->
-            <BotonSiguiente @goToNextStep="goStep2"/>
+          <div class="colegio">
+            <h3>{Colegio}</h3>
+            <h4>{places_num} {horario}</h4>
+          </div>
+          <div class="pasarelaPago">
+            <h2>pasarera de pago</h2>
+                        
+          </div>
+          
+
+          <div class="AtrasSiguiente">
+            <div class="Siguiente">
+              <BotonSiguiente @goToNextStep="goStep7" />
+            </div>
+            <div class="Atras">
+              <BotonAtras @goToPreviusStep="goStep5" />
+            </div>
           </div>
         </div>
       </div>
@@ -52,13 +70,13 @@ provide('pasoActual', pasoActual);
 <style scoped lang="scss">
 @import "../assets/scss/variables.scss";
 
-#paso1 {
-  background-color: $red;
-}
-
 h2 {
   padding-left: 2%;
   padding-top: 2%;
+}
+
+.campamento {
+  font-family: Arial;
 }
 
 .bajoSaludo {
@@ -85,6 +103,12 @@ aside {
   margin-right: 1%;
 }
 
+.AtrasSiguiente {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 1%;
+  gap: 1%;
+}
 .Siguiente {
   text-align: right;
   margin-right: 2%;
@@ -94,5 +118,13 @@ aside {
   .barraLateral {
     display: none;
   }
+
+  .AtrasSiguiente {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 2%;
+  gap: 1%;
+  justify-content: space-evenly;
+}
 }
 </style>

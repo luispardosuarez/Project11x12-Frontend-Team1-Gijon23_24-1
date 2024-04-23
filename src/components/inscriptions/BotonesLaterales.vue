@@ -1,13 +1,21 @@
 <script setup>
-import { ref } from 'vue';
+import { inject } from 'vue';
+import { onBeforeRouteUpdate } from 'vue-router';
 
 // Definir el estado del paso actual
-const pasoActual = ref(1);
+const pasoActual = inject('pasoActual');
 
-// Función para cambiar el paso actual
-const cambiarPaso = (nuevoPaso) => {
- pasoActual.value = nuevoPaso;
-};
+onBeforeRouteUpdate((to, from, next) => {
+   const numeroPaso = determinarNumeroPaso(to.path);
+   pasoActual.value = numeroPaso;
+   next();
+})
+
+function determinarNumeroPaso(ruta) {
+   const match = ruta.match(/inscriptionPaso(\d+)/);
+   return match ? parseInt(match[1], 10) : 1;
+}
+
 </script>
 
 <template>

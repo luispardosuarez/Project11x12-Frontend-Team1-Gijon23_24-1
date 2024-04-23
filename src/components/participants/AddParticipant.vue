@@ -180,9 +180,91 @@
     }
 }
 
-// Desktop 
+// Desktop v1 
 
-@media only screen and (min-width : 1024px) {
+@media (min-width: 1200px) and (max-width: 1399px) {
+
+#participantWelcome {
+    gap: 30%;
+    margin-top: 10px;
+
+    h2 {
+        font-size: 25px;
+        margin-top: 30px;
+    }
+
+    img {
+        width: 25%;
+        margin-left: 25px;
+    }
+}
+
+#participantDashboard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .inputGroup {
+        .name, .surname {
+            width: 300px;
+            margin-left: 20px;
+        }
+
+        .dni {
+            width: 350px;
+            margin-left: 30px;
+        }
+
+        .direction {
+            width: 750px;
+            margin-left: 15px;
+        }
+
+        .cp {
+            width: 250px;
+            margin-left: 10px;
+        }
+
+        .locality, .municipality {
+            width: 300px;
+            margin-left: 15px;
+        }
+
+        .municipality {
+            margin-right: 20px;
+        }
+
+        .birth {
+            width: 350px;
+            margin-left: 15px;
+        }
+
+        .email {
+            width: 450px;
+            margin-left: 15px;
+        }
+
+        .allergies {
+            width: 500px;
+            margin-left: 60px;
+        }
+
+        .observations {
+            width: 1020px;
+            margin-left: 15px;
+        }
+    }
+
+    .save {
+        width: 8%;
+        margin-left: 500px;
+    }
+}
+}
+
+// Desktop large
+
+@media only screen and (min-width : 1400px) {
 
     #participantWelcome {
 
@@ -215,12 +297,12 @@
             flex-direction: column;
 
             .name, .surname {
-                width: 550px;
+                width: 400px;
                 margin-left: 20px;
             }
 
             .dni {
-                width: 400px;
+                width: 300px;
                 margin-right: 25px;
             }
 
@@ -230,33 +312,37 @@
             }
 
             .cp {
-                width: 150px;
+                width: 300px;
+                margin-right: 30px;
             }
 
-            .locality, .municipality {
-                width: 300px;
+            .locality {
+                width: 400px;
+                margin-left: 20px;
             }
 
             .municipality {
-                margin-right: 25px;
+                width: 400px;
             }
 
             .birth {
                 width: 300px;
-                margin-left: 20px;
+                margin-right: 30px;
+                
             }
 
             .email {
                 width: 500px;
+                margin-left: 20px;
             }
 
             .allergies {
-                width: 700px;
-                margin-right: 25px;
+                width: 650px;
+                margin-right: 30px;
             }
 
             .observations {
-                width: 1655px;
+                width: 1200px;
                 margin-left: 20px;
             }
 
@@ -268,9 +354,163 @@
         .save {
             width: 10%;
             align-items: center;
-            margin-left: 750px;
+            margin-left: 550px;
         }
         }
+}
+
+// Desktop extra grande
+@media (min-width: 1600px) {
+
+#participantWelcome {
+    gap: 45%;
+    margin-top: 10px;
+
+    h2 {
+        font-size: 35px;
+        margin-top: 50px;
+    }
+
+    img {
+        width: 15%;
+        margin-left: 30px;
+    }
+}
+
+#participantDashboard {
+
+    .inputGroup {
+        .name {
+            width: 400px;
+            margin-left: 25px;
+        }
+
+        .surname {
+            width: 500px;
+        }
+
+        .dni {
+            width: 400px;
+            margin-right: 30px;
+        }
+
+        .direction {
+            width: 950px;
+            margin-left: 25px;
+        }
+
+        .cp {
+            width: 350px;
+            margin-right: 30px;
+        }
+
+        .locality {
+            width: 400px;
+            margin-left: 25px;
+        }
+
+        .municipality {
+            width: 500px;
+            margin-left: 30px;
+        }
+
+        .birth {
+            width: 400px;
+            margin-left: 25px;
+        }
+
+        .email {
+            width: 550px;
+            margin-left: 25px;
+        }
+
+        .allergies {
+            width: 800px;
+            margin-right: 30px;
+        }
+
+        .observations {
+            width: 1400px;
+            margin-left: 30px;
+        }
+    }
+
+    .save {
+        width: 12%;
+        align-items: center;
+        margin-left: 650px;
+    }
+}
+}
+
+// Mi desktop
+
+@media (min-width: 1800px){
+    #participantDashboard {
+
+.inputGroup {
+    .name {
+        width: 500px;
+        margin-left: 30px;
+    }
+
+    .surname {
+        width: 500px;
+    }
+
+    .dni {
+        width: 400px;
+        margin-right: 55px;
+    }
+
+    .direction {
+        width: 600px;
+        margin-left: 30px;
+    }
+
+    .cp {
+        width: 150px;
+    }
+
+    .locality {
+        width: 300px;
+    }
+
+    .municipality {
+        width: 300px;
+        margin-right: 55px;
+    }
+
+    .birth {
+        width: 400px;
+        margin-left: 30px;
+        
+    }
+
+    .email {
+        width: 500px;
+        margin-right: 40px;
+    }
+
+    .allergies {
+        width: 600px;
+        margin-right: 55px;
+    
+    }
+
+    .observations {
+        width: 1620px;
+        margin-left: 30px;
+    }
+}
+
+.save {
+    width: 12%;
+    align-items: center;
+    margin-left: 750px;
+    border: $red;
+}
+}
 }
 
 </style>

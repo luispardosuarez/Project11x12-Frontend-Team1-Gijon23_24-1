@@ -6,6 +6,8 @@ import ComboParticipante from "@/components/inscriptions/ComboParticipante.vue";
 import ParticipantesOpciones from "@/components/inscriptions/ParticipantesOpciones.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
+import { ref } from "vue";
+import { provide } from "vue";
 
 const router = useRouter();
 
@@ -16,6 +18,10 @@ const goStep4 = () => {
   router.push("/inscriptionPaso4");
 };
 const authStore = useAuthStore();
+
+const pasoActual = ref(3);
+provide('pasoActual', pasoActual);
+
 </script>
 <template>
   <main>

@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+
+</script>
+
 <template>
-  <div class="contenedorPaso1">
-    <div class="container">
+  <div class="container">
     <div class="select">
       <select>
         <option value="null">Seleccione Fecha:</option>
@@ -12,20 +14,16 @@
       </select>
     </div>
   </div>
-  </div>
+
 </template>
 
 <style scoped lang="scss">
-@import "../../assets/scss/variables.scss";
-
 .container {
   padding: 20px;
-  
 
   select {
-    font-family: Arial;
     appearance: none;
-    outline: 0.5px $red;
+    outline: 1px red;
     border-color: $red;
     flex: 1;
     padding: 0 1em;
@@ -45,7 +43,7 @@
   width: 15em;
   height: 2em;
   overflow: hidden;
-  box-shadow: 0 0.5px 1px rgb(59, 59, 59);
+  box-shadow: 0 2px 2px rgb(59, 59, 59);
 }
 
 .select::after {
@@ -67,8 +65,7 @@
     cursor: pointer;
     color: $black;
     background-color: $gray-checkbox;
-    font-family: Arial;
-    font-size: medium;
+    font-size: xx-smal;
     transition: background-color 0.3s;
   }
 
