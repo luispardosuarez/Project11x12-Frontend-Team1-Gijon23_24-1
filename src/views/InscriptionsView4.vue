@@ -32,6 +32,10 @@ const selectedCamp = selectedCampStore.state.selectedCamp;
 const pasoActual = ref(4);
 provide('pasoActual', pasoActual);
 
+const showComboParticipante = () => {
+  router.push("/inscriptionPaso5");
+}
+
 </script>
 <template>
   <main>
@@ -65,9 +69,10 @@ provide('pasoActual', pasoActual);
                 {{ participant.participantName }} {{ participant.participantSurname }}
               </li>
             </ul>
+            <button @click="showComboParticipante">Añadir Participante</button>
           </div>
           <div class="opcionesParticipantes">
-            <ParticipantesOpciones/>
+            <!-- <ParticipantesOpciones/> -->
           </div>
 
           <div class="AtrasSiguiente">

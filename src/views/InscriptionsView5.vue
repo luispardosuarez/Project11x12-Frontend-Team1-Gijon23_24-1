@@ -10,6 +10,7 @@ import { ref } from "vue";
 import { provide } from "vue";
 import selectedCampStore from "@/stores/selectedCampStore";
 import { useSchoolStore } from "@/stores/schoolStore";
+import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
 
 const router = useRouter();
 
@@ -24,6 +25,8 @@ const schoolStore = useSchoolStore();
 const selectedSchool = schoolStore.selectedSchool;
 
 const selectedCamp = selectedCampStore.state.selectedCamp;
+const selectedParticipantStore = useSelectedParticipantStore();
+const selectedParticipant = selectedParticipantStore.selectedParticipants;
 
 const pasoActual = ref(5);
 provide('pasoActual', pasoActual);
@@ -53,20 +56,28 @@ provide('pasoActual', pasoActual);
             <h3>{{selectedSchool}}</h3>
             <h4>Plazas disponibles {places_num}</h4>
           </div>
+          <div class="participantes">
+            <h3>Seleccionar Participante:</h3>
+            <ul>
+              <li v-for="participant in selectedParticipant" :key="participant.id_participant">
+                {{ participant.participantName }} {{ participant.participantSurname }}
+              </li>
+            </ul>
+            <!-- <button @click="showComboParticipante">Añadir Participante</button> -->
+          </div>
           
-          
-          <!-- <div class="participantes">
+          <div class="participantes">
             <h3>Seleccionar Participante:</h3>
             <ComboParticipante/>
             
           </div>
           <div class="opcionesParticipantes">
             <ParticipantesOpciones/>
-          </div> -->
+          </div>
 
           <div class="AtrasSiguiente">
             <div class="Siguiente">
-              <BotonSiguiente @goToNextStep="goStep6" />
+              <BotonSiguiente @goToNextStep="goStep4" />
             </div>
             <div class="Atras">
               <!-- <BotonAtras @goToPreviusStep="goStep4" /> -->
