@@ -1,30 +1,58 @@
 <script setup>
-
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from "@/stores/auth";
+import axios from 'axios';
 
 const authStore = useAuthStore();
 const participants = ref([]);
+const selectedParticipant = ref({});
+const showModal = ref(false);
 
+const router = useRouter();
 
-  const router = useRouter();
-
-  const redirectToAdd = () => {
-    router.push('/add');
-  };
-
-  const redirectToEdit = () => {
-    router.push('/edit');
-  };
-
-  const redirectToHome = () => {
-    router.push('/');
-  };
-
-  const addParticipant = (newParticipant) => {
- participants.value.push(newParticipant);
+const redirectToAdd = () => {
+  router.push('/add');
 };
+
+const redirectToEdit = () => {
+  router.push('/edit');
+};
+
+const redirectToHome = () => {
+  router.push('/');
+};
+
+const fetchParticipants = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS}`);
+    participants.value = response.data;
+  } catch (error) {
+    console.error('Error fetching participants:', error);
+  }
+};
+
+fetchParticipants(); 
+
+const addParticipant = async (newParticipant) => {
+  try {
+    const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS}`, newParticipant);
+    participants.value.push(response.data); 
+  } catch (error) {
+    console.error('Error adding participant:', error);
+  }
+};
+
+const deleteParticipant = async (participantId) => {
+ try {
+    await axios.delete(`${import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS}/${participantId}`);
+    participants.value = participants.value.filter(participant => participant.id !== participantId);
+    console.log('Participante eliminado exitosamente');
+ } catch (error) {
+    console.error('Error al eliminar el participante:', error);
+ }
+};
+
 
 </script>
 
@@ -85,21 +113,19 @@ const participants = ref([]);
         <div class="participants">
             <h6>Participantes registrados</h6>
             <button @click="redirectToAdd" class="addParticipant">Añadir participante</button>
-            <AddParticipant :addParticipant="addParticipant" />
         </div>
 
         <div v-for="participant in participants" :key="participant.id" id="registeredParticipant" class="registeredItem">
 
-            <p>{{ participant.name }}</p>
+            <p>{{ participant.participantName }} {{ participant.participantSurname }}</p>
 
             <div class="participantIcons">
                 <img src="../../assets/icons/see.svg">
                 <img src="../../assets/icons/edit.svg" @click="redirectToEdit">
-                <img src="../../assets/icons/delete.svg">
+                <img src="../../assets/icons/delete.svg" @click="deleteParticipant(participant.id)">
             </div>
 
         </div>
-
 
     </div>
 
@@ -457,5 +483,6 @@ const participants = ref([]);
     .participantIcons {
         width: 27%;
     }
+    
 }
 </style>
