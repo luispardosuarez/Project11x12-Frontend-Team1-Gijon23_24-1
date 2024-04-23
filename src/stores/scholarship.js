@@ -1,10 +1,11 @@
-import { ref, reactive } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
     export const usescholarshipStore = defineStore('scholarship', () => {
 
-        const dniList = ref([])
+        const dniList = ref([]);
+    
 
     const isLoading = ref(false)
 
