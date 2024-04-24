@@ -17,7 +17,7 @@ const goStep2 = () => {
   router.push("/inscriptionPaso2");
 };
 const goStep4 = () => {
-  router.push("/inscriptionPaso4");
+  router.push("/inscriptionPaso5");
 };
 const authStore = useAuthStore();
 const schoolStore = useSchoolStore();

@@ -12,7 +12,6 @@ import selectedCampStore from "@/stores/selectedCampStore";
 import { useSchoolStore } from "@/stores/schoolStore";
 import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
 
-
 const router = useRouter();
 
 const goStep3 = () => {
@@ -25,16 +24,12 @@ const authStore = useAuthStore();
 const schoolStore = useSchoolStore();
 const selectedSchool = schoolStore.selectedSchool;
 
+const selectedCamp = selectedCampStore.state.selectedCamp;
 const selectedParticipantStore = useSelectedParticipantStore();
 const selectedParticipant = selectedParticipantStore.selectedParticipants;
 
-const selectedCamp = selectedCampStore.state.selectedCamp;
 const pasoActual = ref(4);
 provide('pasoActual', pasoActual);
-
-const showComboParticipante = () => {
-  router.push("/inscriptionPaso5");
-}
 
 </script>
 <template>
@@ -61,7 +56,6 @@ const showComboParticipante = () => {
             <h3>{{selectedSchool}}</h3>
             <h4>Plazas disponibles {places_num}</h4>
           </div>
-       
           <div class="participantes">
             <h3>Seleccionar Participante:</h3>
             <ul>
@@ -69,10 +63,16 @@ const showComboParticipante = () => {
                 {{ participant.participantName }} {{ participant.participantSurname }}
               </li>
             </ul>
-            <button @click="showComboParticipante">Añadir Participante</button>
+            <!-- <button @click="showComboParticipante">Añadir Participante</button> -->
+          </div>
+          
+          <div class="participantes">
+            <h3>Seleccionar Participante:</h3>
+            <ComboParticipante/>
+            
           </div>
           <div class="opcionesParticipantes">
-            <!-- <ParticipantesOpciones/> -->
+            <ParticipantesOpciones/>
           </div>
 
           <div class="AtrasSiguiente">
@@ -80,7 +80,7 @@ const showComboParticipante = () => {
               <BotonSiguiente @goToNextStep="goStep5" />
             </div>
             <div class="Atras">
-              <!-- <BotonAtras @goToPreviusStep="goStep3" /> -->
+              <!-- <BotonAtras @goToPreviusStep="goStep4" /> -->
             </div>
           </div>
         </div>
