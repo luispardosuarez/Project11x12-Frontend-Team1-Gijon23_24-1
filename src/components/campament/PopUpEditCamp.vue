@@ -5,14 +5,14 @@ import SelectDate from './SelectDate.vue';
 
 const props = defineProps({
   camp: Object,
-  showModal: Boolean, // Nueva propiedad para controlar la visibilidad
+  showModal: Boolean, 
 });
 
 const store = useCampStore();
 const modalOpen = ref(props.showModal);
 const camp = ref(props.camp);
-const editCamp = ref({...props.camp }); // Store a copy for modifications
-const selectedImg = ref(null); // Track selected image
+const editCamp = ref({...props.camp }); 
+const selectedImg = ref(null); 
 const emit = defineEmits(['close']);
 
 const handleEditAndClose = async () => {
@@ -21,8 +21,7 @@ const handleEditAndClose = async () => {
     camp.value = {...editCamp.value };
     console.log('Datos del campamento a editar:', camp.value);
     await store.editCamp(camp.value.id, camp.value);
-    closeModal(); // Cierra el modal después de editar el campamento
-  } catch (error) {
+    closeModal();   } catch (error) {
     console.error("Error al editar el campamento", error);
   }
 };
@@ -33,10 +32,6 @@ const handleUpdateDates = ({ startDate, endDate }) => {
   console.log('Fechas actualizadas:', { startDate, endDate });
 };
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 watch(
   () => store.campsList,
   (newCampsList) => {
