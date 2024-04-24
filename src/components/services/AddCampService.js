@@ -69,33 +69,25 @@ async editCamp(campId, camp) {
   }
  },
  //DELETE BY ID
- async deleteCamp(id) {
-    try {
-      await axios.delete(`${this.uri}/${id}`);
-      console.log("Campamento borrado exitosamente.");
-    } catch (error) {
-      console.error("Error al borrar el campamento:", error);
-      throw error;
-    }
+async deleteCamp(id) {
+   try {
+     const response = await axios.delete(`${this.uri}/${id}`, {
+       headers: {
+         "Content-Type": "application/json",
+       },
+       withCredentials: true,
+     });
+     return response.data;
+   } catch (error) {
+     console.error("Error al eliminar el campamento:", error);
+     throw error;
+   }
  },
 
-//CRUD IMAGES
+ 
 
- //CREATED
-// async createImage(formData) {
-//   try {
-//      const response = await axios.post(`${this.uri2}`, formData, {
-//        headers: {
-//          "Content-Type": "multipart/form-data",
-//        },
-//        withCredentials: true,
-//      });
-//      return response.data;
-//   } catch (error) {
-//      console.error("Error al crear la imagen:", error);
-//      throw error;
-//   }
-//  },
+
+
  
 //READ BY ID
 async getImage(imageId) {
@@ -108,29 +100,4 @@ async getImage(imageId) {
   }
  },
  
-//  //UPLOAD BY ID
-//  async updateImage(imageId, formData) {
-//   try {
-//      const response = await axios.put(`${this.uri2}/${imageId}`, formData, {
-//        headers: {
-//          "Content-Type": "multipart/form-data",
-//        },
-//        withCredentials: true,
-//      });
-//      return response.data;
-//   } catch (error) {
-//      console.error("Error al actualizar la imagen:", error);
-//      throw error;
-//   }
-//  },
-//  //DELETE BY ID
-//  async deleteImage(imageId) {
-//   try {
-//      await axios.delete(`${this.uri2}/${imageId}`);
-//      console.log("Imagen borrada exitosamente.");
-//   } catch (error) {
-//      console.error("Error al borrar la imagen:", error);
-//      throw error;
-//   }
-//  },
 }

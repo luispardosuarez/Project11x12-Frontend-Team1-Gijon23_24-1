@@ -24,6 +24,8 @@ const deleteCamp = async (id) => {
    }
   };
 
+
+
 const editCamp = async (campId, data) => {
    try {
       const response = await AddCampService.editCamp(campId, data);
