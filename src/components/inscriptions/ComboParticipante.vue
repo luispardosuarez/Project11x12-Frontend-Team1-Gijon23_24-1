@@ -1,47 +1,69 @@
 <script setup>
-
-
-import { useSelectedParticipantStore } from '@/stores/selectedParticipantStore';
-import axios from 'axios';
-import { ref } from 'vue';
-
+import { useAuthStore } from "@/stores/auth";
+import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
+import axios from "axios";
+import { ref } from "vue";
 
 const allParticipants = ref([]);
 const selectedParticipantStore = useSelectedParticipantStore();
 
+const authStore = useAuthStore();
 
 const fetchParticipants = async () => {
-    const response = await axios.get(import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS);
-    allParticipants.value = response.data;
-    console.log(response.data);
-}
+    try {
+        const response = await axios.get(import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS);
+        const loggedInUserId = authStore.user.id;
+        console.log("id del usuario logueado: ", loggedInUserId);
+        console.log("Datos recibidos del servidor: ", response.data);
+        
+        
+        for (const participant of response.data) {
+            if (parseInt(participant.profileId) == loggedInUserId) {
+                allParticipants.value.push(participant);
+            }
+        }
+        
+        console.log("Datos filtrados: ", allParticipants.value);
+        
+        
+        selectedParticipant.value = allParticipants.value.length > 0 ? allParticipants.value[0] : null;
+    } catch (error) {
+        console.error("Error al obtener los participantes: ", error);
+    }
+};
 
 fetchParticipants();
 
 const addSelectedParticipant = () => {
   const participant = selectedParticipant.value;
   selectedParticipantStore.addSelectedParticipant(participant);
-}
+};
 
 const selectedParticipant = ref(null);
-
 </script>
 <template>
-    <div class="container">
-      <div class="select">
-        <select v-model="selectedParticipant" id="comboParticipants" @change="addSelectedParticipant">
-      <option value="null">Seleccione participante</option>
-      <option v-for="participant in allParticipants" v-bind:value="participant" :key="participant.id_participant">
-        {{ participant.participantName }}  {{ participant.participantSurname }}
-      </option>
-    </select>
+  <div class="container">
+    <div class="select">
+      <select
+        v-model="selectedParticipant"
+        id="comboParticipants"
+        @change="addSelectedParticipant"
+      >
+        <option value="null">Seleccione participante</option>
+        <option
+          v-for="participant in allParticipants"
+          v-bind:value="participant"
+          :key="participant.id_participant"
+        >
+          {{ participant.participantName }} {{ participant.participantSurname }}
+        </option>
+      </select>
+    </div>
   </div>
-  
-</div>
 </template>
 
 <style scoped lang="scss">
-@import '../../assets/scss/variables.scss';
+@import "../../assets/scss/variables.scss";
 .container {
   padding: 10px;
 
