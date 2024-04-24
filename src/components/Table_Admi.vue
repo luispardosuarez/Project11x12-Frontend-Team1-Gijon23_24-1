@@ -59,9 +59,13 @@ const deleteScholarship = async (id) => {
 }
 
 
-onMounted(async () => {
+/* onMounted(async () => {
     await scholarship();
-});
+}); */
+
+onMounted(() => {
+    dniList();
+})
 
 
 </script>
