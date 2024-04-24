@@ -14,6 +14,8 @@ export const useAuthStore = defineStore('auth', () => {
 
     const isAuthenticated = computed(() => user.isAuthenticated)
 
+    const id = computed(() =>user.id)
+
     const login = async (dataConnection) => {
         const uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
         try {
@@ -26,7 +28,7 @@ export const useAuthStore = defineStore('auth', () => {
             const response = await axios.get(`${uri}/login`, options)
             const data = response.data
             user.isAuthenticated = true
-            user.id = data.id_user
+            user.id = data.id
             user.username = data.username
             user.roles = data.roles
             isLoading.value = false
@@ -60,5 +62,5 @@ export const useAuthStore = defineStore('auth', () => {
 
     };
 
-    return { user, login, logout, userLogout, isAuthenticated, isLoading  }
+    return { user, login, logout, userLogout, isAuthenticated, isLoading, id  }
 })
