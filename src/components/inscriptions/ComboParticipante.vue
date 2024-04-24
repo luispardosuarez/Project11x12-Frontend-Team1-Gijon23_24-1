@@ -1,6 +1,7 @@
 <script setup>
 import { useAuthStore } from "@/stores/auth";
 import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
+
 import axios from "axios";
 import { ref } from "vue";
 
