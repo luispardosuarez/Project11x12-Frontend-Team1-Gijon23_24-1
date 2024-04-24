@@ -27,7 +27,7 @@ const fetchParticipants = async () => {
         console.log("Datos filtrados: ", allParticipants.value);
         
         
-        selectedParticipant.value = allParticipants.value.length > 0 ? allParticipants.value[0] : null;
+        // selectedParticipant.value = allParticipants.value.length > 0 ? allParticipants.value[0] : null;
     } catch (error) {
         console.error("Error al obtener los participantes: ", error);
     }

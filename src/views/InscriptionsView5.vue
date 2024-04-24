@@ -29,7 +29,7 @@ const selectedParticipantStore = useSelectedParticipantStore();
 const selectedParticipant = selectedParticipantStore.selectedParticipants;
 
 const selectedCamp = selectedCampStore.state.selectedCamp;
-const pasoActual = ref(5);
+const pasoActual = ref(3);
 provide('pasoActual', pasoActual);
 
 const showComboParticipante = () => {

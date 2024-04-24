@@ -22,7 +22,7 @@ const goUserDashboard = () => {
 };
 const authStore = useAuthStore();
 
-const pasoActual = ref(7);
+const pasoActual = ref(5);
 provide('pasoActual', pasoActual);
 
 </script>

@@ -21,7 +21,7 @@ const goStep7 = () => {
 };
 const authStore = useAuthStore();
 
-const pasoActual = ref(6);
+const pasoActual = ref(4);
 provide('pasoActual', pasoActual);
 
 </script>

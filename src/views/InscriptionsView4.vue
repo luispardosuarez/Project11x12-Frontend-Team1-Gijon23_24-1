@@ -28,7 +28,7 @@ const selectedCamp = selectedCampStore.state.selectedCamp;
 const selectedParticipantStore = useSelectedParticipantStore();
 const selectedParticipant = selectedParticipantStore.selectedParticipants;
 
-const pasoActual = ref(4);
+const pasoActual = ref(3);
 provide('pasoActual', pasoActual);
 
 </script>
