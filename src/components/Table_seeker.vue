@@ -6,14 +6,13 @@ import { watchEffect } from 'vue';
 
 const store = usescholarshipStore();
 const searchQuery = ref('');
-
 const showResults = computed(() => searchQuery.value.length > 0);
 
 
 const filteredDniList = computed(() => { 
     const dniList = store.dniList || [];
-    return dniList.filter(dni => dni.dni.includes(searchQuery.value));
-
+    const dniListFiltered = dniList.filter(dni => dni.dni.includes(searchQuery.value));
+    return dniListFiltered
 });
 
 const noResultsFound = computed(() => filteredDniList.value.length === 0);
@@ -49,10 +48,13 @@ const deleteScholarship = async (id) => {
     }
 }
 
+
 watchEffect(() => {
+
     console.log(store.dniList);
     console.log(filteredDniList.value);
 });
+
 
 </script>
 

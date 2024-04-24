@@ -1,40 +1,48 @@
 <script setup>
 
-import { ref, watch } from "vue"
+import { computed } from "vue"
 import { useRoute, useRouter } from "vue-router";
 import { usescholarshipStore } from "@/stores/scholarship";
 import { onMounted } from 'vue';
 import { watchEffect } from 'vue';
 
-const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
 
+const uri = import.meta.env.VITE_API_ENDPOINT_SCHOLARSHIP
 
 const route = useRoute()
 const router = useRouter()
 const store = usescholarshipStore()
 
-const dniList = store.dniList
 
-async function scholarship () {
-    dniList.value = await store.scholarship()
+const dniList = computed(() => store.dniList.value); // Una propiedad computada que refleja el valor de store.dniList.
+
+const updateDniList = () => { //Una función que actualiza dniList con el valor actual de store.dniList.
+    dniList.value = store.dniList.value;
+}
+
+watchEffect(updateDniList); // Ejecuta updateDniList cada vez que cambia el valor de store.dniList, 
+//asegurando que dniList siempre esté sincronizado con el almacén.
+
+async function scholarship () { //Una función asíncrona que llama a store.scholarship para obtener la lista de DNI y luego actualiza dniList
+    await store.scholarship()
+    updateDniList();
     dniList.value = dniList.value.map(dni => ({ ...dni, isEditing: false }))
 }
 
-const editScholarship = async (id, newValue) => {
+const editScholarship = async (id, newValue) => { // para editar un DNI específico.
     await store.editDNI(id, newValue)
 }
 
-const updateDNI = (dni, newValue) => {  
+const updateDNI = (dni, newValue) => { // Actualiza el valor de un DNI específico.
     dni.dni = newValue
 }
 
-const toggleEditMode = (dni,id) => {
+const toggleEditMode = (dni,id) => { // Cambia el modo de edición de un DNI específico.
     dni.isEditing = !dni.isEditing;
 }
 
 
-
-const deleteScholarship = async (id) => {
+const deleteScholarship = async (id) => { 
 
     const confirmation = window.confirm('¿Estás seguro de querer borrar este DNI?');
     if (!confirmation) {
@@ -56,7 +64,6 @@ onMounted(async () => {
 });
 
 
-
 </script>
 
 <template>
@@ -64,7 +71,7 @@ onMounted(async () => {
         <h4>Becados</h4>
         <table>
 
-            <tr v-for="dni in store.dniList" :key="dni.dni">
+            <tr v-for="dni in store.filteredDniList" :key="dni.dni">
                 <td> 
                     <span v-if="!dni.isEditing">{{ dni.dni }}</span>  
                     <input v-else :value="dni.dni" @keyup.enter="updateDNI(dni, $event.target.value)" @blur="editScholarship(dni.id, dni.dni)" />
