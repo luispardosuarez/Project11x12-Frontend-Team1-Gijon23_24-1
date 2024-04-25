@@ -5,21 +5,20 @@ const projectStore = useProjectStore();
 
 
 </script>
-
 <template>
-  <div class="description">
-    <div class="description-card">
-      <h1>Descripción</h1>
-      <div class="content-wrapper">
-        <p>{{ projectStore.description }}</p>
-        <img src="../../assets/img/11x12.jpg" alt="imagen logo 11x12" class="logoHome" />
+  <div class="description ">
+    <div class="description-card d-flex justify-content-between align-items-center">
+      <div>
+        <h1>Descripción</h1>
+        <p> {{ projectStore.description }}</p>
       </div>
       <img src="../../assets/img/11x12.jpg" alt="imagen logo 11x12" class=" logoHome" />
     </div>
    <ContainerModal/>
   </div>
-</template>
 
+
+</template>
 <style lang="scss" scoped>
 .description {
   display: flex;
@@ -67,9 +66,7 @@ const projectStore = useProjectStore();
     }
    
   }
+
 }
 </style>
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
