@@ -1,4 +1,4 @@
-
+<!-- 
 <script setup>
 import { ref } from "vue"
 import { useRoute, useRouter } from "vue-router";
@@ -30,13 +30,13 @@ campamentos.value = getcamps();
       <CardsCampamentos v-for="(campamento, index) in campamentos" :key="index" :campamento="campamento" />
     </div>
   </div>
-</template>
+</template> -->
 
 
 
 
 
-<!-- <script setup>
+<script setup>
 
 import { ref } from 'vue';
 import CardsCampamentos from "./CardsCampamentos.vue";
@@ -49,6 +49,7 @@ const fetchCampamentos = async () => {
     const data = await response.json();
 
     campamentos.value = data.campamentos;
+    console.log("Campamentos: " + campamentos.value)
 
   } catch (error) {
     console.error('Error al cargar el archivo JSON de campamentos:', error);
@@ -79,4 +80,4 @@ fetchCampamentos();
     padding: 20px;
   }
 }
-</style> -->
+</style>

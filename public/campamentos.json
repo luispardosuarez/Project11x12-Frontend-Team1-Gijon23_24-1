@@ -1,6 +1,7 @@
 {
   "campamentos": [
     {
+      "id": 1,
       "image": "navidad.jpg",
       "name": "Navidad",
       "start date": "22/12/2024",
@@ -11,6 +12,7 @@
       "date diner":"20 EUROS"
     }, 
     {
+      "id": 2,
       "image": "semanasanta.jpg",
       "name": "Semana Santa",
       "start date": "25/03/2024",
@@ -22,6 +24,7 @@
 
     }, 
     {
+      "id": 3,
       "image": "verano.jpg",
       "name": "Verano",
       "start date": "24/06/2024",

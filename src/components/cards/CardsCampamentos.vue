@@ -1,16 +1,27 @@
-<!-- <script setup>
+<script setup>
 import { defineProps, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
-import selectedCampStore from '@/stores/selectedCampStore';
+import { useSelectedCampStore } from '@/stores/selectedCampStore';
 
 const router = useRouter();
 
-const redirectInscriptions = (campamentoName) => {
-  selectedCampStore.mutations.setSelectedCamp(campamentoName);
-    router.push(`/inscription/${campamentoName}`);
-  };
+const selectedCampStore = useSelectedCampStore();
 
+// const redirectInscriptions = (campId) => {
+  
+//   console.log("Esto es el index", campId)
+//     router.push(`/inscription/${campId}`);
+//   };
+
+const redirectInscriptions = (campId) => {
+  
+    console.log("Esto es el id:" , campId);
+  router.push(`/inscription/${campId}`);
+  selectedCampStore.saveCampId(campId);
+  
+}
+  
 const props = defineProps({
   campamento: Object,
 });
@@ -85,7 +96,7 @@ watch(() => props.campamento, setColors, { immediate: true });
         <p><img class="flag" src="../../assets/icons/flag.svg" alt=""> {{ campamento['date flag'] }} </p>
         <p><img class="flag" src="../../assets/icons/people.svg" alt=""> {{ campamento['date user'] }} </p>
         <p class="diferent">{{ campamento['date diner'] }}</p>
-        <button :style="'background-color: ' + btnColor" type="button" id="btn_ins" @click="redirectInscriptions(campamento.name)">INSCRIBIRME</button>
+        <button :style="'background-color: ' + btnColor" type="button" id="btn_ins" @click="redirectInscriptions(campamento.id)">INSCRIBIRME</button>
       </div>
     </div>
     </div>
@@ -96,8 +107,8 @@ watch(() => props.campamento, setColors, { immediate: true });
     </div>
   </div>
 </div>
-</template> -->
-<script setup>
+</template>
+<!-- <script setup>
 import { defineProps, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
@@ -185,7 +196,7 @@ const formatDate = (dateString) => {
     </div>
   </div>
 </div>
-</template>
+</template> -->
 
 <style scoped lang="scss">
 

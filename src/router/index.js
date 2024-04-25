@@ -40,7 +40,7 @@ const router = createRouter({
       
     },
     {
-      path: '/inscription/:campamentoName',
+      path: '/inscription/:campId',
       name: 'inscription',
       component: () => import('../views/InscriptionsView.vue')
       
