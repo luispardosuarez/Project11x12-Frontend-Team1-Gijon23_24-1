@@ -36,7 +36,7 @@ async function login() {
         } else if (error.response && error.response.status === 404) {
             errorMessage.value = "Correo incorrecto";
         } else {
-            errorMessage.value = "Error de autenticación";
+            errorMessage.value = "Usuario ó Contraseña Incorrecta";
         } 
     }
 }
