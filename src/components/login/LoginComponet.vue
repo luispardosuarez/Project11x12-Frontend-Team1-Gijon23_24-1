@@ -36,7 +36,7 @@ async function login() {
         } else if (error.response && error.response.status === 404) {
             errorMessage.value = "Correo incorrecto";
         } else {
-            errorMessage.value = "Usuario ó Contraseña Incorrecta";
+            errorMessage.value = "Usuario o contraseña incorrecta";
         } 
     }
 }
@@ -66,10 +66,11 @@ const logout = () => {
                 <input type="password" id="password" placeholder="Contraseña" required v-model="password">
             </div>
         </form>
+
         <div v-if="errorMessage" class="error-popup">
             <div class="error-content">
                 <p>{{ errorMessage }}</p>
-                <button @click="errorMessage = ''">Cerrar</button>
+                <button class="btn close-btn" @click="errorMessage = ''">Cerrar</button >
             </div>
         </div>
         <p class="paragraph">¿No tienes cuenta? <a href="#" @click.prevent="redirectToRegister()"> <b>Regístrate aquí</b></a></p>
@@ -133,10 +134,17 @@ button {
     margin-top: 20px;
     font-size: large;
 }
+
 .error-message {
     color: red;
     margin-top: 10px;
 }
+
+.error-content p {
+    margin-bottom: 20px;
+    color: black;
+}
+
 .error-popup {
     position: fixed;
     top: 0;
@@ -148,11 +156,10 @@ button {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-
 }
 
-    .error-content {
-        background-color: white; /* Fondo blanco */
+.error-content {
+    background-color: white; 
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -166,21 +173,19 @@ button {
     justify-content: center;
 }
 
-.error-content p {
-    margin-bottom: 20px;
-    color: black;
-}
-
 .error-content button {
-    background-color: red;
-    color: black; 
+    background-color: #D0003E;
+    color: white; 
     border: none;
     cursor: pointer;
     margin-top: 20px;
-    font-size: 16px;
-    width: auto; /* Hacer el ancho flexible */
-    padding: 10px 20px;
+    font-size: 15px;
+    width: auto;
+    padding: 10px 10px;
+    margin-left: 0%;
 }
+
+
 
 
 
