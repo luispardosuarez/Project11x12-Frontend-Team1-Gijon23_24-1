@@ -9,7 +9,7 @@ const showPopup = ref(false);
 <template>
   <TableCamps/>
     <div class="admin-panel">
-      <button class="add-button " @click="showPopup = true">Añadir Campamento</button>
+      <button class="add-button p-2" @click="showPopup = true">Añadir Campamento</button>
       
       <div v-if="showPopup" class="popup">
        <PopUpAddCamp/>
@@ -37,6 +37,10 @@ const showPopup = ref(false);
         color: white;
         background-color: $red;
         border: none;
+        padding: 4px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 0;
     }
   
     .popup {
