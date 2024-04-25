@@ -27,8 +27,12 @@ watchEffect(() => {
     console.log(filteredDniList.value);
 });
 
-const updateSearchQuery = (event) => {
+/* const updateSearchQuery = (event) => {
     store.setSearchQuery(event.target.value);
+};  */
+
+const updateSearchQuery = (event) => {
+    searchQuery.value = event.target.value;
 }; 
 
 
@@ -39,8 +43,7 @@ const updateSearchQuery = (event) => {
     <div class="contain">
         <div class="center">
             <div class="temp_box">
-                <!-- <input type="text" id="dni_pas" placeholder="Buscar DNI" v-model="searchQuery" autocomplete="off" @keyup.enter="searchQuery.value = ''"> -->
-                <input type="text" placeholder="Buscar DNI" @input="updateSearchQuery" autocomplete="off"/>
+                <input type="text" placeholder="Buscar DNI" v-model="searchQuery" autocomplete="off"/>
                 <label>🔍</label> 
             </div>
             
