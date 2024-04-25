@@ -102,8 +102,9 @@ import { defineProps, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 const router = useRouter();
-const redirectInscriptions = (campamentoName) => {
-    router.push(`/inscription/${campamentoName}`);
+const redirectInscriptions = (index) => {
+  console.log("Esto es el index", index)
+    router.push(`/inscription/${index}`);
   };
 const props = defineProps({
   campamento: Object,
@@ -173,7 +174,7 @@ const formatDate = (dateString) => {
         <p><img class="flag" src="../../assets/icons/flag.svg" alt=""> {{ campamento['date flag'] }} </p>
         <p><img class="flag" src="../../assets/icons/people.svg" alt=""> {{ campamento['date user'] }} </p>
         <p class="diferent">{{ campamento['date diner'] }}</p>
-        <button :style="'background-color: ' + btnColor" type="button" id="btn_ins" @click="redirectInscriptions(campamento.name)">INSCRIBIRME</button>
+        <button :style="'background-color: ' + btnColor" type="button" id="btn_ins" @click="redirectInscriptions(campamento.id)">INSCRIBIRME</button>
       </div>
     </div>
     </div>
