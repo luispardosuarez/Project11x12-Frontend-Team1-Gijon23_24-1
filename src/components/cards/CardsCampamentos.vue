@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { defineProps, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
@@ -79,6 +79,94 @@ watch(() => props.campamento, setColors, { immediate: true });
 
     <p class="descrip_events">{{ campamento['description'] }}</p>
 
+    <div class="main_event">
+      <div :style="'background-color: ' + navEventColor" class="nav_event"
+        :class="{ 'black_text_verano': props.campamento.name === 'Verano' }">
+        <p><img class="flag" src="../../assets/icons/flag.svg" alt=""> {{ campamento['date flag'] }} </p>
+        <p><img class="flag" src="../../assets/icons/people.svg" alt=""> {{ campamento['date user'] }} </p>
+        <p class="diferent">{{ campamento['date diner'] }}</p>
+        <button :style="'background-color: ' + btnColor" type="button" id="btn_ins" @click="redirectInscriptions(campamento.name)">INSCRIBIRME</button>
+      </div>
+    </div>
+    </div>
+    <div class="card__face card__face--back">
+        <p>Más información</p>
+        <p class="descrip_events">{{ campamento['description'] }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</template> -->
+<script setup>
+import { defineProps, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+const router = useRouter();
+const redirectInscriptions = (campamentoName) => {
+    router.push(`/inscription/${campamentoName}`);
+  };
+const props = defineProps({
+  campamento: Object,
+});
+let colorFig = '';
+let navEventColor = '';
+let btnColor = '';
+const setColors = () => {
+  switch (props.campamento.name) {
+    case 'Navidad':
+      colorFig = '#6E8EBC';
+      navEventColor = '#6E8EBC';
+      btnColor = '#3D6BAD';
+      break;
+    case 'Semana Santa':
+      colorFig = '#5FC68E';
+      navEventColor = '#5FC68E';
+      btnColor = '#497C48';
+      break;
+    case 'Verano':
+      colorFig = '#F5D872';
+      navEventColor = '#F5D872';
+      btnColor = '#F6FF90';
+      break;
+    default:
+      colorFig = 'transparent';
+      navEventColor = 'transparent';
+      btnColor = 'transparent';
+  }
+};
+const isFlipped = ref(false);
+const flipCard = (event) => {
+  const card = event.currentTarget.closest('.card');
+  const backFace = card.querySelector('.card__face--back');
+  isFlipped.value = !isFlipped.value;
+  if (isFlipped.value) {
+    backFace.style.backgroundColor = colorFig;
+  }
+};
+watch(() => props.campamento, setColors, { immediate: true });
+const formatDate = (dateString) => {
+ const date = new Date(dateString);
+ const options = { year: 'numeric', month: 'long', day: 'numeric' };
+ return date.toLocaleDateString('es-ES', options);
+};
+</script>
+<template>
+  <div id="card-container">
+  <div class="card" @click="flipCard">
+    <div :class="{ 'card__inner': true, 'is-flipped': isFlipped }">
+      <div class="card__face card__face--front">
+        <div class="color_fig" :style="{ backgroundColor: colorFig }"></div>
+    <img class="mainImg" :src="'/img/' + campamento.img" alt="Imagen de {{ campamento.camp_name }}" />
+    <div class="dates_event">
+      <h5 :class="campamento.camp_name === 'Navidad' ? 'navidad' : campamento.camp_name === 'Verano' ? 'verano' : ''">{{
+      campamento.camp_name }}</h5>
+      <div class="text_event">
+        <h6><strong>Fecha inicio/fin:</strong>
+          <p>{{ formatDate(campamento.start_date) }} - {{ formatDate(campamento.end_date) }} </p>
+        </h6>
+      </div>
+    </div>
+    <p class="descrip_events">{{ props.campamento.description}}</p>
     <div class="main_event">
       <div :style="'background-color: ' + navEventColor" class="nav_event"
         :class="{ 'black_text_verano': props.campamento.name === 'Verano' }">
