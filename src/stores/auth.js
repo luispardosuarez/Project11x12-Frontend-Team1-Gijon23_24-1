@@ -28,6 +28,11 @@ export const useAuthStore = defineStore('auth', () => {
             isLoading.value = false
             return true
         } catch (error) {
+
+            if (error.response && error.response.status === 401) {
+                throw new Error('Contraseña incorrecta')
+            }
+            
             throw new Error('Error Loading API: ' + error)
         }
     }
