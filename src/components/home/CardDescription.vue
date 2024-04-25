@@ -62,11 +62,11 @@ const projectStore = useProjectStore();
     }
     @media (max-width: 980px) {
       margin-top: 1rem; 
-      width: 35%;
+      width: 45%;
+      margin-left: 5rem;
     }
    
   }
 
 }
 </style>
-
