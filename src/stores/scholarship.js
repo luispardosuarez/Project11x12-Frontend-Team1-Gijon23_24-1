@@ -4,20 +4,13 @@ import axios from 'axios'
 
     export const usescholarshipStore = defineStore('scholarship', () => {
 
-        const dniList = ref([]); // Array d lista de DNI, almacenada como una referencia reactiva.
-        const filterByDNI = ref(''); // Un filtro para buscar DNI específicos, también una referencia reactiva.
+    const dniList = ref([]); 
+    const searchQuery = ref('');
+    const isLoading = ref(false);
 
-
-        const filteredDniList = computed(() => { //Una propiedad calculada que filtra dniList basándose en filterByDNI. 
-            //Si filterByDNI está vacío, devuelve toda la lista; de lo contrario, filtra los DNI que incluyen el valor de filterByDNI.
-            if (!filterByDNI.value) {
-            return dniList.value;
-            }
-            return dniList.value.filter(dni => dni.dni.includes(filterByDNI.value));
-        });
-    
-
-    const isLoading = ref(false)
+    const setSearchQuery = (query) => {
+        searchQuery.value = query;
+    };
 
     const scholarship = async (dataConnection) => {
 
@@ -95,5 +88,5 @@ import axios from 'axios'
         }
 
 
-    return { dniList, scholarship, deleteDNI, editDNI, filterByDNI, filteredDniList}
+    return { dniList, scholarship, deleteDNI, editDNI, searchQuery, setSearchQuery  }
 })
