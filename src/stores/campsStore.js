@@ -1,5 +1,0 @@
-VITE_API_ENDPOINT_CAMPS
-
-
-
-
