@@ -1,14 +1,46 @@
-<script setup></script>
+<script setup>
+import { useCampWeeksStore } from '@/stores/campWeeksStore';
+import { onMounted, ref, watch } from 'vue';
+
+
+const store = useCampWeeksStore();
+const weeks = store.weeks;
+const selectedWeek = ref(null);
+
+onMounted(async () => {
+  await store.fetchWeeks();
+});
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('es-ES');
+};
+
+watch(selectedWeek, (newValue, oldValue) => {
+ if (newValue != null) {
+    const selectedWeekData = weeks.value.find(week => week.id_week === newValue);
+    if (selectedWeekData) {
+      store.setSelectedDateRange({
+      
+          start: formatDate(selectedWeekData.start_date),
+          end: formatDate(selectedWeekData.end_date),
+        
+      });
+    }
+ } else {
+  store.setSelectedDateRange(null);
+ }
+});
+
+</script>
 <template>
   <div class="contenedorPaso1">
     <div class="container">
     <div class="select">
-      <select>
+      <select v-model="selectedWeek">
         <option value="null">Seleccione Fecha:</option>
-        <option value="uno">01/07/2024 - 05/07/2024</option>
-        <option value="dos">08/07/2024 - 12/07/2024</option>
-        <option value="tres">14/07/2024 - 18/07/2024</option>
-        <option value="cuatro">21/07/2024 - 25/07/2024</option>
+        <option v-for="week in weeks" :key="week.id_week" :value="week.id_week">{{ formatDate(week.start_date) }} - {{ formatDate(week.end_date) }}</option>
+        
       </select>
     </div>
   </div>
@@ -70,6 +102,7 @@
     font-family: Arial;
     font-size: medium;
     transition: background-color 0.3s;
+    text-align: left;
   }
 
   .option:hover {

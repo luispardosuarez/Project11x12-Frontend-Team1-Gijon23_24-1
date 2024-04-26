@@ -8,6 +8,8 @@ import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { provide } from "vue";
+import { useSelectedCampStore} from "@/stores/selectedCampStore";
+import { useSchoolStore } from "@/stores/schoolStore";
 
 const router = useRouter();
 
@@ -15,10 +17,13 @@ const goStep2 = () => {
   router.push("/inscriptionPaso2");
 };
 const goStep4 = () => {
-  router.push("/inscriptionPaso4");
+  router.push("/inscriptionPaso5");
 };
 const authStore = useAuthStore();
+const schoolStore = useSchoolStore();
+const selectedSchool = schoolStore.selectedSchool;
 
+const selectedCamp = useSelectedCampStore();
 const pasoActual = ref(3);
 provide('pasoActual', pasoActual);
 
@@ -27,7 +32,7 @@ provide('pasoActual', pasoActual);
   <main>
     <div>
       <div class="saludo">
-        <h2>¡Hola {{ authStore.user.username }}!</h2>
+        <h2>¡Hola {{ authStore.user.username }}! {{ authStore.user.id }}</h2>
       </div>
       <div class="bajoSaludo">
         <aside class="barraLateral">
@@ -40,28 +45,28 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h3>{campamento}</h3>
-            <h4>{fecha } { schedule }</h4>
+            <h3>{{selectedCamp.campDetails.camp_name}}</h3>
+            <h4> {{ selectedCamp.campDetails.schedule }}</h4>
           </div>
           <div class="colegio">
-            <h3>{Colegio}</h3>
-            <h4>Plazas disponibles {places_num}</h4>
+            <h3>{{selectedSchool}}</h3>
+            <!-- <h4>Plazas disponibles {places_num}</h4> -->
           </div>
           <div class="participantes">
             <h3>Seleccionar Participante:</h3>
             <ComboParticipante/>
             
           </div>
-          <div class="opcionesParticipantes">
+          <!-- <div class="opcionesParticipantes">
             <ParticipantesOpciones/>
-          </div>
+          </div> -->
 
           <div class="AtrasSiguiente">
             <div class="Siguiente">
               <BotonSiguiente @goToNextStep="goStep4" />
             </div>
             <div class="Atras">
-              <BotonAtras @goToPreviusStep="goStep2" />
+              <!-- <BotonAtras @goToPreviusStep="goStep2" /> -->
             </div>
           </div>
         </div>

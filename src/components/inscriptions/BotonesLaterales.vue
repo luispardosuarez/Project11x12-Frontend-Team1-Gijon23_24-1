@@ -16,16 +16,22 @@ function determinarNumeroPaso(ruta) {
    return match ? parseInt(match[1], 10) : 1;
 }
 
+function desactivarBotones() {
+   document.querySelectorAll('.btnPasos button').forEach(button => {
+      button.disabled = true;
+   })
+}
+
 </script>
 
 <template>
  <div class="btnPasos">
-    <button :class="{ 'paso-actual': pasoActual === 1 }" @click="cambiarPaso(1)">Seleccionar semana</button>
-    <button :class="{ 'paso-actual': pasoActual === 2 }" @click="cambiarPaso(2)">Seleccionar colegio</button>
-    <button :class="{ 'paso-actual': pasoActual === 3 }" @click="cambiarPaso(3)">Seleccionar participante</button>
-    <button :class="{ 'paso-actual': pasoActual === 4 }" @click="cambiarPaso(4)">Confirmar compra</button>
-    <button :class="{ 'paso-actual': pasoActual === 5 }" @click="cambiarPaso(5)">Pago</button>
-    <button :class="{ 'paso-actual': pasoActual === 6 }" @click="cambiarPaso(6)">Finalizar</button>
+    <button :class="{ 'paso-actual': pasoActual === 1 }" @click="cambiarPaso(1)" @mouseenter="desactivarBotones">Seleccionar semana</button>
+    <button :class="{ 'paso-actual': pasoActual === 2 }" @click="cambiarPaso(2)" @mouseenter="desactivarBotones">Seleccionar colegio</button>
+    <button :class="{ 'paso-actual': pasoActual === 3 }" @click="cambiarPaso(3)" @mouseenter="desactivarBotones">Seleccionar participante</button>
+    <button :class="{ 'paso-actual': pasoActual === 4 }" @click="cambiarPaso(4)" @mouseenter="desactivarBotones">Confirmar compra</button>
+    <button :class="{ 'paso-actual': pasoActual === 5 }" @click="cambiarPaso(5)" @mouseenter="desactivarBotones">Pago</button>
+    <button :class="{ 'paso-actual': pasoActual === 6 }" @click="cambiarPaso(6)" @mouseenter="desactivarBotones">Finalizar</button>
  </div>
 </template>
 

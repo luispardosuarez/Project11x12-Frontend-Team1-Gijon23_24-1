@@ -2,6 +2,7 @@
 import { ref } from "vue"
 import { useRoute, useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
+import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
 
 let uri = import.meta.env.VITE_API_ENDPOINT_GENERAL
 
@@ -39,6 +40,9 @@ async function login() {
             errorMessage.value = "Usuario o contraseña incorrecta";
         } 
     }
+
+    const cleanStoreParticipantSelected = useSelectedParticipantStore();
+    cleanStoreParticipantSelected.clearSelectedParticipants();
 }
 
 function redirectToRegister() {

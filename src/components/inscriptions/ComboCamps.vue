@@ -1,39 +1,45 @@
 <script setup>
-import { useSchoolStore } from "@/stores/schoolStore";
+import { useCampsStore } from "@/stores/campStore"; 
 import axios from "axios";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
-const allSchools = ref([]);
-const fetchColes = ref(null);
-const schoolStore = useSchoolStore();
+const allCamps = ref([]);
+const campsStore = useCampsStore();
 
-const fetchSchools = async () => {
-  const response = await axios.get(import.meta.env.VITE_API_ENDPOINT_SCHOOLS);
-  allSchools.value = response.data;
-  console.log(response.data);
+const fetchCampsData = async () => {
+ try {
+    const response = await axios.get(import.meta.env.VITE_API_ENDPOINT_CAMPS);
+    allCamps.value = response.data;
+    console.log(response.data);
+ } catch (error) {
+    console.error("Error fetching camps:", error);
+ }
 };
 
-fetchSchools();
+onMounted(() => {
+ fetchCampsData();
+});
 
-const updateSelectedSchool = (event) => {
- schoolStore.setSelectedSchool(event.target.value);
+const updateSelectedCamp = (event) => {
+ campsStore.setSelectedCamp(event.target.value);
 };
 </script>
+
 <template>
-  <div class="container">
+ <div class="container">
     <div class="select">
-      <select v-model="fetchColes" id="comboColes" @change="updateSelectedSchool">
-        <option value="null">Seleccione colegios</option>
+      <select v-model="fetchCamps" id="comboCamps" @change="updateSelectedCamp">
+        <option value="null">Seleccione campamento</option>
         <option
-          v-for="school in allSchools"
-          :key="school.id_schools"
-          :value="school.school_name"
+          v-for="camp in allCamps"
+          :key="camp.id_camp"
+          :value="camp.camp_name"
         >
-          {{ school.schoolName }}
+          {{ camp.campName }}
         </option>
       </select>
     </div>
-  </div>
+ </div>
 </template>
 
 <style scoped lang="scss">

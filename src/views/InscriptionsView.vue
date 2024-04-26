@@ -3,21 +3,52 @@ import BotonesLaterales from "@/components/inscriptions/BotonesLaterales.vue";
 import BotonSiguiente from "@/components/inscriptions/BotonSiguiente.vue";
 import InscripcionPaso1 from "@/components/inscriptions/InscripcionPaso1.vue";
 import { useAuthStore } from "@/stores/auth";
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { onMounted, ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { provide } from "vue";
+import { useSelectedCampStore } from "@/stores/selectedCampStore";
+import axios from "axios";
 
 const router = useRouter();
 
 const goStep2 = () => {
-  router.push('/inscriptionPaso2');
-}
+  router.push("/inscriptionPaso2");
+};
 const authStore = useAuthStore();
 
+const route = useRoute();
+
+const selectedCampStore = useSelectedCampStore();
+
 const pasoActual = ref(1);
-provide('pasoActual', pasoActual);
+provide("pasoActual", pasoActual);
 
+// const fetchCampDetails = async () => {
+//   try {
+//     console.log('campId:', campId);
+//     if (!campId) return;
 
+//     const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_CAMPS}/${campId}`);
+//     console.log('datos a guardar', response.data);
+//     if (response.status === 200) {
+//       selectedCampStore.saveCampDetails(response.data);
+//     }
+
+//   } catch (error) {
+//     console.error('Error al obtener detalles del campamento:', error);
+//   }
+// };
+
+onMounted(async () => {
+  
+  console.log(selectedCampStore.campDetails)
+});
+
+// watch(() => selectedCampStore.selectedCampId, (newValue, oldValue)=> {
+//   if (newValue && newValue !== oldValue) {
+//     fetchCampDetails();
+//   }
+// })
 </script>
 <template>
   <main>
@@ -36,12 +67,18 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h2>{{this.$route.params.campamentoName}}</h2>
+            <!-- <h2>Campamento {{ selectedCampStore.campDetails.id }}</h2> -->
+            <h2>{{ selectedCampStore.campDetails.camp_name}}</h2>
+      
+
+            <div v-if="fetchError">
+              <p class="error-message">Error: {{ fetchError.message }}</p>
+            </div>
           </div>
           <InscripcionPaso1 />
           <div class="Siguiente">
             <!-- <button>Atras</button> -->
-            <BotonSiguiente @goToNextStep="goStep2"/>
+            <BotonSiguiente @goToNextStep="goStep2" />
           </div>
         </div>
       </div>

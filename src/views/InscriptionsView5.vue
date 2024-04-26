@@ -8,6 +8,10 @@ import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { provide } from "vue";
+import { useSelectedCampStore } from "@/stores/selectedCampStore";
+import { useSchoolStore } from "@/stores/schoolStore";
+import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
+
 
 const router = useRouter();
 
@@ -18,9 +22,19 @@ const goStep6 = () => {
   router.push("/inscriptionPaso6");
 };
 const authStore = useAuthStore();
+const schoolStore = useSchoolStore();
+const selectedSchool = schoolStore.selectedSchool;
 
-const pasoActual = ref(5);
+const selectedParticipantStore = useSelectedParticipantStore();
+const selectedParticipant = selectedParticipantStore.selectedParticipants;
+
+const selectedCamp = useSelectedCampStore();
+const pasoActual = ref(3);
 provide('pasoActual', pasoActual);
+
+const showComboParticipante = () => {
+  router.push("/inscriptionPaso4");
+}
 
 </script>
 <template>
@@ -40,18 +54,27 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h3>{campamento}</h3>
-            <h4>{fecha } { schedule }</h4>
+            <h3>{{selectedCamp.campDetails.camp_name}}</h3>
+            <h4>{{ selectedCamp.campDetails.schedule }}</h4>
           </div>
           <div class="colegio">
-            <h3>{Colegio}</h3>
-            <h4>Plazas disponibles {places_num}</h4>
+            <h3>{{selectedSchool}}</h3>
+            <!-- <h4>Plazas disponibles {places_num}</h4> -->
           </div>
+       
           <div class="participantes">
-            <h3>{Participante} {campamento} {desayuno} {merienda} {importe}</h3>
-                        
+            <h3>Seleccionar Participante:</h3>
+            <ul>
+              <li v-for="participant in selectedParticipant" :key="participant.id_participant">
+                {{ participant.participantName }} {{ participant.participantSurname }}
+              </li>
+            </ul>
+            <button @click="showComboParticipante">Añadir Participante</button>
+            <button @click="goStep6">Terminar</button>
           </div>
-          
+          <div class="opcionesParticipantes">
+            <!-- <ParticipantesOpciones/> -->
+          </div>
 
           <div class="AtrasSiguiente">
             <div class="Siguiente">

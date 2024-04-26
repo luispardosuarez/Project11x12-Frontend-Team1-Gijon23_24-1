@@ -7,6 +7,8 @@ import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { provide } from "vue";
+import {useSelectedCampStore} from "@/stores/selectedCampStore";
+import { useCampWeeksStore } from "@/stores/campWeeksStore";
 
 const router = useRouter();
 
@@ -17,6 +19,11 @@ const goStep3 = () => {
   router.push('/inscriptionPaso3');
 }
 const authStore = useAuthStore();
+
+const selectedCamp = useSelectedCampStore();
+
+const campWeeksDateStore = useCampWeeksStore();
+const selectedDateRange = campWeeksDateStore.selectedDateRange;
 
 const pasoActual = ref(2);
 provide('pasoActual', pasoActual);
@@ -39,12 +46,16 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h3>{campamento}</h3>
-            <h4>{fecha } { schedule }</h4>
+            <h2> {{selectedCamp.campDetails.camp_name}}</h2>
+            <h4 v-if="selectedDateRange">{{selectedDateRange.start }} - {{ selectedDateRange.end }} { schedule }</h4>
           </div>
           <div class="colegio">
+            
             <h3>Seleccionar Colegio:</h3>
-             <ComboColes/>   <h4>Plazas disponibles {places_num}</h4>
+            <div class="cmbColes">
+             <ComboColes/>   
+             <!-- <h4>Plazas disponibles:{places_num}</h4> -->
+            </div>
           </div>
 
           <div class="AtrasSiguiente">
@@ -52,7 +63,7 @@ provide('pasoActual', pasoActual);
               <BotonSiguiente @goToNextStep="goStep3" />
             </div>
             <div class="Atras">
-              <BotonAtras @goToPreviusStep="goStep1"/>
+              <!-- <BotonAtras @goToPreviusStep="goStep1"/> -->
             </div>
             
           </div>
@@ -69,9 +80,23 @@ h2 {
   padding-left: 2%;
   padding-top: 2%;
 }
+ h3 {
+  padding-left: 2.5%;
+ }
+ h4 {
+  font-size: small;
+ }
 
 .campamento{
   font-family: Arial;
+}
+
+.colegio {
+  display: flex;
+  flex-direction: column;
+}
+.cmbColes {
+  display: flex;
 }
 
 .bajoSaludo {
@@ -103,6 +128,7 @@ aside {
   flex-direction: row-reverse;
   margin: 1%;
   gap: 1%;
+  margin-top: 3%;
 }
 .Siguiente {
   text-align: right;
