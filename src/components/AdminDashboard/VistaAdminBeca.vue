@@ -11,16 +11,7 @@ const route = useRoute()
 const router = useRouter()
 const store = usescholarshipStore()
 
-const dniList = computed(() => store.dniList)
-
-
-const filteredDniList = computed(() => {
-    const dniList = store.dniList || [];
-    const searchQuery = store.searchQuery;
-    return dniList.filter(dni => dni.dni.includes(searchQuery));
-});
-
-
+const dniList = ref([])
 
 async function scholarship () {
     dniList.value = await store.scholarship()
@@ -82,11 +73,10 @@ const goToPage = (page) => {
     currentPage.value = page;
  }
 };
-
 const paginatedDnis = computed(() => {
-    const start = (currentPage.value - 1) * itemsPerPage.value;
-    const end = start + itemsPerPage.value;
-    return filteredDniList.value.slice(start, end);
+ const start = (currentPage.value - 1) * itemsPerPage.value;
+ const end = start + itemsPerPage.value;
+ return dniList.value.slice(start, end);
 });
 
 
@@ -98,7 +88,7 @@ const paginatedDnis = computed(() => {
         <h4>Becados</h4>
         <table>
 
-            <tr v-for="dni in filteredDniList " :key="dni.dni">
+            <tr v-for="dni in paginatedDnis" :key="dni.dni">
                 <td> 
                     <span v-if="!dni.isEditing">{{ dni.dni }}</span>  
                     <input v-else :value="dni.dni" @keyup.enter="updateDNI(dni, $event.target.value)" @blur="editScholarship(dni.id, dni.dni)" />
@@ -117,13 +107,13 @@ const paginatedDnis = computed(() => {
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-        <li class="page-item" v-for="page in totalPages" :key="page" @click="goToPage(page)">
-        <a class="page-link" href="#">{{ page }}</a>
+           <li class="page-item" v-for="page in totalPages" :key="page" @click="goToPage(page)">
+          <a class="page-link" href="#">{{ page }}</a>
         </li>
         <li class="page-item" @click="nextPage">
-        <a class="page-link" href="#" aria-label="Next">
+          <a class="page-link" href="#" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
-        </a>
+          </a>
         </li>
                 </ul>
             </nav>
@@ -131,7 +121,6 @@ const paginatedDnis = computed(() => {
         </table>
     </div>
 </template>
-
 
 <style scoped lang="scss">
 

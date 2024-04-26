@@ -7,8 +7,7 @@ import { watchEffect } from 'vue';
 const store = usescholarshipStore();
 const searchQuery = ref('');
 
-
-const showResults = computed(() => filteredDniList.value.length > 0);
+const showResults = computed(() => searchQuery.value.length > 0);
 
 
 const filteredDniList = computed(() => { 
@@ -17,23 +16,45 @@ const filteredDniList = computed(() => {
     return dniListFiltered
 });
 
+const noResultsFound = computed(() => filteredDniList.value.length === 0);
 
-const noResultsFound = computed(() => !showResults.value);
+const editScholarship = async (id, newValue) => {
+    await store.editDNI(id, newValue);
+    const index = store.dniList.value.findIndex(dni => dni.id === id);
+    if (index !== -1) {
+        store.dniList.value[index].dni = newValue;
+    }
+    searchQuery.value = '';
+}
+
+const updateDNI = (dni, newValue) => {  
+    dni.dni = newValue
+}
+
+const toggleEditMode = (dni,id) => {
+    dni.isEditing = !dni.isEditing;
+}
+
+
+const deleteScholarship = async (id) => {
+    const confirmation = window.confirm('¿Estás seguro de querer borrar este DNI?');
+    if (!confirmation) {
+        return;
+    }
+    const isDeleted = await store.deleteDNI(id);
+    if (isDeleted) {
+        store.deleteDNI(id);
+    } else {
+        console.error('No se pudo borrar el registro');
+    }
+}
+
 
 watchEffect(() => {
-    store.setSearchQuery(searchQuery.value);
 
     console.log(store.dniList);
     console.log(filteredDniList.value);
 });
-
-/* const updateSearchQuery = (event) => {
-    store.setSearchQuery(event.target.value);
-};  */
-
-const updateSearchQuery = (event) => {
-    searchQuery.value = event.target.value;
-}; 
 
 
 </script>
@@ -43,20 +64,30 @@ const updateSearchQuery = (event) => {
     <div class="contain">
         <div class="center">
             <div class="temp_box">
-                <input type="text" placeholder="Buscar DNI" v-model="searchQuery" autocomplete="off"/>
+                <input type="text" id="dni_pas" placeholder="Buscar DNI" v-model="searchQuery" autocomplete="off" @keyup.enter="searchQuery.value = ''">
                 <label>🔍</label> 
             </div>
-            
-            
-            <table class="table table-striped table-bordered" v-if="showResults"> 
-    <tbody>
-        <tr v-for="dni in filteredDniList" :key="dni.id"></tr>
-    </tbody>
-</table>
 
-<div v-if="noResultsFound" class="error-message">
-    DNI no encontrado.
-</div>
+            <table class="table table-striped table-bordered" v-if="showResults">
+                
+                <tbody>
+                    <tr v-for="dni in filteredDniList" :key="dni.id">
+                        
+                    <td>
+                            <span v-if="!dni.isEditing">{{ dni.dni }}</span>  
+                    <input v-else :value="dni.dni" @keyup.enter="updateDNI(dni, $event.target.value)" @blur="editScholarship(dni.id, dni.dni)" />
+                        </td> 
+
+                    <img src="../assets/icons/delete.svg" alt=""  @click="deleteScholarship(dni.id)">
+                    <img src="../assets/icons/edit.svg" alt="" @click="toggleEditMode(dni)">
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <div v-if="noResultsFound" class="error-message">
+                No hay resultados.
+            </div>
 
         </div>
     </div>
