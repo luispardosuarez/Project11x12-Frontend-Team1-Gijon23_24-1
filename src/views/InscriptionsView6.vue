@@ -6,7 +6,7 @@ import ComboParticipante from "@/components/inscriptions/ComboParticipante.vue";
 import ParticipantesOpciones from "@/components/inscriptions/ParticipantesOpciones.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { provide } from "vue";
 import {useSelectedCampStore} from "@/stores/selectedCampStore";
 import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
@@ -17,10 +17,14 @@ const selectedCamp = useSelectedCampStore();
 const selectedParticipantStore = useSelectedParticipantStore();
 const selectedParticipant = selectedParticipantStore.selectedParticipants;
 
-// const total = computed(() => {
-//  const result = selectedParticipant.value.length * selectedCamp.campDetails.price;
-//  console.log('Total: ', result);
-// });
+const total = ref(null);
+
+onMounted(()=> {
+  console.log(selectedParticipant)
+  total.value = selectedParticipant.length * selectedCamp.campDetails.price;
+ console.log('Total: ', total.value);
+});
+
 
 const goStep5 = () => {
   router.push("/inscriptionPaso5");
