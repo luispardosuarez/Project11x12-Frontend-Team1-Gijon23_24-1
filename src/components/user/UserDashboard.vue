@@ -1,23 +1,97 @@
-<script setup>
-
+<script setup> 
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from "@/stores/auth";
+import axios from 'axios';
 
 const authStore = useAuthStore();
+const participants = ref([]);
+const camps = ref([]);
 
-  const router = useRouter();
+const router = useRouter();
 
-  const redirectToAdd = () => {
-    router.push('/add');
-  };
+const userModel = {
+    profile_name: '',
+    profile_surname: '',
+    dni: '',
+    tlf1: '',
+    tlf2: '',
+    email: '',
+};
 
-  const redirectToEdit = () => {
-    router.push('/edit');
-  };
+userModel.email = authStore.user.username;
 
-  const redirectToHome = () => {
-    router.push('/');
-  };
+const saveUserData = async () => {
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT_GENERAL}/profile`, userModel, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        });
+        console.log('Datos del usuario guardados exitosamente:', response.data);
+    } catch (error) {
+        console.error('Error guardando los datos del usuario:', error);
+    }
+};
+
+const redirectToAdd = () => {
+  router.push('/add');
+};
+
+const redirectToEdit = () => {
+  router.push('/edit');
+};
+
+const redirectToHome = () => {
+  router.push('/');
+};
+
+const fetchParticipants = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS}`);
+    participants.value = response.data;
+  } catch (error) {
+    console.error('Error fetching participants:', error);
+  }
+};
+
+fetchParticipants(); 
+
+const fetchCamps = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_CAMPS}`);
+    camps.value = response.data;
+  } catch (error) {
+    console.error('Error fetching participants:', error);
+  }
+};
+
+fetchCamps(); 
+
+/* const addParticipant = async (newParticipant) => {
+  try {
+    const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS}`, newParticipant);
+    participants.value.push(response.data); 
+  } catch (error) {
+    console.error('Error adding participant:', error);
+  }
+};
+ */
+const deleteParticipant = async (participantId) => {
+  try {
+    await axios.delete(`${import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS}/${participantId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true, 
+    });
+    participants.value = participants.value.filter(participant => participant.id !== participantId);
+    console.log('Participante eliminado exitosamente');
+  } catch (error) {
+    console.error('Error al eliminar el participante:', error);
+  }
+};
 
 </script>
 
@@ -37,7 +111,7 @@ const authStore = useAuthStore();
     <div class="inputGroup">
 
     <label input="Nombre y apellidos">Nombre y apellidos</label>
-    <input type="Nombre y apellidos" placeholder="Nombre y apellidos">
+    <input v-model="userModel.profile_name" type="text" placeholder="Nombre y apellidos">
     <img class="editIcon" src="../../assets/icons/edit.svg">
 
     </div>
@@ -45,7 +119,7 @@ const authStore = useAuthStore();
     <div class="inputGroup">
 
     <label input="DNI">DNI del usuario</label>
-    <input type="DNI" placeholder="DNI del usuario">
+    <input v-model="userModel.dni" type="text" placeholder="DNI del usuario">
     <img class="editIcon" src="../../assets/icons/edit.svg">
 
     </div>
@@ -53,7 +127,7 @@ const authStore = useAuthStore();
     <div class="inputGroup">
 
     <label input="Teléfonos">Teléfonos de contacto</label>
-    <input class="telephone1" type="Teléfonos" placeholder="Teléfono 1"> <input class="telephone2" type="Teléfonos" placeholder="Teléfono 2">
+    <input v-model="userModel.tlf1" class="telephone1" type="tel" placeholder="Teléfono 1"> <input v-model="userModel.tlf2" class="telephone2" type="tel" placeholder="Teléfono 2">
     <img class="editIcon" src="../../assets/icons/edit.svg">
 
     </div>
@@ -61,7 +135,7 @@ const authStore = useAuthStore();
     <div class="inputGroup">
 
     <label input="Correo">Correo electrónico</label>
-    <input type="Correo" placeholder="Correo">
+    <input v-model="userModel.email" type="text" placeholder="Correo">
     <img class="editIcon" src="../../assets/icons/edit.svg">
 
     </div>
@@ -69,7 +143,7 @@ const authStore = useAuthStore();
 </div>
 
     <div class="buttonContainer">
-        <button class="saveButton">Guardar</button>
+        <button @click="saveUserData" class="saveButton">Guardar</button>
     </div>
 
 <div class="registeredContainer">
@@ -80,18 +154,17 @@ const authStore = useAuthStore();
             <button @click="redirectToAdd" class="addParticipant">Añadir participante</button>
         </div>
 
-        <div id="registeredParticipant" class="registeredItem">
+        <div v-for="participant in participants" :key="participant.id" id="registeredParticipant" class="registeredItem">
 
-            <p>Pepa López Navarro</p>
+            <p>{{ participant.participantName }} {{ participant.participantSurname }}</p>
 
             <div class="participantIcons">
                 <img src="../../assets/icons/see.svg">
                 <img src="../../assets/icons/edit.svg" @click="redirectToEdit">
-                <img src="../../assets/icons/delete.svg">
+                <img src="../../assets/icons/delete.svg" @click="deleteParticipant(participant.id)">
             </div>
 
         </div>
-
 
     </div>
 
@@ -104,9 +177,9 @@ const authStore = useAuthStore();
             <button @click="redirectToHome" class="addCamp">Inscribirse</button>
         </div>
 
-        <div class="registeredCamp registeredItem">
+        <div v-for="camp in camps" :key="camp.id" class="registeredCamp registeredItem">
 
-            <p>Campamento de verano - 22/07/2024</p>
+            <p>{{ camp.camp_name }}</p>
 
         </div>
 
@@ -120,6 +193,7 @@ const authStore = useAuthStore();
 </template>
 
 <style lang="scss">
+
 
 // Mobile 
 
@@ -416,7 +490,7 @@ const authStore = useAuthStore();
     }
 
     #registeredParticipant {
-        margin-bottom: 50px;
+        margin-bottom: 20px;
     }
 
     .registeredContainer {
@@ -441,13 +515,14 @@ const authStore = useAuthStore();
     .separator {
         display: block;
         width: 1px;
-        height: 220px;
+        height: 450px;
         background-color: black;
-        margin-top: 20px;
+        margin-top: 100px;
     }
 
     .participantIcons {
         width: 27%;
     }
+    
 }
 </style>

@@ -100,8 +100,8 @@ const paginatedDnis = computed(() => {
                 </td>
 
             </tr>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
+            <nav aria-label="Page navigation example" >
+                <ul class="pagination" >
                     <li class="page-item" @click="prevPage" >
                         <a class="page-link" href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>

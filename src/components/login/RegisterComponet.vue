@@ -13,6 +13,19 @@ const errorMessage = ref('');
 function isValidEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
+
+}
+
+function isValidPassword(password) {
+    const hasMinLength = password.length >= 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
+    return hasMinLength && hasUpperCase && hasSpecialChar;
+}
+
+
+function arePasswordsMatching(password, confirmPassword) {
+    return password === confirmPassword;
 }
 
 
@@ -22,11 +35,21 @@ async function register() {
         errorMessage.value = 'Por favor, introduce tu correo electrónico.';
         return;
     }
-
     if (!isValidEmail(email.value)) {
         errorMessage.value = 'Por favor, introduce un correo electrónico válido.';
         return;
     }
+
+    if (!isValidPassword(password.value)) {
+        errorMessage.value = 'La contraseña debe tener al menos 8 caracteres, una letra mayúscula y un carácter especial.';
+        return;
+    }
+    if (!arePasswordsMatching(password.value, confirmPassword.value)) {
+        errorMessage.value = 'Las contraseñas no coinciden.';
+        return;
+    }
+
+
     try {
         let passwordEncrypted = btoa(`${password.value}`)
         
@@ -56,6 +79,7 @@ async function register() {
     }
 }
 
+
 function redirectToLogin() {
     const redirectPath = '/login'
     router.push(redirectPath)
@@ -66,7 +90,6 @@ function redirectToDashboard() {
     const redirectPath = '/user'
     router.push(redirectPath)
 }
-
 
 
 
