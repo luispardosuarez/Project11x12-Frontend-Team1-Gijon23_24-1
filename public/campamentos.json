@@ -7,6 +7,7 @@
       "start date": "22/12/2024",
       "end date": "29/21/2024",
       "description": "Campamento de Navidad disponible dentro del programa 11x12.",
+      "description2": "Servicio de 9 de la mañana a 6 de la tarde.Atención temprana y desayuno desde las 7 y media de la mañana.Comedor desde las 2 hasta las 4 de la tarde.",
       "date flag":"CAMPAMENTO",
       "date user":"9 PLAZAS",
       "date diner":"20 EUROS"
@@ -18,6 +19,7 @@
       "start date": "25/03/2024",
       "end date": "30/03/2024",
       "description": "Campamento de Semana Santa disponible dentro del programa 11x12.",
+      "description2": "Servicio de 9 de la mañana a 6 de la tarde.Atención temprana y desayuno desde las 7 y media de la mañana.Comedor desde las 2 hasta las 4 de la tarde.",
       "date flag":"CAMPAMENTO",
       "date user":"9 PLAZAS",
       "date diner":"20 EUROS"
@@ -30,6 +32,7 @@
       "start date": "24/06/2024",
       "end date": "30/08/2024",
       "description": "Campamento de Verano disponible dentro del programa 11x12.",
+      "description2": "Servicio de 9 de la mañana a 6 de la tarde.Atención temprana y desayuno desde las 7 y media de la mañana.Comedor desde las 2 hasta las 4 de la tarde.",
       "date flag":"CAMPAMENTO",
       "date user":"9 PLAZAS",
       "date diner":"20 EUROS"

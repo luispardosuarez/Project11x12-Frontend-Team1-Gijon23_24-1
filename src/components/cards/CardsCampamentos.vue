@@ -103,7 +103,7 @@ watch(() => props.campamento, setColors, { immediate: true });
     </div>
     <div class="card__face card__face--back">
         <p>Más información</p>
-        <p class="descrip_events">{{ campamento['description'] }}</p>
+        <p class="descrip_events">{{ campamento['description2'] }}</p>
       </div>
     </div>
   </div>
