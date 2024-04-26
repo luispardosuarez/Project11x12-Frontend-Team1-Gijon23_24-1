@@ -1,6 +1,46 @@
 <script setup>
+import { ref } from 'vue';
+import axios from 'axios';
 
+const participantData = ref({
+  participantName: '',
+  participantSurname: '',
+  dni: '',
+  street: '',
+  pc: '',
+  city: '',
+  municipality: '', 
+  mail: '',
+  birthDate: '',
+  allergies: '',
+  remarks: '',
+});
 
+const uri = import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS;
+
+const addParticipant = async () => {
+  try {
+    const response = await axios.post(`${uri}`, participantData.value, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error al añadir participante:", error);
+    throw error;
+  }
+};
+
+async function handlePost() {
+  try {
+    await addParticipant();
+  } catch (error) {
+    console.error("Error al manejar la solicitud:", error);
+  }
+};
 </script>
 
 <template>
@@ -16,81 +56,81 @@
         <div class="inputGroup">
 
             <label class="name" for="Nombre">Nombre</label>
-            <input class="name" type="Nombre">
+            <input v-model="participantData.participantName" type="text" class="name" placeholder="Nombre">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="surname" for="Apellidos">Apellidos</label>
-            <input class="surname" type="Apellidos">
+            <input v-model="participantData.participantSurname" class="surname" type="text">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="dni" for="DNI">DNI</label>
-            <input class="dni" type="DNI">
+            <input v-model="participantData.dni" class="dni" type="text">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="direction" for="Dirección">Dirección</label>
-            <input class="direction" type="Dirección">
+            <input v-model="participantData.street" class="direction" type="text">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="cp" for="CP">CP</label>
-            <input class="cp" type="CP">
+            <input v-model="participantData.pc" class="cp" type="text">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="locality" for="Localidad">Localidad</label>
-            <input class="locality" type="Localidad">
+            <input v-model="participantData.city" class="locality" type="text">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="municipality" for="Municipio">Municipio</label>
-            <input class="municipality" type="Municipio">
+            <input v-model="participantData.municipality" class="municipality" type="text">
 
         </div>
 
         <div class="inputGroup">
 
         <label class="birth" for="Fecha de nacimiento">Fecha de nacimiento</label>
-        <input class="birth" type="Fecha de nacimiento">
+        <input v-model="participantData.birthDate" class="birth" type="date">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="email" for="Email">Email</label>
-            <input class="email" type="Email">
+            <input v-model="participantData.mail" class="email" type="text">
 
         </div>
 
         <div class="inputGroup">
 
             <label class="allergies" for="Alergias">Alergias</label>
-            <textarea class="allergies" type="Alergias"></textarea>
+            <textarea v-model="participantData.allergies" class="allergies" type="text"></textarea>
 
         </div>
 
         <div class="inputGroup">
 
             <label class="observations" for="Observaciones">Observaciones</label>
-            <textarea class="observations" id="Observaciones"></textarea>
+            <textarea v-model="participantData.remarks" class="observations" id="Observaciones" type="text"></textarea>
 
         </div>
 
-        <button class="save">Guardar</button>
+        <button @click="handlePost" class="save">Guardar</button>
 
     </div>
     
