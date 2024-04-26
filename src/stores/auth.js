@@ -1,4 +1,4 @@
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
@@ -7,6 +7,7 @@ export const useAuthStore = defineStore('auth', () => {
         username: '',
         roles: '',
         isAuthenticated: false
+        
     })
 
     const isLoading = ref(false)
@@ -26,6 +27,7 @@ export const useAuthStore = defineStore('auth', () => {
             user.username = data.username
             user.roles = data.roles
             isLoading.value = false
+            localStorage.setItem('user', JSON.stringify(user));
             return true
         } catch (error) {
 

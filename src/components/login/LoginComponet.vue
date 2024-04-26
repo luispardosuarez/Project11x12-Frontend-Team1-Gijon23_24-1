@@ -128,7 +128,7 @@ button {
     border-radius: 3px;
     border: none;
     background-color: white;
-    color: black;
+    color: #858585;
     cursor: pointer;
     margin-left: 30%;
     margin-top: 20px;
