@@ -53,7 +53,8 @@ provide('pasoActual', pasoActual);
             
             <h3>Seleccionar Colegio:</h3>
             <div class="cmbColes">
-             <ComboColes/>   <h4>Plazas disponibles:{places_num}</h4>
+             <ComboColes/>   
+             <!-- <h4>Plazas disponibles:{places_num}</h4> -->
             </div>
           </div>
 

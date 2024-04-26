@@ -45,21 +45,21 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h3>Campamento {{selectedCamp.campDetails.camp_name}}</h3>
-            <h4>{fecha } { schedule }</h4>
+            <h3>{{selectedCamp.campDetails.camp_name}}</h3>
+            <h4> {{ selectedCamp.campDetails.schedule }}</h4>
           </div>
           <div class="colegio">
             <h3>{{selectedSchool}}</h3>
-            <h4>Plazas disponibles {places_num}</h4>
+            <!-- <h4>Plazas disponibles {places_num}</h4> -->
           </div>
           <div class="participantes">
             <h3>Seleccionar Participante:</h3>
             <ComboParticipante/>
             
           </div>
-          <div class="opcionesParticipantes">
+          <!-- <div class="opcionesParticipantes">
             <ParticipantesOpciones/>
-          </div>
+          </div> -->
 
           <div class="AtrasSiguiente">
             <div class="Siguiente">

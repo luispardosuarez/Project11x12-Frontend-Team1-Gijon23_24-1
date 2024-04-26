@@ -67,8 +67,7 @@ onMounted(async () => {
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <!-- <h2>{{this.$route.params.campamentoName}}</h2> -->
-            <h2>Campamento {{ selectedCampStore.campDetails.id }}</h2>
+            <!-- <h2>Campamento {{ selectedCampStore.campDetails.id }}</h2> -->
             <h2>{{ selectedCampStore.campDetails.camp_name}}</h2>
       
 

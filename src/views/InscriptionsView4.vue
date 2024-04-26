@@ -50,11 +50,11 @@ provide('pasoActual', pasoActual);
         <div class="cuerpoInscripcion">
           <div class="campamento">
             <h3> {{selectedCamp.campDetails.camp_name}}</h3>
-            <h4>{fecha } { schedule }</h4>
+            <h4>{{ selectedCamp.campDetails.schedule}}</h4>
           </div>
           <div class="colegio">
             <h3>{{selectedSchool}}</h3>
-            <h4>Plazas disponibles {places_num}</h4>
+            <!-- <h4>Plazas disponibles {places_num}</h4> -->
           </div>
           <div class="participantes">
             <h3>Seleccionar Participante:</h3>
@@ -71,16 +71,16 @@ provide('pasoActual', pasoActual);
             <ComboParticipante/>
             
           </div>
-          <div class="opcionesParticipantes">
+          <!-- <div class="opcionesParticipantes">
             <ParticipantesOpciones/>
-          </div>
+          </div> -->
 
           <div class="AtrasSiguiente">
             <div class="Siguiente">
               <BotonSiguiente @goToNextStep="goStep5" />
             </div>
             <div class="Atras">
-              <!-- <BotonAtras @goToPreviusStep="goStep4" /> -->
+               <!-- <BotonAtras @goToPreviusStep="goStep3" /> -->
             </div>
           </div>
         </div>

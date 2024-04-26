@@ -6,12 +6,21 @@ import ComboParticipante from "@/components/inscriptions/ComboParticipante.vue";
 import ParticipantesOpciones from "@/components/inscriptions/ParticipantesOpciones.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { provide } from "vue";
 import {useSelectedCampStore} from "@/stores/selectedCampStore";
+import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
 
 const router = useRouter();
 const selectedCamp = useSelectedCampStore();
+
+const selectedParticipantStore = useSelectedParticipantStore();
+const selectedParticipant = selectedParticipantStore.selectedParticipants;
+
+// const total = computed(() => {
+//  const result = selectedParticipant.value.length * selectedCamp.campDetails.price;
+//  console.log('Total: ', result);
+// });
 
 const goStep5 = () => {
   router.push("/inscriptionPaso5");
@@ -43,12 +52,20 @@ provide('pasoActual', pasoActual);
         <div class="cuerpoInscripcion">
           <div class="campamento">
             <h3>{{ selectedCamp.campDetails.camp_name }}</h3>
-            <h4>{fecha } { schedule }</h4>
+            
           </div>
           <div class="colegio">
-            <h3>{Colegio}</h3>
-            <h4>{places_num} {horario}</h4>
+            <h3>{{selectedSchool}}</h3>
+            <h4>{{ selectedCamp.campDetails.schedule }}</h4>
           </div>
+          <ul>
+              <li v-for="participant in selectedParticipant" :key="participant.id_participant">
+                {{ participant.participantName }} {{ participant.participantSurname }} {{ selectedCamp.campDetails.price }}
+              </li>
+            </ul>
+<div>
+  Total: {{ total }}
+</div>
           <div class="pasarelaPago">
             <h2>pasarera de pago</h2>
                         
