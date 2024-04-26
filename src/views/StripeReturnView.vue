@@ -34,12 +34,16 @@ onMounted(async () => {
 <template>
   <body>
     <main>
-      <a href="/">home</a>
-      <h1>Thank you!</h1>
+           <h1>Thank you!</h1>
       <StripeMessages
         v-if="clientSecret"
         :messages="messages"
       />
     </main>
   </body>
-</template>s
+</template>
+<style scoped lang="scss">
+h1{
+  text-align: center;
+}
+</style>

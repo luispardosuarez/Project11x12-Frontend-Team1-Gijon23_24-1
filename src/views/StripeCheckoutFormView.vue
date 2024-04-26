@@ -12,16 +12,18 @@ let stripe;
 let elements;
 let appearance;
 
-const cart = reactive({
-      totalPrice: 2000
+const total = reactive({
+      totalPrice:0
 });
-
+//const total = ref(null);
 
 onMounted(async () => {
+  total.totalPrice=stripeStore.total*100;
+  console.log(total.totalPrice)
   const publishableKey = import.meta.env.VITE_API_ENDPOINT_STRIPE_PK;
   stripe = await loadStripe(publishableKey);
 
-  const clientSecret = (await stripeStore.post(cart)).clientSecret;
+  const clientSecret = (await stripeStore.post(total)).clientSecret;
   console.log(clientSecret)
 
   appearance = {

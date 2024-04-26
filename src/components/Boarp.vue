@@ -4,7 +4,7 @@
             <router-link class="btn" to="/admin">Becados</router-link>
             <router-link class="btn" to="/camp">Campamentos</router-link>
             <!-- <router-link class="btn" to="/camp">Inscriptos</router-link> -->
-            <div class="btn">Inscritos</div>
+            <!-- <div class="btn">Inscritos</div> -->
         </div>
         <div class="image"><img src="../assets/img/11x12.jpg" alt="11x12"></div>
     </div>
