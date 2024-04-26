@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const authStore = useAuthStore();
 const participants = ref([]);
+const camps = ref([]);
 
 const router = useRouter();
 
@@ -56,6 +57,17 @@ const fetchParticipants = async () => {
 };
 
 fetchParticipants(); 
+
+const fetchCamps = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_CAMPS}`);
+    camps.value = response.data;
+  } catch (error) {
+    console.error('Error fetching participants:', error);
+  }
+};
+
+fetchCamps(); 
 
 /* const addParticipant = async (newParticipant) => {
   try {
@@ -165,9 +177,9 @@ const deleteParticipant = async (participantId) => {
             <button @click="redirectToHome" class="addCamp">Inscribirse</button>
         </div>
 
-        <div class="registeredCamp registeredItem">
+        <div v-for="camp in camps" :key="camp.id" class="registeredCamp registeredItem">
 
-            <p>Campamento de verano - 22/07/2024</p>
+            <p>{{ camp.camp_name }}</p>
 
         </div>
 
@@ -478,7 +490,7 @@ const deleteParticipant = async (participantId) => {
     }
 
     #registeredParticipant {
-        margin-bottom: 50px;
+        margin-bottom: 20px;
     }
 
     .registeredContainer {
@@ -503,9 +515,9 @@ const deleteParticipant = async (participantId) => {
     .separator {
         display: block;
         width: 1px;
-        height: 220px;
+        height: 450px;
         background-color: black;
-        margin-top: 20px;
+        margin-top: 100px;
     }
 
     .participantIcons {
