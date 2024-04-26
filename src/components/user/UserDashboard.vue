@@ -1,4 +1,4 @@
-<script setup>
+<script setup> 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from "@/stores/auth";
@@ -6,10 +6,33 @@ import axios from 'axios';
 
 const authStore = useAuthStore();
 const participants = ref([]);
-const selectedParticipant = ref({});
-const showModal = ref(false);
 
 const router = useRouter();
+
+const userModel = {
+    profile_name: '',
+    profile_surname: '',
+    dni: '',
+    tlf1: '',
+    tlf2: '',
+    email: '',
+};
+
+userModel.email = authStore.user.username;
+
+const saveUserData = async () => {
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT_GENERAL}/profile`, userModel, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        });
+        console.log('Datos del usuario guardados exitosamente:', response.data);
+    } catch (error) {
+        console.error('Error guardando los datos del usuario:', error);
+    }
+};
 
 const redirectToAdd = () => {
   router.push('/add');
@@ -34,7 +57,7 @@ const fetchParticipants = async () => {
 
 fetchParticipants(); 
 
-const addParticipant = async (newParticipant) => {
+/* const addParticipant = async (newParticipant) => {
   try {
     const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS}`, newParticipant);
     participants.value.push(response.data); 
@@ -42,17 +65,21 @@ const addParticipant = async (newParticipant) => {
     console.error('Error adding participant:', error);
   }
 };
-
+ */
 const deleteParticipant = async (participantId) => {
- try {
-    await axios.delete(`${import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS}/${participantId}`);
+  try {
+    await axios.delete(`${import.meta.env.VITE_API_ENDPOINT_PARTICIPANTS}/${participantId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true, 
+    });
     participants.value = participants.value.filter(participant => participant.id !== participantId);
     console.log('Participante eliminado exitosamente');
- } catch (error) {
+  } catch (error) {
     console.error('Error al eliminar el participante:', error);
- }
+  }
 };
-
 
 </script>
 
@@ -72,7 +99,7 @@ const deleteParticipant = async (participantId) => {
     <div class="inputGroup">
 
     <label input="Nombre y apellidos">Nombre y apellidos</label>
-    <input type="Nombre y apellidos" placeholder="Nombre y apellidos">
+    <input v-model="userModel.profile_name" type="text" placeholder="Nombre y apellidos">
     <img class="editIcon" src="../../assets/icons/edit.svg">
 
     </div>
@@ -80,7 +107,7 @@ const deleteParticipant = async (participantId) => {
     <div class="inputGroup">
 
     <label input="DNI">DNI del usuario</label>
-    <input type="DNI" placeholder="DNI del usuario">
+    <input v-model="userModel.dni" type="text" placeholder="DNI del usuario">
     <img class="editIcon" src="../../assets/icons/edit.svg">
 
     </div>
@@ -88,7 +115,7 @@ const deleteParticipant = async (participantId) => {
     <div class="inputGroup">
 
     <label input="Teléfonos">Teléfonos de contacto</label>
-    <input class="telephone1" type="Teléfonos" placeholder="Teléfono 1"> <input class="telephone2" type="Teléfonos" placeholder="Teléfono 2">
+    <input v-model="userModel.tlf1" class="telephone1" type="tel" placeholder="Teléfono 1"> <input v-model="userModel.tlf2" class="telephone2" type="tel" placeholder="Teléfono 2">
     <img class="editIcon" src="../../assets/icons/edit.svg">
 
     </div>
@@ -96,7 +123,7 @@ const deleteParticipant = async (participantId) => {
     <div class="inputGroup">
 
     <label input="Correo">Correo electrónico</label>
-    <input type="Correo" placeholder="Correo">
+    <input v-model="userModel.email" type="text" placeholder="Correo">
     <img class="editIcon" src="../../assets/icons/edit.svg">
 
     </div>
@@ -104,7 +131,7 @@ const deleteParticipant = async (participantId) => {
 </div>
 
     <div class="buttonContainer">
-        <button class="saveButton">Guardar</button>
+        <button @click="saveUserData" class="saveButton">Guardar</button>
     </div>
 
 <div class="registeredContainer">
@@ -154,6 +181,7 @@ const deleteParticipant = async (participantId) => {
 </template>
 
 <style lang="scss">
+
 
 // Mobile 
 
