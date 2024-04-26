@@ -8,9 +8,9 @@ import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { provide } from "vue";
-import selectedCampStore from "@/stores/selectedCampStore";
 import { useSchoolStore } from "@/stores/schoolStore";
 import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
+import { useSelectedCampStore } from "@/stores/selectedCampStore";
 
 const router = useRouter();
 
@@ -24,7 +24,7 @@ const authStore = useAuthStore();
 const schoolStore = useSchoolStore();
 const selectedSchool = schoolStore.selectedSchool;
 
-const selectedCamp = selectedCampStore.state.selectedCamp;
+const selectedCamp = useSelectedCampStore();
 const selectedParticipantStore = useSelectedParticipantStore();
 const selectedParticipant = selectedParticipantStore.selectedParticipants;
 
@@ -49,7 +49,7 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h3>Campamento {{selectedCamp}}</h3>
+            <h3> {{selectedCamp.campDetails.camp_name}}</h3>
             <h4>{fecha } { schedule }</h4>
           </div>
           <div class="colegio">

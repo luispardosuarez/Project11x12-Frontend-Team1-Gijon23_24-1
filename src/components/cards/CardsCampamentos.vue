@@ -3,6 +3,7 @@ import { defineProps, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { useSelectedCampStore } from '@/stores/selectedCampStore';
+import axios from 'axios';
 
 const router = useRouter();
 
@@ -14,11 +15,11 @@ const selectedCampStore = useSelectedCampStore();
 //     router.push(`/inscription/${campId}`);
 //   };
 
-const redirectInscriptions = (campId) => {
-  
-    console.log("Esto es el id:" , campId);
-  router.push(`/inscription/${campId}`);
-  selectedCampStore.saveCampId(campId);
+const redirectInscriptions = async (campId) => {
+  selectedCampStore.saveCampId(campId);  
+
+  await selectedCampStore.fetchCampDetails(campId);
+    router.push(`/inscription/${campId}`)
   
 }
   

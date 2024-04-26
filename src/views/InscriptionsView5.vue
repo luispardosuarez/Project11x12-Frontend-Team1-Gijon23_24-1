@@ -8,7 +8,7 @@ import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { provide } from "vue";
-import selectedCampStore from "@/stores/selectedCampStore";
+import { useSelectedCampStore } from "@/stores/selectedCampStore";
 import { useSchoolStore } from "@/stores/schoolStore";
 import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
 
@@ -28,7 +28,7 @@ const selectedSchool = schoolStore.selectedSchool;
 const selectedParticipantStore = useSelectedParticipantStore();
 const selectedParticipant = selectedParticipantStore.selectedParticipants;
 
-const selectedCamp = selectedCampStore.state.selectedCamp;
+const selectedCamp = useSelectedCampStore();
 const pasoActual = ref(3);
 provide('pasoActual', pasoActual);
 
@@ -54,7 +54,7 @@ const showComboParticipante = () => {
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h3>Campamento {{selectedCamp}}</h3>
+            <h3>Campamento {{selectedCamp.campDetails.camp_name}}</h3>
             <h4>{fecha } { schedule }</h4>
           </div>
           <div class="colegio">
@@ -81,7 +81,7 @@ const showComboParticipante = () => {
               <BotonSiguiente @goToNextStep="goStep6" />
             </div>
             <div class="Atras">
-              <!-- <BotonAtras @goToPreviusStep="goStep3" /> -->
+              <BotonAtras @goToPreviusStep="goStep4" />
             </div>
           </div>
         </div>

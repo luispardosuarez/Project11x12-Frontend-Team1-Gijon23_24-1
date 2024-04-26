@@ -19,9 +19,6 @@ const authStore = useAuthStore();
 const route = useRoute();
 
 const selectedCampStore = useSelectedCampStore();
-const campId = selectedCampStore.selectedCampId;
-const campDetails = ref(null);
-const fetchError = ref(null);
 
 const pasoActual = ref(1);
 provide("pasoActual", pasoActual);
@@ -43,7 +40,8 @@ provide("pasoActual", pasoActual);
 // };
 
 onMounted(async () => {
-  await selectedCampStore.fetchCampDetails();
+  
+  console.log(selectedCampStore.campDetails)
 });
 
 // watch(() => selectedCampStore.selectedCampId, (newValue, oldValue)=> {
@@ -70,9 +68,9 @@ onMounted(async () => {
         <div class="cuerpoInscripcion">
           <div class="campamento">
             <!-- <h2>{{this.$route.params.campamentoName}}</h2> -->
-            <h2>Campamento {{ campId }}</h2>
-            <h2 v-if="campDetails">{{ campDetails.campName }}</h2>
-            <h2 v-else>Cargando detalles...</h2>
+            <h2>Campamento {{ selectedCampStore.campDetails.id }}</h2>
+            <h2>{{ selectedCampStore.campDetails.camp_name}}</h2>
+      
 
             <div v-if="fetchError">
               <p class="error-message">Error: {{ fetchError.message }}</p>

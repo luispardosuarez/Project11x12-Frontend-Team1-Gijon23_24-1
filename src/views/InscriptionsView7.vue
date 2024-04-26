@@ -8,11 +8,11 @@ import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { provide } from "vue";
-import selectedCampStore from "@/stores/selectedCampStore";
+import { useSelectedCampStore } from "@/stores/selectedCampStore";
 
 const router = useRouter();
 
-const selectedCamp = selectedCampStore.state.selectedCamp;
+const selectedCamp = useSelectedCampStore();
 
 const goStep6 = () => {
   router.push("/inscriptionPaso6");

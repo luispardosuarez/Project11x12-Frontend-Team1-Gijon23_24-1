@@ -1,11 +1,12 @@
+import axios from "axios";
 import { defineStore } from "pinia";
 
-export const useSelectedCampStore = defineStore({
-  id: 'selectedCampStore',
+export const useSelectedCampStore = defineStore('selectedCamp',{
+  
   state: () => ({
     selectedCampId: null,
     campDetails: null,
-    fetchError: null, // 
+    fetchError: null, 
   }),
   actions: {
     saveCampId(id) {
@@ -16,48 +17,28 @@ export const useSelectedCampStore = defineStore({
       this.campDetails = null;
       this.fetchError = null; 
     },
-    async fetchCampDetails() {
+    async fetchCampDetails(id) {
+      console.log(id + "campamento seleccionado")
         try {
-          const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_CAMPS}/${selectedCampId}`);
+          const uri= import.meta.env.VITE_API_ENDPOINT_CAMPS
+          const response = await axios.get(`${uri}/${id}`);
           if (response.status === 200) {
-            const campData = response.data;
-            if (campData.length > 0) {
+            const campData = await response.data;
+            console.log(response)
+            this.campDetails = campData;
+            // if (campData.length > 0) {
               
-              this.campDetails = campData[0];
-            } else {
-              console.warn('No camp found with the given ID');
-            }
-          } else {
-          
+              
+            // } else {
+            //   console.warn('No camp found with the given ID');
+            // }
           }
         } catch (error) {
-          this.fetchError = error;
+          this.fetchError = error;  
           console.error('Error al obtener detalles del campamento:', error);
         }
       }
   },
+  
 });
 
-// import { defineStore } from "pinia";
-// import axios from "axios";
-
-// export const useSelectedCampsStore = defineStore("camps", {
-//   state: () => ({
-//     camps: [],
-//   }),
-//   actions: {
-//     saveCampId(id) {
-//       this.selectedCampId = id;
-//     },
-//     async fetchCamps(campId) {
-//       try {
-//         const response = await axios.get(
-//           `${import.meta.env.VITE_API_ENDPOINT_CAMPS}/${campId}`
-//         );
-//         this.camps = response.data;
-//       } catch (error) {
-//         console.error("Error fetching camps:", error);
-//       }
-//     },
-//   },
-// });

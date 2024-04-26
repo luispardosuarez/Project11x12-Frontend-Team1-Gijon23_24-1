@@ -7,7 +7,7 @@ import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { provide } from "vue";
-import selectedCampStore from "@/stores/selectedCampStore";
+import {useSelectedCampStore} from "@/stores/selectedCampStore";
 import { useCampWeeksStore } from "@/stores/campWeeksStore";
 
 const router = useRouter();
@@ -20,7 +20,7 @@ const goStep3 = () => {
 }
 const authStore = useAuthStore();
 
-const selectedCamp = selectedCampStore.state.selectedCamp;
+const selectedCamp = useSelectedCampStore();
 
 const campWeeksDateStore = useCampWeeksStore();
 const selectedDateRange = campWeeksDateStore.selectedDateRange;
@@ -46,7 +46,7 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h2>Campamento {{selectedCamp}}</h2>
+            <h2> {{selectedCamp.campDetails.camp_name}}</h2>
             <h4 v-if="selectedDateRange">{{selectedDateRange.start }} - {{ selectedDateRange.end }} { schedule }</h4>
           </div>
           <div class="colegio">
