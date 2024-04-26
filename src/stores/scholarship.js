@@ -1,13 +1,16 @@
-import { ref, reactive } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
     export const usescholarshipStore = defineStore('scholarship', () => {
-    const user = reactive({
-        dni: ''
-    })
 
-    const isLoading = ref(false)
+    const dniList = ref([]); 
+    const searchQuery = ref('');
+    const isLoading = ref(false);
+
+    const setSearchQuery = (query) => {
+        searchQuery.value = query;
+    };
 
     const scholarship = async (dataConnection) => {
 
@@ -23,7 +26,8 @@ import axios from 'axios'
     
             const response = await axios.get(`${uri}`, options)
             const data = await response.data
-            isLoading.value = false
+            dniList.value = data
+            console.log(dniList.value)
             return data;
         } catch (error) {
             throw new Error('Error Loading API: ' + error)
@@ -82,9 +86,7 @@ import axios from 'axios'
                 isLoading.value = false
             }
         }
-    
 
 
-
-    return { user, scholarship, deleteDNI, editDNI }
+    return { dniList, scholarship, deleteDNI, editDNI, searchQuery, setSearchQuery  }
 })
