@@ -4,6 +4,7 @@ import { defineStore } from 'pinia';
 export const useStripeStore = defineStore({
   id: 'stripeStore',
   state: () => ({
+    total:0,
     uri: import.meta.env.VITE_API_ENDPOINT_INTENT_PAYMENT
    
   }),
