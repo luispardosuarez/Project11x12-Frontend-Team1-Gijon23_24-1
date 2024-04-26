@@ -6,10 +6,24 @@ import ComboParticipante from "@/components/inscriptions/ComboParticipante.vue";
 import ParticipantesOpciones from "@/components/inscriptions/ParticipantesOpciones.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { provide } from "vue";
+import { useSelectedCampStore } from "@/stores/selectedCampStore";
+import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
 
 const router = useRouter();
+const selectedCamp = useSelectedCampStore();
+
+const selectedParticipantStore = useSelectedParticipantStore();
+const selectedParticipant = selectedParticipantStore.selectedParticipants;
+
+const total = ref(null);
+
+onMounted(() => {
+  console.log(selectedParticipant);
+  total.value = selectedParticipant.length * selectedCamp.campDetails.price;
+  console.log("Total: ", total.value);
+});
 
 const goStep5 = () => {
   router.push("/inscriptionPaso5");
@@ -19,9 +33,8 @@ const goStep7 = () => {
 };
 const authStore = useAuthStore();
 
-const pasoActual = ref(6);
-provide('pasoActual', pasoActual);
-
+const pasoActual = ref(4);
+provide("pasoActual", pasoActual);
 </script>
 <template>
   <main>
@@ -40,18 +53,23 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h3>{campamento}</h3>
-            <h4>{fecha } { schedule }</h4>
+            <h3>{{ selectedCamp.campDetails.camp_name }}</h3>
           </div>
           <div class="colegio">
-            <h3>{Colegio}</h3>
-            <h4>{places_num} {horario}</h4>
+            <h3>{{ selectedSchool }}</h3>
+            <h4>{{ selectedCamp.campDetails.schedule }}</h4>
           </div>
-          <div class="pasarelaPago">
-            <h2>pasarera de pago</h2>
-                        
-          </div>
-          
+          <ul>
+            <li
+              v-for="participant in selectedParticipant"
+              :key="participant.id_participant"
+            >
+              {{ participant.participantName }}
+              {{ participant.participantSurname }}
+              {{ selectedCamp.campDetails.price }}
+            </li>
+          </ul>
+          <div>Total: {{ total }}</div>
 
           <div class="AtrasSiguiente">
             <div class="Siguiente">
@@ -120,11 +138,11 @@ aside {
   }
 
   .AtrasSiguiente {
-  display: flex;
-  flex-direction: row-reverse;
-  margin: 2%;
-  gap: 1%;
-  justify-content: space-evenly;
-}
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 2%;
+    gap: 1%;
+    justify-content: space-evenly;
+  }
 }
 </style>

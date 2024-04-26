@@ -8,8 +8,11 @@ import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 import { provide } from "vue";
+import { useSelectedCampStore } from "@/stores/selectedCampStore";
 
 const router = useRouter();
+
+const selectedCamp = useSelectedCampStore();
 
 const goStep6 = () => {
   router.push("/inscriptionPaso6");
@@ -19,7 +22,7 @@ const goUserDashboard = () => {
 };
 const authStore = useAuthStore();
 
-const pasoActual = ref(7);
+const pasoActual = ref(5);
 provide('pasoActual', pasoActual);
 
 </script>
@@ -40,7 +43,7 @@ provide('pasoActual', pasoActual);
         </aside>
         <div class="cuerpoInscripcion">
           <div class="campamento">
-            <h3>{campamento}</h3>
+            <h3>{{ selectedCamp }}</h3>
             <h4>{fecha } { schedule }</h4>
           </div>
           <div class="colegio">

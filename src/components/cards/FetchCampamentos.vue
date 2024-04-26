@@ -11,6 +11,7 @@ const fetchCampamentos = async () => {
     const data = await response.json();
 
     campamentos.value = data.campamentos;
+    // console.log("Campamentos: " + campamentos.value)
 
   } catch (error) {
     console.error('Error al cargar el archivo JSON de campamentos:', error);
