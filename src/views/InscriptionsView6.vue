@@ -2,17 +2,15 @@
 import BotonAtras from "@/components/inscriptions/BotonAtras.vue";
 import BotonesLaterales from "@/components/inscriptions/BotonesLaterales.vue";
 import BotonSiguiente from "@/components/inscriptions/BotonSiguiente.vue";
-import ComboParticipante from "@/components/inscriptions/ComboParticipante.vue";
-import ParticipantesOpciones from "@/components/inscriptions/ParticipantesOpciones.vue";
 import { useAuthStore } from "@/stores/auth";
-import { useRouter } from "vue-router";
-import { computed, onMounted, ref } from "vue";
-import { provide } from "vue";
 import { useSelectedCampStore } from "@/stores/selectedCampStore";
 import { useSelectedParticipantStore } from "@/stores/selectedParticipantStore";
-
+import { useStripeStore } from "@/stores/stripeStore";
+import { onMounted, provide, ref } from "vue";
+import { useRouter } from "vue-router";
 const router = useRouter();
 const selectedCamp = useSelectedCampStore();
+const stripeStore= useStripeStore();
 
 const selectedParticipantStore = useSelectedParticipantStore();
 const selectedParticipant = selectedParticipantStore.selectedParticipants;
@@ -22,6 +20,7 @@ const total = ref(null);
 onMounted(() => {
   console.log(selectedParticipant);
   total.value = selectedParticipant.length * selectedCamp.campDetails.price;
+  stripeStore.total=total.value;
   console.log("Total: ", total.value);
 });
 
@@ -29,7 +28,7 @@ const goStep5 = () => {
   router.push("/inscriptionPaso5");
 };
 const goStep7 = () => {
-  router.push("/inscriptionPaso7");
+  router.push("/payment");
 };
 const authStore = useAuthStore();
 
