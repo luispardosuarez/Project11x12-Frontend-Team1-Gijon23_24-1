@@ -117,13 +117,13 @@ const paginatedDnis = computed(() => {
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-           <li class="page-item" v-for="page in totalPages" :key="page" @click="goToPage(page)">
-          <a class="page-link" href="#">{{ page }}</a>
+        <li class="page-item" v-for="page in totalPages" :key="page" @click="goToPage(page)">
+        <a class="page-link" href="#">{{ page }}</a>
         </li>
         <li class="page-item" @click="nextPage">
-          <a class="page-link" href="#" aria-label="Next">
+        <a class="page-link" href="#" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
-          </a>
+        </a>
         </li>
                 </ul>
             </nav>
