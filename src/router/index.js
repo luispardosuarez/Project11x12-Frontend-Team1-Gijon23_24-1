@@ -114,6 +114,18 @@ const router = createRouter({
       component: () => import('../views/AdminDashboardCampView.vue')
       
     },
+    {
+      path: '/return',
+      name: 'return',
+      component: () => import('../views/StripeReturnView.vue')
+      
+    },
+    {
+      path: '/payment',
+      name: 'payment',
+      component: () => import('../views/StripeCheckoutFormView.vue')
+      
+    },
   ]
 })
 

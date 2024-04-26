@@ -1,22 +1,31 @@
 <script setup>
 import { useCampStore } from '@/stores/campStore';
 import { onMounted, ref, watch } from 'vue';
+import CampDetailsCard from './CampDetailsCard.vue';
 import PopUpEditCamp from './PopUpEditCamp.vue';
+
 const store = useCampStore();
 const campsList = ref([]);
+const selectedCamp = ref(null);
+const selectedCampForDetails = ref(null); 
+const showPopup = ref(false);
+const showDetailsPopup = ref(false); 
 
-
-const selectedCamp = ref(null); const editCamp = (camp) => {
+const editCamp = (camp) => {
  console.log('Intentando editar campamento:', camp);
- selectedCamp.value = camp; 
- showPopup.value = true; 
+ selectedCamp.value = camp;
+ showPopup.value = true;
 };
 
+const viewCamp = (camp) => {
+ selectedCampForDetails.value = camp;
+ showDetailsPopup.value = true;
+};
 
 watch(
  () => store.campsList,
  (newCampsList) => {
-    console.log('store.campsList actualizado:', newCampsList); 
+    console.log('store.campsList actualizado:', newCampsList);
     campsList.value = newCampsList;
  },
  { deep: true }
@@ -36,8 +45,6 @@ const deleteCamp = async (id) => {
     console.log('Campamento borrado con éxito');
  }
 };
-
-const showPopup = ref(false);
 </script>
 
 <template>
@@ -49,6 +56,8 @@ const showPopup = ref(false);
           {{ camp.camp_name }}
           <img src="../../assets/icons/delete.svg" alt="borrar" @click="deleteCamp(camp.id)">
           <img src="../../assets/icons/edit.svg" alt="editar" @click="editCamp(camp)">
+          <img src="../../assets/icons/see.svg" alt="ver" @click="viewCamp(camp)">
+       
         </td>
       </tr>
       <nav aria-label="Page navigation example">
@@ -73,8 +82,60 @@ const showPopup = ref(false);
     <PopUpEditCamp :camp="selectedCamp" :showModal="showPopup" v-if="showPopup" />
     <button type="button" class="btn-close " aria-label="Close" @click="showPopup = false"></button>
  </div>
+ <div v-if="showDetailsPopup" class="popup">
+      <CampDetailsCard :camp="selectedCampForDetails" />
+      <button type="button" class="btn-close" aria-label="Close" @click="showDetailsPopup = false"></button>
+    </div>
       </div>
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <style scoped lang="scss">

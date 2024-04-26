@@ -1,4 +1,4 @@
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 export const useAuthStore = defineStore('auth', () => {
@@ -7,6 +7,7 @@ export const useAuthStore = defineStore('auth', () => {
         username: '',
         roles: '',
         isAuthenticated: false
+        
     })
     const isLoading = ref(false)
     const isAuthenticated = computed(() => user.isAuthenticated)
