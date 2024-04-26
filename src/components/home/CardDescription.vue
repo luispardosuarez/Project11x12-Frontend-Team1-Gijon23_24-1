@@ -1,9 +1,8 @@
 <script setup>
-import { ref } from "vue";
 import { useProjectStore } from '../../stores/dataHomeStore';
-import ModalHome from '../home/ModalHome.vue';
+import ContainerModal from "./ContainerModal.vue";
 const projectStore = useProjectStore();
-const showPopup = ref(false);
+
 
 </script>
 <template>
@@ -15,72 +14,59 @@ const showPopup = ref(false);
       </div>
       <img src="../../assets/img/11x12.jpg" alt="imagen logo 11x12" class=" logoHome" />
     </div>
-    <div class="admin-panel  bg-light">
-      <div>
-        <b-button v-b-modal.modal-center class="add-button btn btn-danger" @click="showPopup = true">Más
-          información</b-button>
-      </div>
-
-      <div v-if="showPopup" class="popup bg-light">
-
-        <ModalHome :projectStore="projectStore" />
-        <button type="button" class=" btn-danger close-modal bg-danger" aria-label="Close"
-          @click="showPopup = false">Cerrar</button>
-
-      </div>
-   
-    </div>
+   <ContainerModal/>
   </div>
 
 
 </template>
 <style lang="scss" scoped>
-.description-card {
-  background-color: #fff;
-  margin-bottom: 5rem;
-  padding: 2rem;
-  border: 1px solid #ccc;
-  text-align: justify;
-  font-size: 1.3rem;
-  h1 {
-    color: $red;
-    text-align: center;
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+  .description-card {
+    position: relative; 
+    background-color: #fff;
+    margin-bottom: 5rem;
+    padding: 3rem;
+    border: none;
+    text-align: justify;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+   
+    h1 {
+      color: $red;
+      margin-left: 52%;
+    }
+
+    p {
+      justify-content: center;
+      padding: 2rem;
+    }
   }
 
-  p {
-    justify-content: center;
-    padding: 2rem;
+  
+  
+
+  .logoHome {
+    width: 15%;
+    display: flex;
+
+    @media (max-width: 1050px) {
+      margin-top: 1rem; 
+      width: 25%;
+      display: flex;
+
+ 
+    }
+    @media (max-width: 980px) {
+      margin-top: 1rem; 
+      width: 45%;
+      margin-left: 5rem;
+    }
+   
   }
-
-}
-
-.add-button {
-  margin-left: 45%;
-
-}
-
-.logoHome {
-  align-self: center;
-  width: 15%;
-
-}
-
-.popup {
-  background-color: #fff !important;
-
-}
-
-.admin-panel {
-  background-color: #fff !important;
-}
-
-.close-modal {
-  position: sticky;
-  top: -60rem;
-  left: 66rem;
-  font-size: x-large;
-  color: $gray-form;
-  border-radius: 10px;
 
 }
 </style>

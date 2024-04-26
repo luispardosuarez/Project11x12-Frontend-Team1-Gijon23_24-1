@@ -16,11 +16,9 @@ import AdminCamp from '@/components/campament/AdminCamp.vue';
         <div class="bar_lateral">
           <Boarp />
         </div>
-
-
-        <AdminCamp />
+        <div class="table_cont_body"><AdminCamp /></div>
       </div>
-
+      
     </div>
 
     <!-- admin@gijon11x12.com // AdminGijon11x12 -->
